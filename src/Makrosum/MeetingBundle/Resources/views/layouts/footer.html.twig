@@ -1,0 +1,10 @@
+{% trans_default_domain "global" %}
+<div class="grid makrosum-footer">
+    <div class="col_12 center">
+        <p>
+            &copy; {{ "string.copyright"|trans({"%year%": "now"|date("Y")}, "global", trans_l)|raw }} - &reg; <a style="text-decoration: none;color: #3A87AD;" title="{{ project_name }}" href="{{ project_overview }}" target="_blank">{{ project_name }}</a> & <a style="text-decoration: none;color: #3A87AD;" title="{{ copyright_company_name }}" href="http://{{ copyright_company_site }}" target="_blank">{{ copyright_company_name }}</a>
+            <br />
+            <a style="text-decoration: none;color: #3A87AD;" title="{{ "string.privacy"|trans }}" href="{{ project_privacy }}" target="_blank">{{ "string.privacy"|trans }}</a> & <a style="text-decoration: none;color: #3A87AD;" title="{{ "string.terms"|trans }}" href="{{ project_terms }}" target="_blank">{{ "string.terms"|trans }}</a>
+        </p>
+    </div>
+</div>

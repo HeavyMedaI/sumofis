@@ -1,0 +1,149 @@
+{% trans_default_domain "security" %}
+{% set body_class = '' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>Ouppss - Responsive Error Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ouppss - Responsive Error Page">
+    <meta name="author" content="Taner Özdemir as CRTVMax">
+
+    <!-- STYLESHEETS -->
+
+    <!-- EXTENSIONS -->
+    <link href="{{ asset('bundles/Makrosum/Meeting/_error/ouppss/') }}css/ggrid.css" rel="stylesheet">
+    <!-- EXTENSIONS -->
+
+    <!-- COLOR FILE -->
+    <link href="{{ asset('bundles/Makrosum/Meeting/_error/ouppss/') }}css/color.css" rel="stylesheet">
+    <!-- COLOR FILE -->
+
+    <!-- GENERAL STYLES FILE (NOT COLORIZED) -->
+    <link href="{{ asset('bundles/Makrosum/Meeting/_error/ouppss/') }}css/style.css" rel="stylesheet">
+    <!-- GENERAL STYLES FILE -->
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- FAV AND TOUCH ICONS -->
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="ico/favicon.png">
+
+    <!-- JAVASCRIPTS ON BOTTOM OF THIS PAGE -->
+    <style type="text/css">body {background-color: #469ae3;}section #search form input[type="text"]:hover {color: #469ae3 ;}section #search form input[type="text"]:active {border: 1px solid #469ae3;}section #search form input[type="button"]:hover {color: #469ae3 ;}section #search form input[type="button"]:active {border: 1px solid #469ae3;}section #subscribe form input[type="text"]:hover {color: #469ae3 ;}section #subscribe form input[type="text"]:active {border: 1px solid #469ae3;}section #subscribe form input[type="button"]:hover {color: #469ae3 ;}section #subscribe form input[type="button"]:active {border: 1px solid #469ae3;}footer ul li a:hover {color: #469ae3 ;}footer #copyright {color: #469ae3;}input:hover::-webkit-input-placeholder {color: #469ae3 ;}input:hover:-moz-placeholder {color: #469ae3;}input:hover:-ms-input-placeholder {color: #469ae3;}input:focus::-webkit-input-placeholder, input:focus:hover::-webkit-input-placeholder {color: #FFF !important;}input:focus:-moz-placeholder, input:focus:hover:-moz-placeholder {color: #FFF !important;}input:focus:-ms-input-placeholder, input:focus:hover:-ms-input-placeholder {color: #FFF !important;}</style>
+</head>
+<body class="error_page">
+
+<!-- HEADER -->
+
+<header>
+
+    <div id="top" class="g_container_12">
+
+        <!-- LOGO -->
+
+        <div id="logo" class="g_four">
+
+            <a href="{{ path("homepage_www") }}"></a>
+
+        </div>
+
+        <!-- END OF LOGO -->
+
+        <div class="clearfix"></div>
+
+    </div>
+
+    <div id="title" class="g_container_12">
+
+        <h1>{{ exception.message|nl2br|format_file_from_text }}</h1>
+
+        <h2><strong>{{ status_code }}</strong> {{ status_text }} - {{ exception.class|abbr_class }}</h2>
+
+    </div>
+
+    <div class="clearfix"></div>
+
+</header>
+
+<!-- END OF HEADER -->
+
+<!-- SECTIONS -->
+
+<section></section>
+
+<!-- END OF SECTIONS -->
+
+<!-- FOOTER -->
+
+<footer>
+
+    <!-- SOCIAL LINKS -->
+
+    <div id="socials">
+
+        <ul>
+            <li><a href="{{ social_facebook }}" class="facebook"></a></li>
+            <li><a href="{{ social_twitter }}" class="twitter"></a></li>
+            <li><a href="{{ social_google }}" class="googleplus"></a></li>
+        </ul>
+
+    </div>
+
+    <!-- END OF SOCIAL LINKS -->
+
+    <!-- MOBILE MENU -->
+
+    <a id="mobile" class="open"></a>
+
+    <ul id="mobile_menu">
+        <li><a href="{{ path("homepage_www") }}">{{ "string.home"|trans }}</a></li>
+        <li style="display: none;"><a href="{{ path("homepage_www") }}">{{ "string.contact_us"|trans }}</a></li>
+    </ul>
+
+    <!-- END OF MOBILE MENU -->
+
+    <!-- FOOTER MENU -->
+
+    <ul style="width: auto !important;" id="menu">
+
+        <li><a href="{{ path("homepage_www") }}">{{ "string.home"|trans }}</a></li>
+        <li style="display: none;"><a href="{{ path("homepage_www") }}">{{ "string.contact_us"|trans }}</a></li>
+
+    </ul>
+
+    <!-- END OF FOOTER MENU -->
+
+    <div id="copyright">Copyright © 2016. {{ copyright_company_name }} All Rights Reserved.</div>
+
+    <div class="clearfix"></div>
+
+</footer>
+
+<!-- END OF FOOTER -->
+
+<!-- PLUGINS -->
+
+<script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_error/ouppss/') }}js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_error/ouppss/') }}js/jquery-ui-1.9.2.custom.min.js"></script>
+<script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_error/ouppss/') }}js/jquery.easing.js"></script>
+<script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_error/ouppss/') }}js/modernizr.js"></script>
+<script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_error/ouppss/') }}js/jquery.validate.js"></script>
+
+<!-- THEME PLUGIN -->
+
+<script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_error/ouppss/') }}js/ouppss_ui.js"></script>
+
+<!-- PLUGINS -->
+
+</body>
+</html>
+<!-- Localized -->

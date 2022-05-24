@@ -1,0 +1,7 @@
+services:
+  MakrosumSessionStorage:
+    class: Makrosum\MeetingBundle\Services\MakrosumSessionStorage
+    arguments: ["%session.storage.options%", "@session.handler", "@session.storage.metadata_bag", "@request_stack"]
+  MakrosumNotificationStream.SMS:
+    class: Makrosum\MeetingBundle\Services\MakrosumSmsStream
+    arguments: ["%arti_username%", "%arti_password%", "%arti_origin%"]

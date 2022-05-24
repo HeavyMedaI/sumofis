@@ -1,0 +1,103 @@
+{% trans_default_domain "meeting" %}
+{% set uriParse = app.request.uri|split(':') %}
+{#% set protocol = uriParse[0] %#}
+{% set protocol = protocol_scheme %}
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- META -->
+    <title>{{ title }}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ server_name }}{{ server_name }}{{ asset('bundles/Makrosum/Meeting/_assets/css/normalize.css') }}" media="all"/>
+    <link rel="stylesheet" type="text/css" href="{{ server_name }}{{ asset('bundles/Makrosum/Meeting/_assets/css/kickstart.css') }}" media="all"/>
+    <link rel="stylesheet" type="text/css" href="{{ server_name }}{{ asset('bundles/Makrosum/Meeting/_assets/external/custom-scrollbars/custom-scrollbars.css') }}" media="all"/>
+    <link rel="stylesheet" type="text/css" href="{{ server_name }}{{ asset('bundles/Makrosum/Meeting/_assets/style.css') }}" media="all"/>
+    <link rel="stylesheet" type="text/css" href="{{ server_name }}{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-center-loader/css/prettify.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ server_name }}{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-center-loader/css/style.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ server_name }}{{ asset('bundles/Makrosum/Meeting/_assets/blue-style-makrosum.css') }}" media="all"/>
+
+    <!-- Javascript -->
+    <script type="text/javascript" src="{{ server_name }}{{ asset('bundles/Makrosum/Meeting/_assets/js/Makrosum.js') }}"></script>
+    <script type="text/javascript" src="{{ server_name }}{{ asset('bundles/Makrosum/Meeting/_assets/js/lib/less.min.js') }}"></script>
+    <script type="text/javascript" src="{{ server_name }}{{ asset('bundles/Makrosum/Meeting/_assets/js/lib/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ server_name }}{{ asset('bundles/Makrosum/Meeting/_assets/js/kickstart.js') }}"></script>
+    <script type="text/javascript" src="{{ server_name }}{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-center-loader/js/prettify.js') }}"></script>
+    <script type="text/javascript" src="{{ server_name }}{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-center-loader/center-loader.min.js') }}"></script>
+    <script type="text/javascript" src="{{ server_name }}{{ asset('bundles/Makrosum/Meeting/_assets/js/functions.js') }}"></script>
+    <script type="text/javascript">
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+
+        $(function(){
+            window.Makrosum.window.width = windowWidth;
+            window.Makrosum.window.height = windowHeight;
+
+            //Makrosum.funcs.windowLoader.show();
+
+        });
+    </script>
+    {% if promt_error.messageKey is defined %}
+        <script type="text/javascript">
+            alert('{{ promt_error.messageKey|trans(promt_error.messageData, 'security') }}');
+        </script>
+    {% endif %}
+</head>
+<body class="to-doc">
+<div class="col_12">
+    <div class="col_3">
+        <h5><img width="50" height="50" alt="{{ company_name }}" src="{{ server_name }}{{ asset('bundles/Makrosum/Meeting/Logo/' ~ company_logo) }}"></h5>
+    </div>
+    <div class="col_9">
+
+    </div>
+</div>
+<div class="col_12">
+    <span style="font-weight: bold;color: rgba(116, 174, 203, 0.73);">{{ title }}</span>
+</div>
+<div class="col_8 column">
+    <h3 style="color: rgba(116, 174, 203, 0.73);">{{ "string.matter_subjects"|trans }}</h3>
+    {% for meeting_subject in meeting_subjects %}
+        <h5>{{ meeting_subject.header }}</h5>
+        <blockquote class="small"><p>
+                {{ meeting_subject.content|raw }}
+                <span style="color: rgba(0, 0, 0, 0.44);">{{ meeting_subject.creator }}</span></p></blockquote>
+        <p>
+            {{ meeting_subject.report.content|raw }}
+        </p>
+    {% endfor %}
+
+</div>
+<div class="col_4 column">
+    <h5 style="color: rgba(116, 174, 203, 0.73);">{{ "string.members"|trans }}</h5>
+    <ul>
+        {% for meeting_member in meeting_members %}
+            <li>{{ meeting_member.name }}({{ meeting_member.role }})</li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="col_12 column">
+    <h3 style="color: rgba(116, 174, 203, 0.73);">{{ "string.additional_reports"|trans }}</h3>
+    {% for additional_report in additional_reports %}
+        <h5>- {{ additional_report.header }}</h5>
+        <p class="small"><p>
+                {{ additional_report.content|raw }}
+                <span style="color: rgba(0, 0, 0, 0.44);">{{ additional_report.creator }}</span></p></p>
+    {% endfor %}
+</div>
+</body>
+<script type="text/javascript">
+    $(function () {
+
+        Makrosum.funcs.pageLoaded(function(global){
+            Makrosum.funcs.windowLoader.hide(function(){
+                //window.print();
+            });
+        });
+
+    });
+</script>
+</html>

@@ -1,0 +1,271 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>string.company_name</source>
+                <target>Şirket Adı</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>string.header</source>
+                <target>Başlık</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>string.creator</source>
+                <target>Oluşturan</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>string.category</source>
+                <target>Kategori</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>string.begin_time</source>
+                <target>Başlama Tarihi</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>string.end_time</source>
+                <target>Bitiş Tarihi</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>string.transactions</source>
+                <target>İşlemler</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>string.edit</source>
+                <target>Düzenle</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>string.remove</source>
+                <target>Sil</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>string.save</source>
+                <target>Kaydet</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>string.please_select</source>
+                <target>Lütfen Seçiniz</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>string.new_meeting</source>
+                <target>Yeni Toplantı</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>string.new_category</source>
+                <target>Yeni Kategori</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>string.meetings</source>
+                <target>Toplantılar</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>string.categories</source>
+                <target>Kategoriler</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>string.cancel</source>
+                <target>İptal</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>string.meeting_name</source>
+                <target>Toplantı Adı</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>string.meeting_category</source>
+                <target>Toplantı Kategorisi</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>string.view</source>
+                <target>Görüntüle</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>string.sure_cancel_meeting</source>
+                <target>Toplantıyı iptal etmek istediğinizden emin misiniz?</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>string.sure_re_set_meeting</source>
+                <target>Toplantıyı yeniden gündeme almak istediğinizden emin misiniz?</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>string.re_set</source>
+                <target>Gündeme Al</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>string.approve</source>
+                <target>Onayla ve Oluştur</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>string.sure_approve_meeting</source>
+                <target>Toplantı isteğini onaylamak istediğinizden emin misiniz?</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>string.new_subject</source>
+                <target>Yeni Konu Başlığı</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>string.drop_object</source>
+                <target>»Dosyayı buraya sürükleyin (veya tıklayın)«</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>string.subject_header</source>
+                <target>Konu Başlığı</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>string.sure_remove_subject</source>
+                <target>Bu konu başlığını silmek istediğinizden emin misiniz?</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>string.add_member</source>
+                <target>Katılımcı Ekle</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>string.add_external_member</source>
+                <target>Harici Katılımcı Ekle</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>string.members</source>
+                <target>Katılımcılar</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>string.subjects</source>
+                <target>Konular</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>string.member_name</source>
+                <target>Katılımcı adı</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>string.member_email</source>
+                <target>Katlımcı E-Posta</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>string.member_role</source>
+                <target>Katılımcı Rolü</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>string.member_role_guest</source>
+                <target>Misafir Katılımcı</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>string.member_role_reporter</source>
+                <target>Raportör Katılımcı</target>
+            </trans-unit>
+            <trans-unit id="38">
+                <source>string.member_role_member</source>
+                <target>Katılımcı</target>
+            </trans-unit>
+            <trans-unit id="39">
+                <source>string.meeting_not_permitted_to_view</source>
+                <target>Bu toplantının detaylarını görüntüleme yetkiniz bulunmamaktadır</target>
+            </trans-unit>
+            <trans-unit id="40">
+                <source>string.member_already_exist</source>
+                <target>Mevcut katılımcı!</target>
+            </trans-unit>
+            <trans-unit id="41">
+                <source>string.sure_remove_member</source>
+                <target>Bu katılımcıyı silmek istediğinizden emin misiniz?</target>
+            </trans-unit>
+            <trans-unit id="42">
+                <source>string.subject_content</source>
+                <target>Konu İçeriği</target>
+            </trans-unit>
+            <trans-unit id="43">
+                <source>string.reports</source>
+                <target>Raporlar</target>
+            </trans-unit>
+            <trans-unit id="44">
+                <source>string.new_report</source>
+                <target>Yeni Rapor</target>
+            </trans-unit>
+            <trans-unit id="45">
+                <source>string.report_header</source>
+                <target>Rapor Başlığı</target>
+            </trans-unit>
+            <trans-unit id="46">
+                <source>string.report_content</source>
+                <target>Rapor İçeriği</target>
+            </trans-unit>
+            <trans-unit id="47">
+                <source>string.sure_remove_report</source>
+                <target>Bu raporu silmek istediğinizden emin misiniz?</target>
+            </trans-unit>
+            <trans-unit id="48">
+                <source>string.new_category</source>
+                <target>Yeni Kategori</target>
+            </trans-unit>
+            <trans-unit id="49">
+                <source>string.category_could_not_created</source>
+                <target>Kategori oluşturulamadı</target>
+            </trans-unit>
+            <trans-unit id="50">
+                <source>string.category_could_not_found</source>
+                <target>Kategori bulunamadı</target>
+            </trans-unit>
+            <trans-unit id="51">
+                <source>string.meeting_could_not_found</source>
+                <target>Toplantı bulunamadı</target>
+            </trans-unit>
+            <trans-unit id="52">
+                <source>string.company</source>
+                <target>Şirket</target>
+            </trans-unit>
+            <trans-unit id="53">
+                <source>string.category_name</source>
+                <target>Kategori Adı</target>
+            </trans-unit>
+            <trans-unit id="54">
+                <source>string.sure_remove_category</source>
+                <target>Bu kategoriyi silmek istediğinizden emin misiniz?</target>
+            </trans-unit>
+            <trans-unit id="55">
+                <source>string.request_meeting</source>
+                <target>Toplantı Talebi Gönder</target>
+            </trans-unit>
+            <trans-unit id="56">
+                <source>string.details</source>
+                <target>Detaylar</target>
+            </trans-unit>
+            <trans-unit id="57">
+                <source>string.open</source>
+                <target>Aç</target>
+            </trans-unit>
+            <trans-unit id="58">
+                <source>string.matter_subjects</source>
+                <target>Konu Başlıkları</target>
+            </trans-unit>
+            <trans-unit id="59">
+                <source>string.additional_reports</source>
+                <target>Ek Raporlar</target>
+            </trans-unit>
+            <trans-unit id="60">
+                <source>string.report</source>
+                <target>Raporla</target>
+            </trans-unit>
+            <trans-unit id="61">
+                <source>string.download</source>
+                <target>İndir</target>
+            </trans-unit>
+            <trans-unit id="62">
+                <source>string.pdf_could_not_created</source>
+                <target>PDF dosyası oluşturulamadı!</target>
+            </trans-unit>
+            <trans-unit id="63">
+                <source>string.end_and_publish</source>
+                <target>Tamamlandı &amp; Yayınla</target>
+            </trans-unit>
+            <trans-unit id="64">
+                <source>string.sure_for_complete_meeting</source>
+                <target>Bu toplantıyı sonlandırmak istediğinizden emin misiniz?</target>
+            </trans-unit>
+            <trans-unit id="65">
+                <source>string.make_editable</source>
+                <target>Düzenlenebilir yap</target>
+            </trans-unit>
+            <trans-unit id="66">
+                <source>string.sure_for_make_editable_meeting</source>
+                <target>Bu toplantıyı düzenlemeye açmak istediğinizden emin misiniz?</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

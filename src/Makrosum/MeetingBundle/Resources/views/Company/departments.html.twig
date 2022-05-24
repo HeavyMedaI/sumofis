@@ -1,0 +1,253 @@
+{% trans_default_domain "company" %}
+{% set body_class = '' %}
+{% extends 'MeetingBundle:base.html.twig' %}
+
+{% block stylesheets %}
+    <!---->
+    <style type="text/css"></style>
+{% endblock %}
+
+{% block imports_css %}
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.less') }}" />
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-lean-modal/jquery.makrosumModal.css') }}" />
+{% endblock %}
+
+{% block imports_js %}
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-lean-modal/jquery.makrosumModal.min.js') }}"></script>
+{% endblock %}
+
+{% block top_scripts %}
+    <script type="text/javascript">
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+
+        $(function(){
+            window.Makrosum.window.width = windowWidth;
+            window.Makrosum.window.height = windowHeight;
+
+            Makrosum.funcs.windowLoader.show();
+
+            /*var makrosumMenu = {
+             element: $('.makrosum-menu'),
+             width: $('.makrosum-menu').width(),
+             height: $('.makrosum-menu').height()
+             };
+             window.Makrosum.Menu = makrosumMenu;*/
+
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="grid makrosum-container boxed">
+
+        {% embed "MeetingBundle:layouts:notifications_menu.html.twig" %}{% endembed %}
+
+        <div class="col_12">
+
+            <div class="col_3">
+                <h5><img width="50" height="50" alt="{{ company_name }}" src="{{ asset('bundles/Makrosum/Meeting/Logo/' ~ company_logo) }}"></h5>
+                <hr />
+                <ul class="icons makrosum-left-menu">
+                    <li><a href="{{ path('company_company_personnels', {subdomain: company_domain}) }}"><i class="fa fa-users"></i> {{ "string.personnels"|trans }}</a></li>
+                    <li><a href="{{ path("company_company_positions", {subdomain: company_domain}) }}"><i class="fa fa-tasks"></i> {{ "string.positions"|trans }}</a></li>
+                    <li><i class="fa fa-code-fork"></i> {{ "string.departments"|trans }}</li>
+                </ul>
+            </div>
+
+            <div class="col_9">
+                <h5><i class="fa fa-code-fork"></i> {{ "string.departments"|trans }}</h5>
+                <hr class="alt1" />
+                <table>
+                    <thead>
+                    <tr>
+                        {#{ path('company_company_departments_new', {subdomain: company_domain}) }#}
+                        <th colspan="2"><a title="{{ "string.new_department"|trans }}" style="text-decoration:none;" class="float-right new-department" href="#makrosum-modal.new"><i class="fa fa-plus"></i> {{ "string.new_department"|trans }}</a></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="2">
+                                <table class="sortable striped makrosum-table" cellspacing="0" cellpadding="0">
+                                    <thead>
+                                    <tr>
+                                        <th>{{ "string.department"|trans }}</th>
+                                        <th>{{ "string.company"|trans }}</th>
+                                        <th><span style="float: right;margin-right: 10px;">{{ "string.transactions"|trans }}</span></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for department in departments %}
+                                        <tr>
+                                            <td>{{ department.name }}</td>
+                                            <td>{{ company_name }}</td>
+                                            <td><a title="{{ "string.edit"|trans }}"  class="edit-department" href="#makrosum-modal.edit" data-text="{{ department.name }}" data-id="{{ department.id }}" data-href="{{ path('company_company_departments_edit', {subdomain: company_domain, departmentId: department.id}) }}"><i class="fa fa-pencil"></i> {{ "string.edit"|trans }}</a>
+                                                <a title="{{ "string.remove"|trans }}" class="trash-department" href="{{ path('company_company_departments_remove', {subdomain: company_domain, departmentId: department.id}) }}"><i class="fa fa-minus-square"></i> {{ "string.remove"|trans }}</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="makrosum-modal" class="new">
+        <div id="signup-ct">
+            <div id="makrosum-modal-header">
+                <h5 class="header">{{ "string.new_department"|trans }}</h5>
+                <a class="modal_close" href="#"></a>
+            </div>
+
+            <div id="makrosum-modal-body">
+                <form id="makrosum-modal-form" action="{{ path('company_company_departments_new', {subdomain: company_domain}) }}" autocomplete="off">
+                    <div class="txt-fld">
+                        <label for="department_name">{{ "string.department_name"|trans }}</label>
+                        <input id="department_name" name="name" type="text" title="{{ "string.department_name"|trans }}" required>
+                    </div>
+                    <div class="btn-fld">
+                        <button class="button blue float-right submit" type="submit">{{ "string.save"|trans }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="makrosum-modal" class="edit">
+        <div id="signup-ct">
+            <div id="makrosum-modal-header">
+                <h5 class="header">&nbsp;</h5>
+                <a class="modal_close" href="#"></a>
+            </div>
+
+            <div id="makrosum-modal-body">
+                <form id="makrosum-modal-form" action="" autocomplete="off">
+                    <div class="txt-fld">
+                        <label for="department_name">{{ "string.department_name"|trans }}</label>
+                        <input id="department_name" name="name" type="text" title="{{ "string.department_name"|trans }}" required>
+                    </div>
+                    <div class="btn-fld">
+                        <button class="button blue float-right submit" type="submit">{{ "string.save"|trans }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block bottom_scripts %}
+    <script type="text/javascript">
+        $(function () {
+            $('.menu li.dropdown > a').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            //$('a[rel*=makrosumModal]').leanModal({ top : 300, overlay : 0.4, closeButton: '.modal_close' });
+
+            Makrosum.funcs.MakrosumModal('a.new-department', {ease: 'easein'}, function(modal, trigger){
+                var form = modal.body.find('form');
+                trigger.click(function(){
+                    modal.body.find('button.submit').attr('disabled', 'disabled');
+                });
+                form.submit(function(e){
+                    e.preventDefault();
+                    if($(this).find('#department_name').val().length>=3&&$(this).find('#department_name').attr('data-available')=='yes'){
+                        modal.parent.fadeOut(0);
+                        $('#lean_overlay').fadeOut(0);
+                        Makrosum.funcs.windowLoader.show();
+                        $.post($(this).attr('action'), $(this).serialize(), function(r){
+                            if(r.status){
+                                location.reload(1);
+                            }else{
+                                alert(r.message);
+                                Makrosum.funcs.windowLoader.hide();
+                            }
+                        });
+                    }else{
+                        alert('{{ "string.check_form"|trans({}, "global", trans_l) }}');
+                        Makrosum.funcs.windowLoader.hide();
+                    }
+                });
+            },{hidden: function(e, modal, trigger){
+                    e.preventDefault();
+                    e.stopPropagation();
+                    modal.body.find('#department_name').val('');
+                    modal.body.find('#department_name').removeAttr('class');
+                    modal.body.find('#department_name').data('available', 'no');
+                    modal.body.find('button.submit').attr('disabled', 'disabled');
+                }
+            });
+
+            Makrosum.funcs.MakrosumModal($('a.edit-department'), {}, function(modal, trigger){
+                var form = modal.body.find('form');
+                trigger.click(function(){
+                    modal.header.find('.header').text($(this).data('text'));
+                    form.attr('action', $(this).data('href'));
+                    form.data('attempt', 'edit');
+                    form.find('#department_name').val($(this).data('text')).keyup();
+                });
+                form.submit(function(e){
+                    e.preventDefault();
+                    if($(this).find('#department_name').val().length>=3&&$(this).find('#department_name').attr('data-available')=='yes'){
+                        modal.parent.fadeOut(0);
+                        $('#lean_overlay').fadeOut(0);
+                        Makrosum.funcs.windowLoader.show();
+                        $.post($(this).attr('action'), $(this).serialize(), function(r){
+                            if(r.status){
+                                location.reload(1);
+                            }else{
+                                alert(r.message);
+                                Makrosum.funcs.windowLoader.hide();
+                            }
+                        });
+                    }else{
+                        alert('{{ "string.check_form"|trans({}, "global", trans_l) }}');
+                        Makrosum.funcs.windowLoader.hide();
+                    }
+                });
+            });
+
+            $('input[id*=department_name]').keyup(function(){
+                var elThis = $(this);
+                $.post('{{ path('company_company_departments_check', {subdomain: company_domain, departmentName: ''}) }}'+$(this).val(), {departmentName: $(this).val()}, function(r){
+                    if(r.status){
+                        elThis.removeClass('checked').addClass('unchecked').attr('data-available', 'no');
+                        elThis.parent().parent().find('button.submit').attr('disabled', 'disabled');
+                    }else{
+                        elThis.removeClass('unchecked').addClass('checked').attr('data-available', 'yes');
+                        elThis.parent().parent().find('button.submit').removeAttr('disabled');
+                    }
+                });
+            });
+
+            $('a.trash-department').click(function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var elThis = $(this);
+                if(confirm('{{ "string.sure_remove_department"|trans }}')){
+                    Makrosum.funcs.windowLoader.show();
+                    $.post($(this).attr('href'), function(r){
+                        if(r.status){
+                            elThis.parent().parent().remove();
+                            Makrosum.funcs.windowLoader.hide();
+                        }else{
+                            alert(r.message);
+                            Makrosum.funcs.windowLoader.hide();
+                        }
+                    });
+                }
+            });
+
+            Makrosum.funcs.pageLoaded(function(global){
+                Makrosum.funcs.windowLoader.hide();
+            });
+
+        });
+    </script>
+{% endblock %}

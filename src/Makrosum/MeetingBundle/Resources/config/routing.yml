@@ -1,0 +1,534 @@
+yandex_verification:
+    path:       /b409d457e31a.html
+    defaults:   { _controller: MeetingBundle:Default:yandex, subdomain: '' }
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+
+logout:
+    path: /logout
+register:
+    path:       /register
+    defaults:   { _controller: MeetingBundle:Authentication:register, subdomain: '' }
+    host: 'www.%hostname%'
+login_www:
+    path:       /login
+    defaults:   { _controller: MeetingBundle:Authentication:login, subdomain: '' }
+    host:       'www.%hostname%'
+login_check:
+    path:       /login/check
+    defaults:   { _controller: MeetingBundle:Authentication:loginCheck }
+    host:       'www.%hostname%'
+forgot_password:
+    path:       /forgot-password
+    defaults:   { _controller: MeetingBundle:Authentication:forgotPassword }
+    host:       'www.%hostname%'
+reset_password:
+    path:       /reset-password
+    defaults:   { _controller: MeetingBundle:Authentication:resetPassword }
+    host:       'www.%hostname%'
+
+check_your_email:
+    path:       /global/check_mailbox
+    defaults:   { _controller: MeetingBundle:Authentication:confirmYourEmail }
+    host:       'www.%hostname%'
+add_your_phone:
+    path:       /global/activation/ap/{tokenKey}
+    defaults:   { _controller: MeetingBundle:Authentication:addYourPhone }
+    host:       'www.%hostname%'
+    requirements:
+        tokenKey: '.*'
+set_phone:
+    path:       /global/activation/set_phone/{tokenKey}
+    defaults:   { _controller: MeetingBundle:Authentication:setPhoneNumber }
+    host:       'www.%hostname%'
+    requirements:
+        tokenKey: '.*'
+confirm_phone:
+    path:       /global/activation/confirm_phone/{tokenKey}
+    defaults:   { _controller: MeetingBundle:Authentication:confirmPhoneNumber }
+    host:       'www.%hostname%'
+    requirements:
+        tokenKey: '.*'
+
+load_provinces:
+    path:       /load/public/provinces
+    defaults:   { _controller: MeetingBundle:Authentication:loadProvinces }
+    host:       'www.%hostname%'
+load_cities:
+    path:       /load/public/cities
+    defaults:   { _controller: MeetingBundle:Authentication:loadCities }
+    host:       'www.%hostname%'
+
+homepage_www:
+    path:       /
+    defaults:   { _controller: MeetingBundle:Calendar:index }
+    host:       'www.%hostname%'
+homepage:
+    path:       /
+    defaults:   { _controller: MeetingBundle:Calendar:index }
+    host:       '%hostname%'
+
+profile:
+    path:       /account/profile
+    defaults:   { _controller: MeetingBundle:Account:profile }
+profile_update:
+    path:       /account/profile/update
+    defaults:   { _controller: MeetingBundle:Account:profileUpdate }
+profile_load_provinces:
+    path:       /account/profile/provinces
+    defaults:   { _controller: MeetingBundle:Account:loadProvinces }
+profile_load_cities:
+    path:       /account/profile/cities
+    defaults:   { _controller: MeetingBundle:Account:loadCities }
+account_settings_general:
+    path:       /account/settings/general
+    defaults:   { _controller: MeetingBundle:Account:generalSettings }
+account_settings_general_update:
+    path:       /account/settings/general/update
+    defaults:   { _controller: MeetingBundle:Account:generalSettingsUpdate }
+account_settings_notification:
+    path:       /account/settings/notification
+    defaults:   { _controller: MeetingBundle:Account:notificationSettings }
+account_settings_notification_update:
+    path:       /account/settings/notification/update
+    defaults:   { _controller: MeetingBundle:Account:notificationSettingsUpdate }
+
+company_homepage:
+    path:       /
+    defaults:   { _controller: MeetingBundle:Company:index }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_add_new:
+    path:       /company/new
+    defaults:   { _controller: MeetingBundle:Company:new }
+company_company_edit:
+    path:       /company/edit
+    defaults:   { _controller: MeetingBundle:Company:edit }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_company_remove:
+    path:       /company/remove
+    defaults:   { _controller: MeetingBundle:Company:remove }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_company_leave:
+    path:       /company/leave
+    defaults:   { _controller: MeetingBundle:Company:leave }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_backservice_create:
+    path:       /company/create
+    defaults:   { _controller: MeetingBundle:Company:create }
+company_backservice_update:
+    path:       /company/update
+    defaults:   { _controller: MeetingBundle:Company:update }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_backservice_check_domain:
+    path:       /company/check/domain
+    defaults:   { _controller: MeetingBundle:Company:checkDomain }
+company_backservice_upload_logo:
+    path:       /company/logo/upload
+    defaults:   { _controller: MeetingBundle:Company:logoUpload }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_company_meetings:
+    path:       /company/meeting/agenda
+    defaults:   { _controller: MeetingBundle:Company:meeting_management, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_company_meeting_categries:
+    path:       /company/meeting/categories
+    defaults:   { _controller: MeetingBundle:Company:meeting_category_management, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_company_personnels:
+    path:       /company/personnels
+    defaults:   { _controller: MeetingBundle:Company:personnel_management, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_company_personnels_new:
+    path:       /company/personnels/new
+    defaults:   { _controller: MeetingBundle:Company:new_personnel, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_company_personnels_edit:
+    path:       /company/personnels/edit/{personnelId}
+    defaults:   { _controller: MeetingBundle:Company:edit_personnel, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        personnelId:    '(0|[1-9][0-9]*)'
+company_company_departments:
+    path:       /company/departments
+    defaults:   { _controller: MeetingBundle:Company:departments, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_company_positions:
+    path:       /company/positions
+    defaults:   { _controller: MeetingBundle:Company:positions, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+
+
+company_meeting_webcal_protocol_ics:
+    path:       /global/meeting/{meetingId}/webcal/ics
+    defaults:   { _controller: MeetingBundle:Meeting:webcal, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '(.*)'
+        meetingId: '(0|[1-9][0-9]*)'
+company_meeting_list_meetings_calendar:
+    path:       /company/meeting/meetings/calendar
+    defaults:   { _controller: MeetingBundle:Meeting:meetings, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '(.*)'
+company_meeting_doc_meeting:
+    path:       /company/meeting/{meetingId}/doc
+    defaults:   { _controller: MeetingBundle:Meeting:doc, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        meetingId: '(0|[1-9][0-9]*)'
+company_meeting_pdf_meeting:
+    path:       /company/meeting/{meetingId}/pdf
+    defaults:   { _controller: MeetingBundle:Meeting:pdf, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        meetingId: '(0|[1-9][0-9]*)'
+company_meeting_view_meeting:
+    path:       /company/meeting/{meetingId}/view
+    defaults:   { _controller: MeetingBundle:Meeting:view, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        meetingId: '(0|[1-9][0-9]*)'
+company_meeting_open_meeting:
+    path:       /company/meeting/{meetingId}/details
+    defaults:   { _controller: MeetingBundle:Meeting:open, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        meetingId: '(0|[1-9][0-9]*)'
+company_meeting_new_meeting:
+    path:       /company/meeting/new
+    defaults:   { _controller: MeetingBundle:Meeting:create, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_meeting_edit_meeting:
+    path:       /company/meeting/{meetingId}/edit
+    defaults:   { _controller: MeetingBundle:Meeting:edit, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        meetingId: '(0|[1-9][0-9]*)'
+company_meeting_cancel_meeting:
+    path:       /company/meeting/{meetingId}/cancel
+    defaults:   { _controller: MeetingBundle:Meeting:cancel, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        meetingId: '(0|[1-9][0-9]*)'
+company_meeting_set_meeting:
+    path:       /company/meeting/{meetingId}/re-set
+    defaults:   { _controller: MeetingBundle:Meeting:re_set, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        meetingId: '(0|[1-9][0-9]*)'
+company_meeting_approve_meeting:
+    path:       /company/meeting/{meetingId}/approve
+    defaults:   { _controller: MeetingBundle:Meeting:approve, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        meetingId: '(0|[1-9][0-9]*)'
+company_meeting_complete_meeting:
+    path:       /company/meeting/{meetingId}/complete
+    defaults:   { _controller: MeetingBundle:Meeting:complete, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        meetingId: '(0|[1-9][0-9]*)'
+
+company_company_departments_check:
+    path:       /company/departments/check/{departmentName}
+    defaults:   { _controller: MeetingBundle:Department:checkDepartment, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        departmentName: '.*'
+company_company_departments_new:
+    path:       /company/departments/new
+    defaults:   { _controller: MeetingBundle:Department:newDepartment, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_company_departments_edit:
+    path:       /company/departments/{departmentId}/edit
+    defaults:   { _controller: MeetingBundle:Department:editDepartment, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        departmentId: '(0|[1-9][0-9]*)'
+company_company_departments_remove:
+    path:       /company/departments/{departmentId}/trash
+    defaults:   { _controller: MeetingBundle:Department:deleteDepartment, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        departmentId: '(0|[1-9][0-9]*)'
+
+company_company_positions_all:
+    path:       /company/positions/list/json
+    defaults:   { _controller: MeetingBundle:Position:getAllJson, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_company_positions_check:
+    path:       /company/positions/{departmentId}/check/{positionName}
+    defaults:   { _controller: MeetingBundle:Position:checkPosition, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        departmentId:   '(0|[1-9][0-9]*)'
+        positionName:   '.*'
+company_company_positions_new:
+    path:       /company/positions/{departmentId}/new
+    defaults:   { _controller: MeetingBundle:Position:newPosition, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        departmentId: '(0|[1-9][0-9]*)'
+company_company_positions_edit:
+    path:       /company/positions/{departmentId}/{positionId}/edit
+    defaults:   { _controller: MeetingBundle:Position:editPosition, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        departmentId:   '(0|[1-9][0-9]*)'
+        positionId:     '(0|[1-9][0-9]*)'
+company_company_positions_remove:
+    path:       /company/positions/{departmentId}/{positionId}/trash
+    defaults:   { _controller: MeetingBundle:Position:deletePosition, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        departmentId:   '(0|[1-9][0-9]*)'
+        positionId:     '(0|[1-9][0-9]*)'
+
+company_company_personnels_check:
+    path:       /company/personnels/check
+    defaults:   { _controller: MeetingBundle:Personnel:checkPersonnel, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_company_personnels_invite:
+    path:       /company/personnels/invite
+    defaults:   { _controller: MeetingBundle:Personnel:invitePeople, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_company_personnels_new_personnel:
+    path:       /company/personnels/personnel/new
+    defaults:   { _controller: MeetingBundle:Personnel:newPersonnel, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_company_personnels_edit_personnel:
+    path:       /company/personnels/personnel/{personnelId}/edit
+    defaults:   { _controller: MeetingBundle:Personnel:editPersonnel, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        personnelId:    '(0|[1-9][0-9]*)'
+company_company_personnels_remove_personnel:
+    path:       /company/personnels/personnel/{personnelId}/remove
+    defaults:   { _controller: MeetingBundle:Personnel:removePersonnel, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        personnelId:    '(0|[1-9][0-9]*)'
+
+company_object_upload_stream:
+    path:       /company/object/upload/{meetingId}/stream
+    defaults:   { _controller: MeetingBundle:MeetingObject:upload_stream, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        meetingId:  '(0|[1-9][0-9]*)'
+company_object_remove_stream:
+    path:       /company/object/upload/remove/stream/{objectId}
+    defaults:   { _controller: MeetingBundle:MeetingObject:remove_stream, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        objectId:  '(0|[1-9][0-9]*)'
+
+company_meeting_subject_create:
+    path:       /company/meeting/{meetingId}/subject/create
+    defaults:   { _controller: MeetingBundle:MeetingMatterSubject:create_subject, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        meetingId: '(0|[1-9][0-9]*)'
+company_meeting_subject_edit:
+    path:       /company/meeting/subject/{matterSubjectId}/edit
+    defaults:   { _controller: MeetingBundle:MeetingMatterSubject:edit_subject, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        matterSubjectId: '(0|[1-9][0-9]*)'
+company_meeting_subject_remove:
+    path:       /company/meeting/subject/{matterSubjectId}/trash
+    defaults:   { _controller: MeetingBundle:MeetingMatterSubject:remove_subject, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        matterSubjectId: '(0|[1-9][0-9]*)'
+
+company_meeting_member_insert:
+    path:       /company/meeting/member/{meetingId}/insert
+    defaults:   { _controller: MeetingBundle:MeetingMember:insert, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        meetingId: '(0|[1-9][0-9]*)'
+company_meeting_member_insert_multiple:
+    path:       /company/meeting/member/{meetingId}/insert
+    defaults:   { _controller: MeetingBundle:MeetingMember:insertMembers, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        meetingId: '(0|[1-9][0-9]*)'
+company_meeting_member_insert_external:
+    path:       /company/meeting/member/{meetingId}/insert-external
+    defaults:   { _controller: MeetingBundle:MeetingMember:insertExternal, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        meetingId: '(0|[1-9][0-9]*)'
+company_meeting_member_set:
+    path:       /company/meeting/{meetingId}/member/{memberId}/set
+    defaults:   { _controller: MeetingBundle:MeetingMember:setMember, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        memberId: '(0|[1-9][0-9]*)'
+        meetingId:  '(0|[1-9][0-9]*)'
+company_meeting_member_remove:
+    path:       /company/meeting/member/{memberId}/trash
+    defaults:   { _controller: MeetingBundle:MeetingMember:remove, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        memberId: '(0|[1-9][0-9]*)'
+
+company_meeting_download_create:
+    path:       /company/meeting/{meetingId}/report/{reportId}/download
+    defaults:   { _controller: MeetingBundle:MeetingReport:download_report, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        meetingId: '(0|[1-9][0-9]*)'
+        reportId: '(0|[1-9][0-9]*)'
+company_meeting_report_create:
+    path:       /company/meeting/{meetingId}/report/create
+    defaults:   { _controller: MeetingBundle:MeetingReport:create_report, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        meetingId: '(0|[1-9][0-9]*)'
+company_meeting_report_edit:
+    path:       /company/meeting/{meetingId}/report/{reportId}/edit
+    defaults:   { _controller: MeetingBundle:MeetingReport:edit_report, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        meetingId: '(0|[1-9][0-9]*)'
+        reportId: '(0|[1-9][0-9]*)'
+company_meeting_report_remove:
+    path:       /company/meeting/{meetingId}/report/{reportId}/trash
+    defaults:   { _controller: MeetingBundle:MeetingReport:remove_report, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        meetingId: '(0|[1-9][0-9]*)'
+        reportId: '(0|[1-9][0-9]*)'
+
+company_meeting_category_list:
+    path:       /company/meeting/categories/all
+    defaults:   { _controller: MeetingBundle:MeetingCategory:categories, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_meeting_categories_check:
+    path:       /company/categories/check/{categoryName}
+    defaults:   { _controller: MeetingBundle:MeetingCategory:checkCategory, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        categoryName: '.*'
+company_meeting_categories_new:
+    path:       /company/categories/new
+    defaults:   { _controller: MeetingBundle:MeetingCategory:newCategory, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+company_meeting_categories_edit:
+    path:       /company/categories/{categoryId}/edit
+    defaults:   { _controller: MeetingBundle:MeetingCategory:editCategory, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        categoryId: '(0|[1-9][0-9]*)'
+company_meeting_categories_remove:
+    path:       /company/categories/{categoryId}/trash
+    defaults:   { _controller: MeetingBundle:MeetingCategory:deleteCategory, subdomain: '' }
+    host:       '{subdomain}.%hostname%'
+    requirements:
+        subdomain:  '^((?!www\.).)*'
+        categoryId: '(0|[1-9][0-9]*)'
+
+
+
+
+
+
+test_email:
+    path:       /global/test_email
+    defaults:   { _controller: MeetingBundle:Authentication:testEmail }
+
+account_settings_register:
+    path:       /account/settings/add
+    defaults:   { _controller: MeetingBundle:Account:settingsRegister }
+account_settings_update:
+    path:       /account/settings/update
+    defaults:   { _controller: MeetingBundle:Account:settingsUpdate }
+account_settings_test_locale:
+    path:       /account/settings/locale/test
+    defaults:   { _controller: MeetingBundle:Account:testLocale }
+
+trans_test_lang:
+    path:       /trans/test/{_locale}
+    defaults:   { _controller: MeetingBundle:TranslationTest:test }
+    requirements:
+        _locale: en|tr
+trans_test:
+    path:       /trans/test
+    defaults:   { _controller: MeetingBundle:TranslationTest:test }

@@ -1,0 +1,109 @@
+{% trans_default_domain "company" %}
+{% set body_class = '' %}
+{% extends 'MeetingBundle:base.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+      #map {
+        height: 500px;
+      }
+    </style>
+{% endblock %}
+
+{% block imports_css %}
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.less') }}" />
+{% endblock %}
+
+{% block imports_js %}
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvjCBcDUDD9V36ck4GSBOMhSWVEXZ_W5c">
+{% endblock %}
+
+{% block top_scripts %}
+    <script type="text/javascript">
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+
+        $(function(){
+            window.Makrosum.window.width = windowWidth;
+            window.Makrosum.window.height = windowHeight;
+
+            Makrosum.funcs.windowLoader.show();
+
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="grid makrosum-container boxed">
+
+        {% embed "MeetingBundle:layouts:notifications_menu.html.twig" %}{% endembed %}
+
+        <div class="col_12">
+
+            <div class="col_3">
+                <h5><img width="50" height="50" alt="{{ company_name }}" src="{{ asset('bundles/Makrosum/Meeting/Logo/' ~ company_logo) }}"></h5>
+                <hr style="margin: 10px 0;" />
+                <ul class="icons makrosum-left-menu">
+                    <li><a title="{{ "string.company_phone"|trans }}" href="tel:{{ company_phone }}"><i class="fa fa-phone"></i> (0224) 490 54 45</a></li>
+                    {% if company_fax != null %}
+                        <li><a title="{{ "string.company_fax"|trans }}" href="tel:{{ company_fax }}"><i class="fa fa-fax"></i> {{ company_fax }}</a></li>
+                    {% endif %}
+                    <li><a title="{{ "string.company_email"|trans }}" href="mailto:{{ company_email }}"><i class="fa fa-envelope"></i> {{ company_email }}</a></li>
+                    {% if company_website != null %}
+                    <li><a title="{{ "string.company_website"|trans }} - {{ company_name }}" href="http://{{ company_website }}" target="_blank"><i class="fa fa-globe"></i> {{ company_website }}</a></li>
+                    {% endif %}
+                    <li><address><i class="fa fa-map-marker"></i> {{ company_address }} {{ company_city }}/{{ company_province }} {{ company_country }}</address></li>
+                </ul>
+            </div>
+
+            <div class="col_9">
+                <h5><i class="fa fa-users"></i> {{ company_name }}</h5>
+                <hr class="alt1" />
+                <div id="map"></div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block bottom_scripts %}
+    <script type="text/javascript">
+        $(function () {
+            $('.menu li.dropdown > a').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            $('a.trash-personnel').click(function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var elThis = $(this);
+                if(confirm('{{ "string.sure_remove_position"|trans }}')){
+                    Makrosum.funcs.windowLoader.show();
+                    $.post($(this).attr('data-trash'), function(r){
+                        if(r.status){
+                            elThis.parent().parent().remove();
+                            Makrosum.funcs.windowLoader.hide();
+                        }else{
+                            alert(r.message);
+                            Makrosum.funcs.windowLoader.hide();
+                        }
+                    });
+                }
+            });
+
+            var MyLocation = {lat: {{ company_map.latitude }}, lng: {{ company_map.longitude }}};
+
+            Makrosum.funcs.initMap('map', {
+                zoom: 18,
+                center: MyLocation
+            }, MyLocation);
+
+            Makrosum.funcs.pageLoaded(function(global){
+                Makrosum.funcs.windowLoader.hide();
+            });
+
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% trans_default_domain "company" %}
+{% set body_class = '' %}
+{% extends 'MeetingBundle:base.html.twig' %}
+
+{% block stylesheets %}
+    <!---->
+{% endblock %}
+
+{% block imports_css %}
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.less') }}" />
+{% endblock %}
+
+{% block imports_js %}
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.js') }}"></script>
+{% endblock %}
+
+{% block top_scripts %}
+    <script type="text/javascript">
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+
+        $(function(){
+            window.Makrosum.window.width = windowWidth;
+            window.Makrosum.window.height = windowHeight;
+
+            Makrosum.funcs.windowLoader.show();
+
+            /*var makrosumMenu = {
+             element: $('.makrosum-menu'),
+             width: $('.makrosum-menu').width(),
+             height: $('.makrosum-menu').height()
+             };
+             window.Makrosum.Menu = makrosumMenu;*/
+
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="grid makrosum-container boxed">
+
+        {% embed "MeetingBundle:layouts:notifications_menu.html.twig" %}{% endembed %}
+
+        <div class="col_12">
+
+            <div class="col_12">
+                <!-- Gallery -->
+                <div class="dashdash">
+                    <a class="right-text" href="{{ path('company_company_meetings', {subdomain: company_domain}) }}">
+                        <i class="fa fa-briefcase"></i>
+                        <span>{{ 'string.meeting_management'|trans }} </span>
+                    </a>
+                    {% if IS_GRANTED_SUPER_PERSONNEL == true %}
+                        <a class="right-text" href="{{ path('company_company_personnels', {subdomain: company_domain}) }}">
+                            <i class="fa fa-users"></i>
+                            <span>{{ 'string.personnel_management'|trans }}</span>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block bottom_scripts %}
+    <script type="text/javascript">
+        $(function () {
+            $('.menu li.dropdown > a').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            Makrosum.funcs.pageLoaded(function(global){
+                Makrosum.funcs.windowLoader.hide();
+            });
+
+        });
+    </script>
+{% endblock %}

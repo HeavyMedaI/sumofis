@@ -1,0 +1,94 @@
+{% trans_default_domain "security" %}
+{% set body_class = '' %}
+{% extends 'MeetingBundle:base.html.twig' %}
+
+{% block stylesheets %}
+    <!---->
+{% endblock %}
+
+{% block imports_css %}
+    <!---->
+{% endblock %}
+
+{% block imports_js %}
+    <!---->
+{% endblock %}
+
+{% block top_scripts %}
+    <script type="text/javascript">
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+
+        $(function(){
+            window.Makrosum.window.width = windowWidth;
+            window.Makrosum.window.height = windowHeight;
+
+            Makrosum.funcs.windowLoader.show();
+
+            /*var makrosumMenu = {
+                element: $('.makrosum-menu'),
+                width: $('.makrosum-menu').width(),
+                height: $('.makrosum-menu').height()
+            };
+            window.Makrosum.Menu = makrosumMenu;*/
+
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="grid makrosum-container boxed">
+
+        <div class="col_12">
+            <div class="col_3"></div>
+            <div class="col_6">
+                <h5><img class="form-logo" src="{{ protocol_scheme }}://{{ base_hostname }}{{ asset('bundles/Makrosum/Meeting/_assets/img/logo.png') }}"> {{ "string.login"|trans }}</h5>
+                <hr class="alt1" />
+                <form action="{{ path("login_www") }}" class="makrosum-login-form" method="post">
+                    <input type="hidden" name="_target_path" value="profile" />
+                    <table>
+                        <tr>
+                            <td><label for="username">{{ "string.email"|trans }}</label></td>
+                            <td><input class="col_10" id="username" type="text" name="_username" placeholder="{{ "string.email"|trans }}" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="password">{{ "string.password"|trans }}</label></td>
+                            <td><input class="col_10" id="password" type="password" name="_password" placeholder="{{ "string.password"|trans }}" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="col_11">
+                                    <a style="color: #1D6DC1;" href="{{ path("forgot_password") }}">{{ "string.forgot_password"|trans }}</a>
+                                    <button class="button register" type="button">{{ "string.register"|trans }}</button>
+                                    <button class="button blue" type="submit">{{ "string.login"|trans }}</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+
+            </div>
+            <div class="col_3"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block bottom_scripts %}
+    <script type="text/javascript">
+        $(function () {
+            $('.menu li.dropdown > a').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            $('.register').click(function(){
+                location.href = '{{ path("register") }}';
+            });
+
+            Makrosum.funcs.pageLoaded(function(global){
+                Makrosum.funcs.windowLoader.hide();
+            });
+
+        });
+    </script>
+{% endblock %}

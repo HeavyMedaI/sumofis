@@ -1,0 +1,283 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>string.new_company</source>
+                <target>Yeni Şirket</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>string.company_name</source>
+                <target>Şirket Adı</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>string.company_domain</source>
+                <target>Alan Adı</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>string.company_website</source>
+                <target>Web Site</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>string.company_email</source>
+                <target>E-Posta</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>string.company_phone</source>
+                <target>Telefon</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>string.company_fax</source>
+                <target>Fax</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>string.country</source>
+                <target>Ülke</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>string.province</source>
+                <target>İl</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>string.city</source>
+                <target>İlçe</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>string.company_address</source>
+                <target>Adres</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>string.company_map</source>
+                <target>Harita</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>string.save</source>
+                <target>Kaydet</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>string.please_select</source>
+                <target>Lütfen Seçiniz</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>string.check</source>
+                <target>Kontrol Et</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>string.check_domain_availability</source>
+                <target>Alanadı kullanılabilir değil</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>string.type_domain</source>
+                <target>Lütfen bir alanadı giriniz</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>string.meeting_management</source>
+                <target>Toplantı Yönetimi</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>string.personnel_management</source>
+                <target>Personel Yönetimi</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>string.personnels</source>
+                <target>Personeller</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>string.positions</source>
+                <target>Pozisyonlar</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>string.departments</source>
+                <target>Departmanlar</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>string.permissions</source>
+                <target>Yetkiler</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>string.company</source>
+                <target>Şirket</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>string.personnel.fullname</source>
+                <target>Adı Soyadı</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>string.department</source>
+                <target>Departman</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>string.position</source>
+                <target>Pozisyon</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>string.transactions</source>
+                <target>İşlemler</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>string.edit</source>
+                <target>Düzenle</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>string.remove</source>
+                <target>Sil</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>string.new_personnel</source>
+                <target>Personel Ekle</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>string.new_department</source>
+                <target>Departman Ekle</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>string.new_position</source>
+                <target>Pozisyon Ekle</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>string.department_name</source>
+                <target>Departman Adı</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>string.sure_remove_department</source>
+                <target>Bu departmanı silmek istediğinizden emin misiniz?</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>string.position_name</source>
+                <target>Pozisyon Adı</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>string.sure_remove_position</source>
+                <target>Bu pozisyonu silmek istediğinizden emin misiniz?</target>
+            </trans-unit>
+            <trans-unit id="38">
+                <source>string.department_could_not_found</source>
+                <target>Departman bulunamadı!</target>
+            </trans-unit>
+            <trans-unit id="39">
+                <source>string.department_could_not_created</source>
+                <target>Departman oluşturulamadı!</target>
+            </trans-unit>
+            <trans-unit id="40">
+                <source>string.position_could_not_found</source>
+                <target>Pozisyon bulunamadı!</target>
+            </trans-unit>
+            <trans-unit id="41">
+                <source>string.position_could_not_created</source>
+                <target>Pozisyon oluşturulamadı!</target>
+            </trans-unit>
+            <trans-unit id="42">
+                <source>string.personnel_could_not_found</source>
+                <target>Personel bulunamadı!</target>
+            </trans-unit>
+            <trans-unit id="43">
+                <source>string.personnel_could_not_created</source>
+                <target>Personel oluşturulamadı!</target>
+            </trans-unit>
+            <trans-unit id="44">
+                <source>string.user_email</source>
+                <target>E-Posta</target>
+            </trans-unit>
+            <trans-unit id="45">
+                <source>string.find_user</source>
+                <target>Kullanıcıyı getir</target>
+            </trans-unit>
+            <trans-unit id="46">
+                <source>string.type_user_email</source>
+                <target>Kullanıcının e-posta adresini giriniz!</target>
+            </trans-unit>
+            <trans-unit id="47">
+                <source>string.user_could_not_found_with_email</source>
+                <target>Bu mail adresi ile kullanıcı bulunamadı, davet etmek ister misiniz?</target>
+            </trans-unit>
+            <trans-unit id="48">
+                <source>string.user_already_in_your_company</source>
+                <target>Bu kullanıcı zaten şirketinizde kayıtlı durumda!</target>
+            </trans-unit>
+            <trans-unit id="49">
+                <source>string.check_user_availability</source>
+                <target>Kullanıcı kullanılabilir değil</target>
+            </trans-unit>
+            <trans-unit id="50">
+                <source>string.personnel_permission</source>
+                <target>Personel Yetkileri</target>
+            </trans-unit>
+            <trans-unit id="51">
+                <source>string.meeting_permission</source>
+                <target>Toplantı Yetkileri</target>
+            </trans-unit>
+            <trans-unit id="52">
+                <source>string.admin</source>
+                <target>Yönetici</target>
+            </trans-unit>
+            <trans-unit id="53">
+                <source>string.create</source>
+                <target>Oluşturma / Onaylama</target>
+            </trans-unit>
+            <trans-unit id="54">
+                <source>string.edit</source>
+                <target>Düzenleme</target>
+            </trans-unit>
+            <trans-unit id="55">
+                <source>string.delete</source>
+                <target>Silme</target>
+            </trans-unit>
+            <trans-unit id="56">
+                <source>string.request</source>
+                <target>Toplantı Talebi</target>
+            </trans-unit>
+            <trans-unit id="57">
+                <source>string.matter</source>
+                <target>Konu Ekleme</target>
+            </trans-unit>
+            <trans-unit id="58">
+                <source>string.change_status</source>
+                <target>İptal / Geri Aç</target>
+            </trans-unit>
+            <trans-unit id="59">
+                <source>string.edit_company</source>
+                <target>Şirketi Düzenle</target>
+            </trans-unit>
+            <trans-unit id="60">
+                <source>string.company_logo</source>
+                <target>Şirket Logosu</target>
+            </trans-unit>
+            <trans-unit id="61">
+                <source>string.company_logo_max_size</source>
+                <target>Max. 100x100</target>
+            </trans-unit>
+            <trans-unit id="62">
+                <source>string.company_logo_upload</source>
+                <target>Yükle</target>
+            </trans-unit>
+            <trans-unit id="63">
+                <source>string.remove_company</source>
+                <target>Şirketi Sil</target>
+            </trans-unit>
+            <trans-unit id="64">
+                <source>string.company_could_not_found</source>
+                <target>Şirket bulunamadı!</target>
+            </trans-unit>
+            <trans-unit id="65">
+                <source>string.leave_company</source>
+                <target>Şirketlerimden Çıkar</target>
+            </trans-unit>
+            <trans-unit id="66">
+                <source>string.sure_for_remove_company</source>
+                <target>Bu şirketi silmek istediğinizden emin misinz?</target>
+            </trans-unit>
+            <trans-unit id="67">
+                <source>string.sure_for_leave_company</source>
+                <target>Bu şirketi kaldırmak istediğinizden emin misinz?</target>
+            </trans-unit>
+            <trans-unit id="68">
+                <source>string.user_could_not_invited</source>
+                <target>Kullanıcı davet edilirken bir sorun oluştu!</target>
+            </trans-unit>
+            <trans-unit id="69">
+                <source>string.user_invited_successfully</source>
+                <target>Kullanıcı davet edildi</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

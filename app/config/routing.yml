@@ -1,0 +1,7 @@
+knp_snappy:
+    resource: "@KnpSnappyBundle/Resources/config/routing.xml"
+    prefix:   /
+
+meeting:
+    resource: "@MeetingBundle/Resources/config/routing.yml"
+    prefix:   /

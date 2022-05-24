@@ -1,0 +1,108 @@
+{% trans_default_domain "account" %}
+{% set body_class = '' %}
+{% extends 'MeetingBundle:base.html.twig' %}
+
+{% block stylesheets %}
+    <!---->
+{% endblock %}
+
+{% block imports_css %}
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.less') }}" />
+{% endblock %}
+
+{% block imports_js %}
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.js') }}"></script>
+{% endblock %}
+
+{% block top_scripts %}
+    <script type="text/javascript">
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+
+        $(function(){
+            window.Makrosum.window.width = windowWidth;
+            window.Makrosum.window.height = windowHeight;
+
+            Makrosum.funcs.windowLoader.show();
+
+            var makrosumMenu = {
+                element: $('.makrosum-menu'),
+                width: $('.makrosum-menu').width(),
+                height: $('.makrosum-menu').height()
+            };
+
+            window.Makrosum.Menu = makrosumMenu;
+
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="grid makrosum-container boxed">
+
+        {% embed "MeetingBundle:layouts:notifications_menu.html.twig" %}{% endembed %}
+
+        <div class="col_12">
+
+            <div class="col_3">
+                <h5>&nbsp;</h5>
+                <hr />
+                <ul class="icons makrosum-left-menu">
+                    <li><a href="{{ path("profile") }}"><i class="fa fa-user"></i> {{ "string.profile"|trans }}</a></li>
+                    <li class="current"><i class="fa fa-cog"></i> {{ "string.settings.general"|trans }}</li>
+                    <li><a href="{{ path("account_settings_notification") }}"><i class="fa fa-bell-o"></i> {{ "string.settings.notification"|trans }}</a></li>
+                </ul>
+            </div>
+
+            <div class="col_9">
+                <h5><i class="fa fa-cog"></i> {{ 'string.settings.general'|trans }}</h5>
+                <hr class="alt1" />
+                <form class="makrosum-form" action="{{ path("account_settings_general_update") }}" method="post" autocomplete="off">
+                    <table>
+                        <tr>
+                            <td width="35%"><label for="language">{{ 'string.language'|trans }}</label></td>
+                            <td>
+                                <select class="col_5" id="language" name="language">
+                                    {% for locale, language in settings.languages %}
+                                        {% if language.selected == false %}
+                                            <option value="{{ locale }}">{{ language.name }}</option>
+                                        {% elseif language.selected == true %}
+                                            <option value="{{ locale }}" selected="selected">{{ language.name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                <div class="col_5">
+                                    <button class="button blue float-right" type="submit">{{ 'string.save'|trans }}</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block bottom_scripts %}
+    <script type="text/javascript">
+        $(function () {
+            $('.menu li.dropdown > a').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            /* PAGE SCRIPS HERE */
+
+            Makrosum.funcs.pageLoaded(function(global){
+                Makrosum.funcs.windowLoader.hide();
+            });
+
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="tr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>string.calendar</source>
+                <target>Calendar</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>string.companies</source>
+                <target>My Companies</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>string.new_company</source>
+                <target>New Company</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>string.day</source>
+                <target>Day</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>string.month</source>
+                <target>Month</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>string.week</source>
+                <target>Week</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>string.year</source>
+                <target>Year</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>string.profile</source>
+                <target>My Profile</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>string.settings</source>
+                <target>Settings</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>string.logout</source>
+                <target>Logout</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>string.check_form</source>
+                <target>Please check your from values.</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>string.module_not_permitted_to_view</source>
+                <target>You don´t have permissions for this module</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>string.status_ok</source>
+                <target>Successful</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>string.copyright</source>
+                <target>Bütün hakları saklıdır. %year%</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>string.privacy</source>
+                <target>Privacy</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>string.terms</source>
+                <target>Terms &amp; Cond.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

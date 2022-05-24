@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>string.login</source>
+                <target>Sign In</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>string.register</source>
+                <target>Register</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>string.email</source>
+                <target>E-mail</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>string.password</source>
+                <target>Password</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>string.not_registered</source>
+                <target>Not Registered</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>string.email_already_taken</source>
+                <target>This e-mail has already been used before</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>string.check_your_email_register</source>
+                <target>We sent you an activation email, please check your mailbox for it.</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>string.add_your_phone</source>
+                <target>Please add a phone number</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>string.confirm_your_phone</source>
+                <target>Please confirm your phone number, we sent you a sms.</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>string.phone</source>
+                <target>Phone Number</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>string.sms_token</source>
+                <target>SMS Token Key</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>string.submit</source>
+                <target>Submit</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>string.phone_already_taken</source>
+                <target>This phone number has already been used before</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>string.token_could_not_found</source>
+                <target>Activation key could not found</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>string.wrong_sms_key</source>
+                <target>SMS key did not match to given key</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>string.fullname</source>
+                <target>Fullname</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>string.please_select</source>
+                <target>Please Select</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>string.home</source>
+                <target>Home Page</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>string.contact_us</source>
+                <target>Contact Us</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>string.module_not_permitted</source>
+                <target>You don´t have permissions for this module</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>string.forgot_password</source>
+                <target>Forgot Password</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>string.check_your_email_reset_password</source>
+                <target>We sent you an email, please check your mailbox for it.</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>string.no_user_found</source>
+                <target>There is no a user with this email</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>string.check_your_sms_reset_password</source>
+                <target>We sent you a sms, please check your sms for it.</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>string.reset_password_sms</source>
+                <target>This is a temporary password %password% please change it after login</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>string.system_error</source>
+                <target>An error ocurred, please try again</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>string.type_an_email</source>
+                <target>Please type your email</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>string.country</source>
+                <target>Country</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>string.province</source>
+                <target>Province</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>string.city</source>
+                <target>City</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

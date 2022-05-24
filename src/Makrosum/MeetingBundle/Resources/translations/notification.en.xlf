@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="tr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>string.you_have_been_added_to_a_company</source>
+                <target>You have been added to %company% company</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>string.there_shall_be_a_meeting</source>
+                <target>There shall be a meeting for %meeting% between %begin% and %end%. %company%</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>string.a_report_added_to_meeting</source>
+                <target>%report% report added to %meeting% meeting. %company%</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>string.add_to_calendar</source>
+                <target>Add to Calendar</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>string.download_calendar</source>
+                <target>Download Calendar</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>string.if_webcal_link_doenst_work</source>
+                <target>If add calendar link doesn´t work, download the calendar file with link given below and open it with your calendar application.</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>string.go_to</source>
+                <target>Go to %to%</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>string.notification_title</source>
+                <target>Sumofis.com Notifications</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>string.home</source>
+                <target>Home</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>string.terms</source>
+                <target>Terms - Cond.</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>string.activation_title</source>
+                <target>Sumofis.com Activation E-Mail</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>string.activate_your_account</source>
+                <target>Please activate your sumofis.com account</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>string.activation</source>
+                <target>Activation</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>string.if_button_does_not_work</source>
+                <target>İf button does not work above, copy the link below and paste it to your browser.</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>string.meeting</source>
+                <target>Meeting</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>string.go_to_meeting</source>
+                <target>Go to Meeting</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>string.you_have_been_added_to_a_meeting</source>
+                <target>You have been added to a meeting as a member.</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>string.if_add_button_does_not_work</source>
+                <target>İf Add Calendar button doesn´t work, download the calendar file with Download Calendar and open it with your calendar application.</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>string.meeting_complete_published</source>
+                <target>Final report published for %meeting%. %company%</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>string.read_report</source>
+                <target>Read the Report</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>string.privacy</source>
+                <target>Privacy</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>string.you_have_been_invited_to</source>
+                <target>You have been invited to %company%</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

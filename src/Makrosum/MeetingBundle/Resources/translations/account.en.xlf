@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="tr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>string.profile</source>
+                <target>My Profile</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>string.settings.general</source>
+                <target>General Settings</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>string.settings.notification</source>
+                <target>Notification Settings</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>string.fullname</source>
+                <target>Fullname</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>string.email</source>
+                <target>E-Mail</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>string.phone</source>
+                <target>Phone</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>string.password</source>
+                <target>Password</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>string.country</source>
+                <target>Country</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>string.province</source>
+                <target>Province</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>string.city</source>
+                <target>City</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>string.save</source>
+                <target>Save</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>string.language</source>
+                <target>Language</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>string.email_notifications</source>
+                <target>E-Mail Notifications</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>string.sms_notifications</source>
+                <target>SMS Notifications</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>string.active</source>
+                <target>Active</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>string.deactive</source>
+                <target>Deactive</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>string.please_select</source>
+                <target>Please Select</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>string.register</source>
+                <target>Register</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>string.calendar</source>
+                <target>Takvim</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>string.companies</source>
+                <target>Şirketlerim</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>string.new_company</source>
+                <target>Şirket Ekle</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>string.day</source>
+                <target>Gün</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>string.month</source>
+                <target>Ay</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>string.week</source>
+                <target>Hafta</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>string.year</source>
+                <target>Yıl</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>string.profile</source>
+                <target>Profilim</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>string.settings</source>
+                <target>Ayarlarım</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>string.logout</source>
+                <target>Çıkış Yap</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>string.check_form</source>
+                <target>Lütfen formu kontrol ediniz.</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>string.module_not_permitted_to_view</source>
+                <target>Bu modüle erişim izniniz bulunmamaktadır</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>string.status_ok</source>
+                <target>İşlem Başarılı</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>string.copyright</source>
+                <target>Bütün hakları saklıdır. %year%</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>string.privacy</source>
+                <target>Gizlilik Politikası</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>string.terms</source>
+                <target>Kullanım Şartları</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -1,0 +1,274 @@
+{% trans_default_domain "notification" %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>{{ "string.notification_title"|trans({}, "notification", language) }}</title>
+
+</head>
+
+<body>
+
+<div style="font-family:'Lato',helvetica,arial,sans-serif;background-color:#f1efea">
+    <div align="center" style="background-color:#f1efea">
+
+        <table width="660" align="center" style="padding:20px 0" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td>
+                    <table width="660" align="center" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr>
+                            <td width="50%" style="text-align:left">
+                                <a href="{{ base_server_url }}"
+                                   target="_blank"><img
+                                            src="{{ base_server_url }}{{ asset('bundles/Makrosum/Meeting/_assets/img/logo-text.png') }}"
+                                            height="50" alt="Logo" border="0" class="CToWUd"></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table width="660" align="center" style="border:1px solid #bfcad2;background-color:#ffffff" border="0"
+               cellspacing="0" cellpadding="0">
+
+
+            <tbody>
+            <tr>
+                <td>
+                    <table width="" align="center" border="0" cellspacing="0" cellpadding="0"
+                           style="padding:0px;background-color:#ecf0f1">
+                        <tbody>
+                        <tr>
+                            <td width="100%">
+                                <table width="660" align="left" style="border-collapse:collapse" border="0"
+                                       cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                    <tr>
+                                        <td width="100%" valign="top" style="text-align:center;padding:20px">
+                <span style="font-size:20px;font-weight:bold;font-family:'Lato',helvetica,arial,sans-serif;color:#313131">
+                  {{ "string.notification_title"|trans({}, "notification", language) }}
+                </span><br>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="border-top:1px solid #ecf0f1">
+                    <table width="660" align="center" border="0" cellspacing="0" cellpadding="0" style="padding:20px">
+                        <tbody>
+                        <tr>
+                            <td width="100%">
+                                <table width="120" align="left" style="border-collapse:collapse" border="0"
+                                       cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                    <tr>
+                                        <td width="100%" style="text-align:center">
+                                            <a href="{{ company_url }}"
+                                               title="{{ company }}"
+                                               target="_blank">
+                                                <img width="120" height="120" alt="{{ company }}" border="0"
+                                                     src="{{ base_server_url }}{{ asset('bundles/Makrosum/Meeting/Logo/' ~ current_company_logo) }}"
+                                                     style="border-radius:0px" class="CToWUd">
+                                            </a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table width="1" align="left" border="0" cellpadding="0" cellspacing="0">
+                                    <tbody>
+                                    <tr>
+                                        <td width="100%" height="20"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table width="480" align="right" style="border-collapse:collapse" border="0"
+                                       cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                    <tr>
+                                        <td width="100%" valign="top" style="text-align:left">
+                                            <a href="{{ meeting_url }}"
+                                               target="_blank">
+                    <span style="font-size:20px;font-weight:bold;font-family:'Lato',helvetica,arial,sans-serif;color:#313131">
+                      {{ meeting }}
+                    </span>
+                                            </a> <br>
+                  <span style="font-size:17px;font-weight:normal;font-family:'Lato',helvetica,arial,sans-serif;color:#313131">
+                    {{ begin }} - {{ end }}
+                  </span>
+                                            <br><br>
+                  <span style="font-size:15px;font-family:'Lato',helvetica,arial,sans-serif;color:#27374c">
+                    <p>{{ "string.you_have_been_added_to_a_meeting"|trans({"%meeting%": meeting, "%begin%": begin, "%end%": end, "%company%": company}, "notification", language) }}</p>
+                  </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100%" valign="top" style="padding-top:20px">
+                                            <table cellspacing="5" align="left" border="0" cellspacing="0" cellpadding="0">
+                                                <tbody>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <br />
+                                                        {{ "string.if_add_button_does_not_work"|trans }}
+                                                        <br />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="background-color:#287fb8;border-radius:3px;padding:12px 24px;width: 50%;">
+                                                        <a href="webcal://{{ base_hostname }}{{ webcal }}{% if email is defined %}?email={{ email }}{% endif %}"
+                                                           style="font-family:'Lato',helvetica,arial,sans-serif;color:#ffffff;text-align:center;text-decoration:none;display:block;font-weight:normal;font-size:17px"
+                                                           title="{{ "string.add_to_calendar"|trans }}"
+                                                           target="_blank">{{ "string.add_to_calendar"|trans }}</a>
+                                                    </td>
+                                                    <td style="background-color:#289CB8;border-radius:3px;padding:12px 24px;width: 50%;">
+                                                        <a href="{{ base_server_url }}{{ webcal }}{% if email is defined %}?email={{ email }}{% endif %}"
+                                                            style="font-family:'Lato',helvetica,arial,sans-serif;color:#ffffff;text-align:center;text-decoration:none;display:block;font-weight:normal;font-size:17px"
+                                                            title="{{ "string.download_calendar"|trans }}"
+                                                            target="_blank">{{ "string.download_calendar"|trans }}</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <br />
+                                                        {{ "string.if_webcal_link_doenst_work"|trans }}
+                                                        <br />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <a href="{{ base_server_url }}{{ webcal }}{% if email is defined %}?email={{ email }}{% endif %}">{{ base_server_url }}{{ webcal }}{% if email is defined %}?email={{ email }}{% endif %}</a>
+                                                        <br />
+                                                    </td>
+                                                </tr>
+                                                <tr></tr>
+                                                <tr>
+                                                    <td colspan="2" style="background-color:#28B88B;border-radius:3px;padding:12px 24px;">
+                                                        <a href="{{ meeting_url }}"
+                                                            style="font-family:'Lato',helvetica,arial,sans-serif;color:#ffffff;text-align:center;text-decoration:none;display:block;font-weight:normal;font-size:17px"
+                                                            title="{{ meeting }}"
+                                                            target="_blank">{{ "string.go_to_meeting"|trans({}, "notification", language) }}</a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+
+            </tbody>
+        </table>
+
+        <table width="600" align="center" style="padding:20px 0px" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td>
+                    <table width="600" align="center" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr>
+                            <td width="100%" style="text-align:center">
+
+
+                                <a href="{{ social_facebook }}"
+                                   style="text-decoration:none;margin-right:10px" title="{{ project_name }} Facebook"
+                                   target="_blank">
+                                    <img style="width:50px;min-height:50px"
+                                         src={{ base_server_url }}{{ asset('bundles/Makrosum/Meeting/_assets/img/social/facebook.png') }}"
+                                         alt="{{ project_name }} Facebook" class="CToWUd">
+                                </a>
+                                <a href="{{ social_twitter }}"
+                                   style="text-decoration:none;margin-right:10px" title="{{ project_name }} Twitter"
+                                   target="_blank">
+                                    <img style="width:50px;min-height:50px"
+                                         src={{ base_server_url }}{{ asset('bundles/Makrosum/Meeting/_assets/img/social/twitter.png') }}"
+                                         alt="{{ project_name }} Twitter" class="CToWUd">
+                                </a>
+                                <a href="{{ social_google }}"
+                                   style="text-decoration:none;margin-right:10px" title="{{ project_name }} Google+"
+                                   target="_blank">
+                                    <img style="width:50px;min-height:50px"
+                                         src={{ base_server_url }}{{ asset('bundles/Makrosum/Meeting/_assets/img/social/tumblr.png') }}"
+                                         alt="{{ project_name }} Google+" class="CToWUd">
+                                </a>
+                                <a href="{{ social_youtube }}"
+                                   style="text-decoration:none;margin-right:10px" title="{{ project_name }} Youtube"
+                                   target="_blank">
+                                    <img style="width:50px;min-height:50px"
+                                         src={{ base_server_url }}{{ asset('bundles/Makrosum/Meeting/_assets/img/social/tumblr.png') }}"
+                                         alt="{{ project_name }} Youtube" class="CToWUd">
+                                </a>
+                                <a href="{{ social_instagram }}"
+                                   style="text-decoration:none" title="{{ project_name }} Instagram" target="_blank">
+                                    <img style="width:50px;min-height:50px"
+                                         src={{ base_server_url }}{{ asset('bundles/Makrosum/Meeting/_assets/img/social/instagram.png') }}"
+                                         alt="{{ project_name }} Instagram" class="CToWUd">
+                                </a>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100%" style="text-align:center">
+                          <span style="font-size:13px;font-family:'Lato',helvetica,arial,sans-serif;color:#929ead">
+                            &copy; {{ "string.copyright"|trans({"%year%": "now"|date("Y")}, "global", trans_l)|raw }} - &reg; <a style="text-decoration: none;color: #3A87AD;" title="{{ project_name }}" href="{{ project_overview }}" target="_blank">{{ project_name }}</a> & <a style="text-decoration: none;color: #3A87AD;" title="{{ copyright_company_name }}" href="http://{{ copyright_company_site }}" target="_blank">{{ copyright_company_name }}</a><br>
+                              {{ copyright_company_address }}<br><br>
+
+
+                              <a href="http://makrosum.com"
+                                 style="color:#929ead" target="_blank">makrosum.com</a> |
+                              <a href="{{ base_server_url }}"
+                                 style="color:#929ead" target="_blank">{{ base_hostname }}</a>
+                          </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100%" style="text-align:center">
+                          <span style="font-size:13px;font-family:'Lato',helvetica,arial,sans-serif;color:#929ead">
+                              <a href="{{ project_overview }}"
+                                 style="text-decoration:none;color:#929ead" target="_blank">{{ "string.home"|trans }}</a>
+                              |
+                            <a href="{{ project_terms }}"
+                               style="text-decoration:none;color:#929ead" target="_blank">{{ "string.terms"|trans }}</a>
+                              |
+                            <a href="{{ project_privacy }}"
+                               style="text-decoration:none;color:#929ead" target="_blank">{{ "string.privacy"|trans }}</a>
+                          </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

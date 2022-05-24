@@ -1,0 +1,220 @@
+<br /><br />
+<a target="_blank" title="{{ "string.add_to_calendar"|trans }}" alt="{{ "string.add_to_calendar"|trans }}" href="webcal://{{ hostname }}{{ webcal }}{% if email is defined %}?email={{ email }}{% endif %}">{{ "string.add_to_calendar"|trans }}</a>
+<br />
+{{ "string.if_webcal_link_doenst_work"|trans }}
+<br />
+<a target="_blank" title="{{ "string.add_to_calendar"|trans }}" alt="{{ "string.add_to_calendar"|trans }}" href="http://{{ hostname }}{{ webcal }}{% if email is defined %}?email={{ email }}{% endif %}">{{ "string.download_calendar"|trans }}</a>
+
+
+<p>{{ "string.there_shall_be_a_meeting"|trans({"%meeting%": meeting, "%begin%": begin, "%end%": end, "%company%": company}, "notification", language) }}</p>
+
+
+
+<div style="font-family:'Lato',helvetica,arial,sans-serif;background-color:#f1efea">
+    <div align="center" style="background-color:#f1efea">
+
+        <table width="660" align="center" style="padding:20px 0" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td>
+                    <table width="660" align="center" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr>
+                            <td width="50%" style="text-align:left">
+                                <a href="http://marketing.couchsurfing.com/wf/click?upn=w3Ri21HIxLqaioTwgPNBqUQwxDe4nzqxL0Bat-2BR8V3u2cX-2FDazt2JCDcbBecFQFD_V70EruI2f4n6ONizMTFtpcmOKOUzXLMTBCG0BcnVjMnRBKucWz2iVZizwdGNkJMBDv4nVqE1F9klmin4w9Ix61Ky5ubz8E0bE5l-2B8sXqeNSeLOFvnlQ-2F6kq0uGqrunP8lPu-2BgH3qfApxLXMOX1V77P1vUBUWhj-2FnSRwY8tyM-2FbnmJ8XqMU6vaN6oEntE3JsZX9VgG6wzotuwX1ikSNFnDaTshqRsmIvpF9OIsv0RXlk-3D"
+                                   target="_blank"><img
+                                        src="https://ci3.googleusercontent.com/proxy/1JPTQj4rT_OQL3fQAccrlo1bfzzFgkG2VBqYJmazIP5YlBxLPKp2fFpHx-j66GWf6whzAyAwq_yTyL_DQ3kHztVLRKCXOVqLLxS5=s0-d-e1-ft#http://ht-cdn.couchsurfing.com/assets/logo-orange.png"
+                                        height="50" alt="Logo" border="0" class="CToWUd"></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table width="660" align="center" style="border:1px solid #bfcad2;background-color:#ffffff" border="0"
+               cellspacing="0" cellpadding="0">
+
+
+            <tbody>
+            <tr>
+                <td>
+                    <table width="" align="center" border="0" cellspacing="0" cellpadding="0"
+                           style="padding:0px;background-color:#ecf0f1">
+                        <tbody>
+                        <tr>
+                            <td width="100%">
+                                <table width="660" align="left" style="border-collapse:collapse" border="0"
+                                       cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                    <tr>
+                                        <td width="100%" valign="top" style="text-align:center;padding:20px">
+                <span style="font-size:20px;font-weight:bold;font-family:'Lato',helvetica,arial,sans-serif;color:#313131">
+                  {{ "string.notification_title"|trans({}, "notification", language) }}
+                </span><br>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="border-top:1px solid #ecf0f1">
+                    <table width="660" align="center" border="0" cellspacing="0" cellpadding="0" style="padding:20px">
+                        <tbody>
+                        <tr>
+                            <td width="100%">
+                                <table width="120" align="left" style="border-collapse:collapse" border="0"
+                                       cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                    <tr>
+                                        <td width="100%" style="text-align:center">
+                                            <a href="{{ company_url }}"
+                                               target="_blank">
+                                                <img width="120" height="120" alt="{{ company_name }}" border="0"
+                                                     src="{{ base_hostname }}{{ asset('bundles/Makrosum/Meeting/Logo/' ~ company_logo) }}"
+                                                     style="border-radius:0px" class="CToWUd">
+                                            </a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table width="1" align="left" border="0" cellpadding="0" cellspacing="0">
+                                    <tbody>
+                                    <tr>
+                                        <td width="100%" height="20"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table width="480" align="right" style="border-collapse:collapse" border="0"
+                                       cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                    <tr>
+                                        <td width="100%" valign="top" style="text-align:left">
+                                            <a href="{{ company_url }}"
+                                               target="_blank">
+                    <span style="font-size:20px;font-weight:bold;font-family:'Lato',helvetica,arial,sans-serif;color:#313131">
+                      {{ company_name }}
+                    </span>
+                                            </a> <br>
+                  <span style="font-size:17px;font-weight:normal;font-family:'Lato',helvetica,arial,sans-serif;color:#313131">
+                    {{ company_email }}
+                  </span>
+                                            <br><br>
+                  <span style="font-size:15px;font-family:'Lato',helvetica,arial,sans-serif;color:#27374c">
+                    <p>{{ "string.you_have_been_added_to_a_company"|trans({"%company%": company}, "notification", language) }}</p>
+                  </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100%" valign="top" style="padding-top:20px">
+                                            <table align="left" border="0" cellspacing="0" cellpadding="0">
+                                                <tbody>
+                                                <tr>
+                                                    <td style="background-color:#287fb8;border-radius:3px;padding:12px 24px">
+                                                        <a href="{{ company_url }}"
+                                                           style="font-family:'Lato',helvetica,arial,sans-serif;color:#ffffff;text-align:center;text-decoration:none;display:block;font-weight:normal;font-size:17px"
+                                                           target="_blank">{{ "string.go_to"|trans({"%to%": company_name}, "notification", language) }}</a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+
+            </tbody>
+        </table>
+
+        <table width="600" align="center" style="padding:20px 0px" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td>
+                    <table width="600" align="center" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr>
+                            <td width="100%" style="text-align:center">
+
+
+                                <a href="http://marketing.couchsurfing.com/wf/click?upn=4hPqf8ealNbl9-2BLb8nVnicvu7ZVi-2BUA7DJiBhJ9sdSHmfZbUK44MvQ5Q-2FMUsqGjF_V70EruI2f4n6ONizMTFtpcmOKOUzXLMTBCG0BcnVjMnRBKucWz2iVZizwdGNkJMBDv4nVqE1F9klmin4w9Ix6zS2E2XnQko63yLqUEF7rp5KfGS8twPALMLMxx1N5F-2BvjclK607RR4c0296QtfAvVPZ4gVWXsCrTBjIAd7lfdnJs8VCVlTeIEI9S3HiIe7qGJgK0G4HK8I-2Bi6TzBp-2BxfEJJLXErY4kKZOnFNXmoR9uk-3D"
+                                   style="text-decoration:none;margin-right:10px" title="Couchsurfing Facebook"
+                                   target="_blank">
+                                    <img style="width:50px;min-height:50px"
+                                         src="https://ci4.googleusercontent.com/proxy/VQXlm6zBmj3kEoN7vjJ93bm69i6S2l0ZbRcnsGsRgdK0jblihT2TPfJA_nlfIAXnV3RYhAD8fYrYcg5e0fCO453C7aNliAZ2nRB6QbdkarjuRFHeSFM=s0-d-e1-ft#http://ht-cdn.couchsurfing.com/assets/emails/social/facebook.png"
+                                         alt="Couchsurfing Facebook" class="CToWUd">
+                                </a>
+                                <a href="http://marketing.couchsurfing.com/wf/click?upn=JN9ZQZbaWb1n1BbJqhv5mtTO-2FggMcpBXtE2H1XHfzYQH5-2F6TH1js1HzxCd6hUAqZ_V70EruI2f4n6ONizMTFtpcmOKOUzXLMTBCG0BcnVjMnRBKucWz2iVZizwdGNkJMBDv4nVqE1F9klmin4w9Ix6-2FNWg7RxR4p7gwQNeiXKz9CZi9WuKsSolAZoFM9DBP80ZsRxrAkhGnwpdWs6ZlxHqak93kKOpypgUKuhn69UDEN7QvPzF6U2uCs6MkrcZcGaONWiZPAyOETLozsc1gnLNvmyZ5PjtD6uTFZPgKxDSC0-3D"
+                                   style="text-decoration:none;margin-right:10px" title="Couchsurfing Twitter"
+                                   target="_blank">
+                                    <img style="width:50px;min-height:50px"
+                                         src="https://ci4.googleusercontent.com/proxy/3cf8egQadlxNQ4TQToxsBOzA1N2s_3HLgZDlOx9zIbikaqTqKj3-N7UXYTQoMwRnHDU_ytwN6XiHslyigv4BifJm6nnb2xPgaa3dE0ZKKlquNTT2Qw=s0-d-e1-ft#http://ht-cdn.couchsurfing.com/assets/emails/social/twitter.png"
+                                         alt="Couchsurfing Twitter" class="CToWUd">
+                                </a>
+                                <a href="http://marketing.couchsurfing.com/wf/click?upn=A3vn0-2F5pu-2BYXUuHbRRn9UlWesxIoXVY-2FO8fma64DgyIBdyBuR5oY-2BFkQtfz1u7ft_V70EruI2f4n6ONizMTFtpcmOKOUzXLMTBCG0BcnVjMnRBKucWz2iVZizwdGNkJMBDv4nVqE1F9klmin4w9Ix69cmUC9Ag2FPb-2FTQX17KCgjl4rZuwOPXi8c0h2N3gESmafRsI2Y9U5EmOKzeykIohPG5ttmqg0i30j94nZn8X8gxip7EFwSKp9rBeHVtWM2mCzBSGa35lW4-2FoXKluClJdcqbMB3ZXLWubqlVn32yvTk-3D"
+                                   style="text-decoration:none;margin-right:10px" title="Couchsurfing Tumblr"
+                                   target="_blank">
+                                    <img style="width:50px;min-height:50px"
+                                         src="https://ci4.googleusercontent.com/proxy/_yEuvU6OdgXHHZag2yWvH_sHBgXxIYfsBk7_an0xZFSm-CZWvFRKasIo2wyH7qTEG1K_gPMUgyzjC2HvKU1C4fe53OknNdi4VcpLp8H5V2kPFEBP=s0-d-e1-ft#http://ht-cdn.couchsurfing.com/assets/emails/social/tumblr.png"
+                                         alt="Couchsurfing Tumblr" class="CToWUd">
+                                </a>
+                                <a href="http://marketing.couchsurfing.com/wf/click?upn=uP31NvvOF0d6DEjvBBMLC8nUa7dg7TVa-2Fk-2BlmvAlBrUwZdgTWyu2TosQ18aCk-2FGZ_V70EruI2f4n6ONizMTFtpcmOKOUzXLMTBCG0BcnVjMnRBKucWz2iVZizwdGNkJMBDv4nVqE1F9klmin4w9Ix63pDVLntq1rZHZYxJUTRmlDCWEI9U5UjqXIKBnayoh9rQvJlQoZTH6tKy-2Fu-2B6Nqr6dMCX3X94dixP-2FKOFCs5PjjyAeoQujmUrYKgUxBhiN1dce8CBzV1zIiIW-2BQnq2JKHWFHapBkY0Vr6XiHjN-2F6vZY-3D"
+                                   style="text-decoration:none" title="Couchsurfing Instagram" target="_blank">
+                                    <img style="width:50px;min-height:50px"
+                                         src="https://ci6.googleusercontent.com/proxy/1vcb02viOtSLRVJJIUpiDG37Pqno-2C-z4RZHIxfd85Dw0QgHM513DK4_T9_elpnbwtMGq0gfUmJhKdTzAAV-YIRbrtEDbswnnF5na4FaP68an67_Z-I=s0-d-e1-ft#http://ht-cdn.couchsurfing.com/assets/emails/social/instagram.png"
+                                         alt="Couchsurfing Instagram" class="CToWUd">
+                                </a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100%" style="text-align:center">
+                          <span style="font-size:13px;font-family:'Lato',helvetica,arial,sans-serif;color:#929ead">
+                            Copyright © 2016 Makrosum Bilişim Danışmanlık, ltd. şti.<br>
+                            Adres kısmı buraya<br><br>
+
+                            
+                              <a href="http://makrosum.com"
+                                 style="color:#929ead" target="_blank">makrosum.com</a> |
+                              <a href="http://{{ base_hostname }}"
+                                 style="color:#929ead" target="_blank">{{ base_hostname }}</a>
+                          </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100%" style="text-align:center">
+                          <span style="font-size:13px;font-family:'Lato',helvetica,arial,sans-serif;color:#929ead">
+                              <a href="http://www.sumofis.com/overview"
+                                 style="text-decoration:none;color:#929ead" target="_blank">{{ "string.home"|trans }}</a>
+                              |
+                            <a href="http://www.sumofis.com/terms"
+                               style="text-decoration:none;color:#929ead" target="_blank">{{ "string.terms"|trans }}</a>
+                          </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="tr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>string.login</source>
+                <target>Giriş Yap</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>string.register</source>
+                <target>Kayıt Ol</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>string.email</source>
+                <target>E-posta Adresi</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>string.password</source>
+                <target>Parola</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>string.not_registered</source>
+                <target>Kayıt Başarısız</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>string.email_already_taken</source>
+                <target>Bir e-posta ile birden fazla hesap açılamaz</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>string.check_your_email_register</source>
+                <target>Lütfen e-posta adresinize gönderdiğimiz aktivasyon linkini ziyaret ediniz </target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>string.add_your_phone</source>
+                <target>Lütfen telefon numaranızı giriniz</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>string.confirm_your_phone</source>
+                <target>Lütfen telefon numaranıza göndermiş olduğumuz aktivasyon kodunu onaylayınız</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>string.phone</source>
+                <target>Telefon</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>string.sms_token</source>
+                <target>SMS Şifresi</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>string.submit</source>
+                <target>Gönder</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>string.phone_already_taken</source>
+                <target>Aynı numara ile birden fazla hesap alınamaz</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>string.token_could_not_found</source>
+                <target>Aktivasyon kaydı bulunamadı</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>string.wrong_sms_key</source>
+                <target>SMS anahtarı ile verilen anahtar uyuşmadı</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>string.fullname</source>
+                <target>Adı Soyadı</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>string.please_select</source>
+                <target>Lütfen Seçiniz</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>string.home</source>
+                <target>Ana Sayfa</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>string.contact_us</source>
+                <target>Bize Ulaşın</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>string.module_not_permitted</source>
+                <target>Bu modüle erişim izniniz bulunmamaktadır</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>string.forgot_password</source>
+                <target>Şifremi Unuttum</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>string.check_your_email_reset_password</source>
+                <target>Lütfen e-posta adresinize gönderdiğimiz şifre değiştirme linkini ziyaret ediniz </target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>string.no_user_found</source>
+                <target>Bu eposta adresi ile kayıtlı kullanıcı bulunmamaktadır</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>string.check_your_sms_reset_password</source>
+                <target>Şifreniz cep telefonunuza gönderildi</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>string.reset_password_sms</source>
+                <target>Bu bir geçici şifredir %password% lütfen giriş yaptıktan sonra değiştirmeyi unutmayınız</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>string.system_error</source>
+                <target>Belirlenemeyen bir hata gerçekleşti, lütfen tekrar deneyin</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>string.type_an_email</source>
+                <target>Lütfen eposta adresinizi yazınız</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>string.country</source>
+                <target>Ülke</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>string.province</source>
+                <target>İl</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>string.city</source>
+                <target>İlçe</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

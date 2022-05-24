@@ -1,0 +1,124 @@
+{% trans_default_domain "company" %}
+{% set body_class = '' %}
+{% extends 'MeetingBundle:base.html.twig' %}
+
+{% block stylesheets %}
+    <!---->
+{% endblock %}
+
+{% block imports_css %}
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.less') }}" />
+{% endblock %}
+
+{% block imports_js %}
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.js') }}"></script>
+{% endblock %}
+
+{% block top_scripts %}
+    <script type="text/javascript">
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+
+        $(function(){
+            window.Makrosum.window.width = windowWidth;
+            window.Makrosum.window.height = windowHeight;
+
+            Makrosum.funcs.windowLoader.show();
+
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="grid makrosum-container boxed">
+
+        {% embed "MeetingBundle:layouts:notifications_menu.html.twig" %}{% endembed %}
+
+        <div class="col_12">
+
+            <div class="col_3">
+                <h5><img width="50" height="50" alt="{{ company_name }}" src="{{ asset('bundles/Makrosum/Meeting/Logo/' ~ company_logo) }}"></h5>
+                <hr />
+                <ul class="icons makrosum-left-menu">
+                    <li class="current"><i class="fa fa-users"></i> {{ "string.personnels"|trans }}</li>
+                    <li><a href="{{ path("company_company_positions", {subdomain: company_domain}) }}"><i class="fa fa-tasks"></i> {{ "string.positions"|trans }}</a></li>
+                    <li><a href="{{ path("company_company_departments", {subdomain: company_domain}) }}"><i class="fa fa-code-fork"></i> {{ "string.departments"|trans }}</a></li>
+                </ul>
+            </div>
+
+            <div class="col_9">
+                <h5><i class="fa fa-users"></i> {{ "string.personnels"|trans }}</h5>
+                <hr class="alt1" />
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="2"><a title="{{ "string.new_personnel"|trans }}" style="text-decoration:none;" class="new float-right" href="{{ path("company_company_personnels_new", {subdomain: company_domain}) }}"><i class="fa fa-plus"></i> {{ "string.new_personnel"|trans }}</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="2">
+                                <table class="sortable striped makrosum-table" cellspacing="0" cellpadding="0">
+                                    <thead>
+                                    <tr>
+                                        <th>{{ "string.personnel.fullname"|trans }}</th>
+                                        <th>{{ "string.department"|trans }}</th>
+                                        <th>{{ "string.position"|trans }}</th>
+                                        <th><span style="float: right;margin-right: 10px;">{{ "string.transactions"|trans }}</span></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for personnel in personnels %}
+                                        <tr>
+                                            <td>{{ personnel.fullname }}</td>
+                                            <td>{{ personnel.department }}</td>
+                                            <td>{{ personnel.position }}</td>
+                                            <td><a title="{{ "string.edit"|trans }}" class="edit" href="{{ path("company_company_personnels_edit", {subdomain: company_domain, personnelId: personnel.personnel}) }}"><i class="fa fa-pencil"></i></a>
+                                                <a title="{{ "string.remove"|trans }}" class="delete trash-personnel" data-trash="{{ path("company_company_personnels_remove_personnel", {subdomain: company_domain, personnelId: personnel.personnel}) }}" href="#{{ personnel.personnel }}"><i class="fa fa-minus-square"></i></a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block bottom_scripts %}
+    <script type="text/javascript">
+        $(function () {
+            $('.menu li.dropdown > a').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            $('a.trash-personnel').click(function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var elThis = $(this);
+                if(confirm('{{ "string.sure_remove_position"|trans }}')){
+                    Makrosum.funcs.windowLoader.show();
+                    $.post($(this).attr('data-trash'), function(r){
+                        if(r.status){
+                            elThis.parent().parent().remove();
+                            Makrosum.funcs.windowLoader.hide();
+                        }else{
+                            alert(r.message);
+                            Makrosum.funcs.windowLoader.hide();
+                        }
+                    });
+                }
+            });
+
+            Makrosum.funcs.pageLoaded(function(global){
+                Makrosum.funcs.windowLoader.hide();
+            });
+
+        });
+    </script>
+{% endblock %}

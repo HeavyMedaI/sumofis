@@ -1,0 +1,65 @@
+{% trans_default_domain "global" %}
+<div class="grid flex makrosum-menu">
+    <!-- Menu Horizontal -->
+    <ul class="menu">
+        <li><a class="navbar-brand">.</a></li>
+        <li class="{% if _current_homepage is defined or _current_calendar is defined %}current{% endif %}"><a href="{{ path("homepage") }}"><i class="fa fa-calendar"></i> {{ "string.calendar"|trans }}</a></li>
+        <li class="{% if _current_companies is defined %}current{% endif %} dropdown"><a href="javascript:void()"><i class="fa fa-building"></i> {{ "string.companies"|trans }}<span class="icon" data-icon="R"></span></a>
+            <ul>
+                {% for company_domain_key, company_name in companies %}
+                    <li class="{% if attribute(_context, '_current_company_' ~ company_domain_key) is defined %}current{% endif %}"><a href="{{ protocol }}://{{ company_domain_key }}.{{ base_hostname }}"><i class="fa fa-building" title="{{ company_name }}"></i> {{ company_name }} </a></li>
+                {% endfor %}
+                <li class="divider"><a href="{{ protocol }}://{{ base_hostname ~ path('company_add_new') }}"><i class="fa fa-plus"></i> {{ 'string.new_company'|trans }}</a></li>
+            </ul>
+        </li>
+        {% if company_domain is defined %}
+            <li class="dropdown float-right first"><a href="">{{ company_name }}<span class="icon" data-icon="R"></span></a>
+                <ul class="overrided">
+                    {% if is_owner == true %}
+                        <li><a href="{{ path("company_company_edit", {subdomain: company_domain}) }}"><i class="fa fa-briefcase"></i> {{ 'string.edit_company'|trans({}, 'company', trans_l) }}</a></li>
+                        <li class="divider"><a class="prevent-event" data-confirm="{{ 'string.sure_for_remove_company'|trans({}, 'company', trans_l) }}" data-prevented="{}" href="{{ path("company_company_remove", {subdomain: company_domain}) }}"><i class="fa fa-trash"></i> {{ 'string.remove_company'|trans({}, 'company', trans_l) }}</a></li>
+                    {% else %}
+                        <li style="display: none;" class="divider"><a class="prevent-event" data-confirm="{{ 'string.sure_for_leave_company'|trans({}, 'company', trans_l) }}" data-prevented="{}" href="{{ path("company_company_leave", {subdomain: company_domain}) }}"><i class="fa fa-sign-out"></i> {{ 'string.leave_company'|trans({}, 'company', trans_l) }}</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+        {% else %}
+            <li class="dropdown float-right first"><a href="">{{ user_fullname }}<span class="icon" data-icon="R"></span></a>
+                <ul class="overrided">
+                    <li><a href="{{ path("profile") }}"><i class="fa fa-user"></i> {{ 'string.profile'|trans }}</a></li>
+                    <li><a href="{{ path("account_settings_general") }}"><i class="fa fa-cogs"></i> {{ 'string.settings'|trans }}</a></li>
+                    <li class="divider"><a href="{{ path("logout") }}"><i class="fa fa-sign-out"></i> {{ 'string.logout'|trans }}</a></li>
+                </ul>
+            </li>
+        {% endif %}
+        <li style="display: none;" class="float-right notification-button"><a class="pull-notifications" data-content="#notifications-area" data-action="click"><i class="fa fa-bell-o"></i></a></li>
+    </ul>
+    {% if (app.request.attributes.get("_route") == "homepage" or app.request.attributes.get("_route") == "homepage_www" or app.request.attributes.get("_route") == "calendar") %}
+        {% embed "MeetingBundle:layouts:calendar-switch.html.twig" %}{% endembed %}
+    {% endif %}
+    {#
+    <ul class="mobile-notification-button">
+        <li class="float-right"><a class="pull-notifications" data-content="#notifications-area" data-action="click"><i class="fa fa-bell-o"></i></a></li>
+    </ul>
+    #}
+</div>
+<script type="application/javascript">
+    $(function(){
+        $('.prevent-event').click(function(e){
+            e.preventDefault();
+            if($(this).data('confirm')){
+                if(!confirm($(this).data('confirm'))){
+                    return;
+                }
+            }
+            $.post($(this).attr('href'), $(this).data('prevented'), function(callback_stream){
+                if(callback_stream){
+                    if(callback_stream.type=='html'||callback_stream.type=='javascript'){
+                        $.parseHTML(callback_stream);
+                    }
+                }
+                location.reload(true);
+            });
+        });
+    });
+</script>

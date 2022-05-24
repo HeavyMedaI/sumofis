@@ -1,0 +1,207 @@
+{% trans_default_domain "calendar" %}
+{% set body_class = '' %}
+{% extends 'MeetingBundle:base.html.twig' %}
+
+{% block stylesheets %}
+    <style type="text/css">
+        #calendar {
+            margin: 0 auto;
+        }
+    </style>
+{% endblock %}
+
+{% block imports_css %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-fullcalendar/fullcalendar.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-fullcalendar/fullcalendar.print.css') }}" media="print"/>
+    <!--<link rel="stylesheet" type="text/css" href="_assets/external/jquery-pull-notification/jquery-pull-notification.css" />-->
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.less') }}" />
+{% endblock %}
+
+{% block imports_js %}
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-fullcalendar/moment.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-fullcalendar/fullcalendar.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-fullcalendar/lang/tr.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.js') }}"></script>
+{% endblock %}
+
+{% block top_scripts %}
+    <script type="text/javascript">
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+
+        $(function(){
+            window.Makrosum.window.width = windowWidth;
+            window.Makrosum.window.height = windowHeight;
+
+            Makrosum.funcs.windowLoader.show();
+
+            var makrosumMenu = {
+                element: $('.makrosum-menu'),
+                width: $('.makrosum-menu').width(),
+                height: $('.makrosum-menu').height()
+            };
+
+            var switchCalendar = {
+                element: $('.switch-calendar-view'),
+                width: $('.switch-calendar-view').width(),
+                height: $('.switch-calendar-view').height()
+            };
+            switchCalendar.left = (windowWidth-switchCalendar.width)/2;
+
+            window.Makrosum.Menu = makrosumMenu;
+            window.Makrosum.CalendarSwitch = switchCalendar;
+
+            Makrosum.funcs.CalendarSwitch();
+            $(window).resize(function(){
+                window.Makrosum.window.width = $(this).width();
+                window.Makrosum.window.height = $(this).height();
+                //switchCalendar.width = switchCalendar.element.width();
+                window.Makrosum.CalendarSwitch.left = (window.Makrosum.window.width-window.Makrosum.CalendarSwitch.width)/2;
+                window.Makrosum.CalendarSwitch = window.Makrosum.CalendarSwitch;
+                Makrosum.funcs.CalendarSwitch();
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="grid makrosum-container">
+        {#
+        <ul id="notification-area" class="notifications">
+            <li class="titlebar">
+                <span class="title">Bildirimler</span>
+                <span class="settings"><i class="fa fa-cog"></i></span>
+            </li>
+            <div id="style-5" class="notifbox">
+                <li class="notif unread">
+                    <a href="#">
+                        <div class="imageblock">
+                            <img src="{{ asset('bundles/Makrosum/Meeting/_assets/img/jquery-pull-notification/img1.jpg') }}" class="notifimage"  />
+                        </div>
+                        <div class="messageblock">
+                            <div class="message">This guy <strong>Jonesy</strong> has just built a tower.
+                            </div>
+                            <div class="messageinfo">
+                                <i class="icon-trophy"></i>2 hours ago
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="notif unread">
+                    <a href="#">
+                        <div class="imageblock">
+                            <img src="{{ asset('bundles/Makrosum/Meeting/_assets/img/jquery-pull-notification/img2.jpg') }}" class="notifimage"  />
+                        </div>
+                        <div class="messageblock">
+                            <div class="message">
+                                <strong>Pete Nawara</strong> want's to drink beer with you
+                            </div>
+                            <div class="messageaction">
+                                <a class="button small green">accept</a>
+                                <a class="button small red">decline</a>
+                            </div>
+                            <div class="messageinfo">
+                                <i class="icon-flag"></i>3 hour ago
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="notif">
+                    <a href="#">
+                        <div class="imageblock"><img src="{{ asset('bundles/Makrosum/Meeting/_assets/img/jquery-pull-notification/img3.jpg') }}" class="notifimage" />
+                        </div>
+                        <div class="messageblock">
+                            <div class="message"><strong>Gary LaPlante</strong> has talked some trash: "<em>Buncha bitches.</em>
+                            </div>
+                            <div class="messageinfo">
+                                <i class="icon-comment"></i>4 hours ago
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="notif">
+                    <a href="#">
+                        <div class="imageblock"><img src="{{ asset('bundles/Makrosum/Meeting/_assets/img/jquery-pull-notification/img4.png') }}" class="notifimage" /></div>
+                        <div class="messageblock">
+                            <div class="message"><strong>Jason Nawara</strong> is probably playing <strong>Smite</strong> right now.
+                            </div>
+                            <div class="messageinfo"><i class="icon-trophy"></i>Yesterday</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="notif">
+                    <a href="#">
+                        <div class="imageblock"><img src="{{ asset('bundles/Makrosum/Meeting/_assets/img/jquery-pull-notification/img2.jpg') }}" class="notifimage"  />
+                        </div>
+                        <div class="messageblock">
+                            <div class="message"><strong>Danny DK12</strong> got a sweet fade!</div>
+
+                            <div class="messageinfo"><i class="icon-flag"></i>Yesterday</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="notif">
+                    <a href="#">
+                        <div class="imageblock"><img src="{{ asset('bundles/Makrosum/Meeting/_assets/img/jquery-pull-notification/img1.jpg') }}" class="notifimage"  /></div>
+                        <div class="messageblock">
+                            <div class="message"><strong>Roidberg</strong> left you a comment: "<em>Hey buddy! Nice toenails!"</em></div>
+                            <div class="messageinfo"><i class="icon-comment"></i>2 hours ago</div>
+                        </div>
+                    </a>
+                </li>
+            </div>
+            <li class="seeall">
+                <a href="#">T�m�n� G�r</a>
+            </li>
+        </ul>
+        #}
+        <div class="" style="margin-top:0px;width: 100% !important;max-width: 100% !important;">
+            <div id='calendar'></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block bottom_scripts %}
+    <script type="text/javascript">
+        $(function () {
+            $('.menu li.dropdown > a').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            $loadCalendarOptions = {
+                events: '{{ path("company_meeting_list_meetings_calendar", {subdomain: 'www'}) }}',
+                eventStartEditable: false,
+                eventDurationEditable: false,
+                eventClick: function(calEvent, jsEvent, view){
+                    location.href = calEvent.detailRoute;
+                },
+                eventRender: function(event, element){
+                    $('#calendar').fullCalendar('option', 'height', (window.Makrosum.window.height-(window.Makrosum.Menu.height+10)));
+                    //$('#calendar').fullCalendar('changeView', 'basicWeek');
+                },
+                windowResize: function(view) {
+                    //$('#calendar').fullCalendar('render');
+                }
+            };
+            Makrosum.funcs.loadCalendar('#calendar', null, $loadCalendarOptions);
+            $(window).resize(function(){
+                $('#calendar').fullCalendar('destroy');
+                Makrosum.funcs.loadCalendar('#calendar', null, $loadCalendarOptions);
+            });
+
+            $(window.Makrosum.CalendarSwitch.element.find('.changeView')).click(function(e){
+                e.preventDefault()
+                e.stopPropagation();
+                window.Makrosum.CalendarSwitch.element.find('.changeView.active').removeClass('active');
+                $(this).addClass('active');
+                $('#calendar').fullCalendar('changeView', $(this).attr('href'));
+            });
+
+            Makrosum.funcs.pageLoaded(function(global){
+                Makrosum.funcs.windowLoader.hide();
+            });
+
+        });
+    </script>
+{% endblock %}

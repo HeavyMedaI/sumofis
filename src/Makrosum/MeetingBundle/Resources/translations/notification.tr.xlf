@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>string.you_have_been_added_to_a_company</source>
+                <target>%company% şirketine eklendiniz</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>string.there_shall_be_a_meeting</source>
+                <target>%begin% - %end% tarihleri arası %meeting% toplantısı var. %company%</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>string.a_report_added_to_meeting</source>
+                <target>%meeting% toplantısına %report% raporu eklendi. %company%</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>string.add_to_calendar</source>
+                <target>Takvime Ekle</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>string.download_calendar</source>
+                <target>Takvimi İndir</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>string.if_webcal_link_doenst_work</source>
+                <target>Yukarıdaki link çalışmıyorsa, aşağıdaki linkten takvim dosyasını indirip, takvim uygulamanız ile açın.</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>string.go_to</source>
+                <target>%to%´a git</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>string.notification_title</source>
+                <target>Sumofis.com Hareket Bildirimi</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>string.home</source>
+                <target>Ana Sayfa</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>string.terms</source>
+                <target>Kullanım Şartları</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>string.activation_title</source>
+                <target>Sumofis.com Aktivasyon Mesajı</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>string.activate_your_account</source>
+                <target>Lütfen sumofis.com hesabınızı onaylayınız</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>string.activation</source>
+                <target>Aktivasyon</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>string.if_button_does_not_work</source>
+                <target>Eğer üssteki buton çalışmıyorsa, alttaki linki kopyalayıp, tarayıcınıza yapıştırabilirsiniz.</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>string.meeting</source>
+                <target>Toplantı</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>string.go_to_meeting</source>
+                <target>Toplantıya Git</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>string.you_have_been_added_to_a_meeting</source>
+                <target>Bir toplantıya katılımcı olarak atandınız.</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>string.if_add_button_does_not_work</source>
+                <target>Eğer Takvimi Ekle butonu çalışmıyorsa, Takvimi İndir butonuna tıklayıp, takvim dosyasını indirdikten sonra, takvim uygulamanızla açabilirsiniz.</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>string.meeting_complete_published</source>
+                <target>%meeting% toplantısı için toplantı sonu raporu yayınlandı. %company%</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>string.read_report</source>
+                <target>Raporu Oku</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>string.privacy</source>
+                <target>Gizlilik Politikası</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>string.you_have_been_invited_to</source>
+                <target>%company% şirketine davet edildiniz</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

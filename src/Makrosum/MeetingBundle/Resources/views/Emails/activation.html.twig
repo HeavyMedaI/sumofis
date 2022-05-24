@@ -1,0 +1,231 @@
+{% trans_default_domain "notification" %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>{{ "string.activation_title"|trans({}, "notification", language) }}</title>
+
+</head>
+
+<body>
+
+<div style="font-family:'Lato',helvetica,arial,sans-serif;background-color:#f1efea">
+    <div align="center" style="background-color:#f1efea">
+
+        <table width="660" align="center" style="padding:20px 0" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td>
+                    <table width="660" align="center" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr>
+                            <td width="50%" style="text-align:left">
+                                <a href="{{ base_server_url }}"
+                                   target="_blank"><img
+                                            src="{{ base_server_url }}{{ asset('bundles/Makrosum/Meeting/_assets/img/logo-text.png') }}"
+                                            height="50" alt="Logo" border="0" class="CToWUd"></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table width="660" align="center" style="border:1px solid #bfcad2;background-color:#ffffff" border="0"
+               cellspacing="0" cellpadding="0">
+
+
+            <tbody>
+            <tr>
+                <td>
+                    <table width="" align="center" border="0" cellspacing="0" cellpadding="0"
+                           style="padding:0px;background-color:#ecf0f1">
+                        <tbody>
+                        <tr>
+                            <td width="100%">
+                                <table width="660" align="left" style="border-collapse:collapse" border="0"
+                                       cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                    <tr>
+                                        <td width="100%" valign="top" style="text-align:center;padding:20px">
+                <span style="font-size:20px;font-weight:bold;font-family:'Lato',helvetica,arial,sans-serif;color:#313131">
+                  {{ "string.activation_title"|trans({}, "notification", language) }}
+                </span><br>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="border-top:1px solid #ecf0f1">
+                    <table width="660" align="center" border="0" cellspacing="0" cellpadding="0" style="padding:20px">
+                        <tbody>
+                        <tr>
+                            <td width="100%">
+                                <table width="1" align="left" border="0" cellpadding="0" cellspacing="0">
+                                    <tbody>
+                                    <tr>
+                                        <td width="100%" height="20"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table width="480" align="center" style="border-collapse:collapse" border="0"
+                                       cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                    <tr>
+                                        <td width="100%" valign="top" style="text-align:left">
+                                            <a href="http://www.{{ hostname }}{{ path }}{{ tokenKey }}"
+                                               target="_blank">
+                    <span style="font-size:20px;font-weight:bold;font-family:'Lato',helvetica,arial,sans-serif;color:#313131">
+                      {{ fullname }}
+                    </span>
+                                            </a> <br>
+                  <span style="font-size:17px;font-weight:normal;font-family:'Lato',helvetica,arial,sans-serif;color:#313131">
+                    {{ email }}
+                  </span>
+                                            <br><br>
+                  <span style="font-size:15px;font-family:'Lato',helvetica,arial,sans-serif;color:#27374c">
+                    <p>{{ "string.activate_your_account"|trans({}, "notification", language) }}</p>
+                  </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100%" valign="top" style="padding-top:20px">
+                                            <table align="left" border="0" cellspacing="0" cellpadding="0">
+                                                <tbody>
+                                                <tr>
+                                                    <td style="background-color:#287fb8;border-radius:3px;padding:12px 24px">
+                                                        <a href="http://www.{{ hostname }}{{ path }}{{ tokenKey }}"
+                                                           style="font-family:'Lato',helvetica,arial,sans-serif;color:#ffffff;text-align:center;text-decoration:none;display:block;font-weight:normal;font-size:17px"
+                                                           target="_blank">{{ "string.go_to"|trans({"%to%": activation}, "notification", language) }}</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <br />
+                                                        {{ "string.if_button_does_not_work"|trans }}
+                                                        <br />
+                                                        <a title="{{ "string.go_to"|trans({"%to%": activation}, "notification", language) }}" href="http://www.{{ hostname }}{{ path }}{{ tokenKey }}">http://www.{{ hostname }}{{ path }}{{ tokenKey }}</a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+
+            </tbody>
+        </table>
+
+        <table width="600" align="center" style="padding:20px 0px" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td>
+                    <table width="600" align="center" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr>
+                            <td width="100%" style="text-align:center">
+
+
+                                <a href="{{ social.facebook }}"
+                                   style="text-decoration:none;margin-right:10px" title="{{ project_name }} Facebook"
+                                   target="_blank">
+                                    <img style="width:50px;min-height:50px"
+                                         src="{{ base_server_url }}{{ asset('bundles/Makrosum/Meeting/_assets/img/social/facebook.png') }}"
+                                         alt="{{ project_name }} Facebook" class="CToWUd">
+                                </a>
+                                <a href="{{ social.twitter }}"
+                                   style="text-decoration:none;margin-right:10px" title="{{ project_name }} Twitter"
+                                   target="_blank">
+                                    <img style="width:50px;min-height:50px"
+                                         src="{{ base_server_url }}{{ asset('bundles/Makrosum/Meeting/_assets/img/social/twitter.png') }}"
+                                         alt="{{ project_name }} Twitter" class="CToWUd">
+                                </a>
+                                <a href="{{ social.google }}"
+                                   style="text-decoration:none;margin-right:10px" title="{{ project_name }} Google+"
+                                   target="_blank">
+                                    <img style="width:50px;min-height:50px"
+                                         src="{{ base_server_url }}{{ asset('bundles/Makrosum/Meeting/_assets/img/social/tumblr.png') }}"
+                                         alt="{{ project_name }} Google+" class="CToWUd">
+                                </a>
+                                <a href="{{ social.youtube }}"
+                                   style="text-decoration:none;margin-right:10px" title="{{ project_name }} Youtube"
+                                   target="_blank">
+                                    <img style="width:50px;min-height:50px"
+                                         src="{{ base_server_url }}{{ asset('bundles/Makrosum/Meeting/_assets/img/social/tumblr.png') }}"
+                                         alt="{{ project_name }} Youtube" class="CToWUd">
+                                </a>
+                                <a href="{{ social.instagram }}"
+                                   style="text-decoration:none" title="{{ project_name }} Instagram" target="_blank">
+                                    <img style="width:50px;min-height:50px"
+                                         src="{{ base_server_url }}{{ asset('bundles/Makrosum/Meeting/_assets/img/social/instagram.png') }}"
+                                         alt="{{ project_name }} Instagram" class="CToWUd">
+                                </a>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100%" style="text-align:center">
+                          <span style="font-size:13px;font-family:'Lato',helvetica,arial,sans-serif;color:#929ead">
+                            &copy; {{ "string.copyright"|trans({"%year%": "now"|date("Y")}, "global", trans_l)|raw }} - &reg; <a style="text-decoration: none;color: #3A87AD;" title="{{ project_name }}" href="{{ project_overview }}" target="_blank">{{ project_name }}</a> & <a style="text-decoration: none;color: #3A87AD;" title="{{ copyright_company_name }}" href="http://{{ copyright_company_site }}" target="_blank">{{ copyright_company_name }}</a><br>
+                              {{ copyright_company_address }}<br><br>
+
+
+                              <a href="http://makrosum.com"
+                                 style="color:#929ead" target="_blank">makrosum.com</a> |
+                              <a href="{{ base_server_url }}"
+                                 style="color:#929ead" target="_blank">{{ base_hostname }}</a>
+                          </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100%" style="text-align:center">
+                          <span style="font-size:13px;font-family:'Lato',helvetica,arial,sans-serif;color:#929ead">
+                              <a href="http://www.sumofis.com/overview"
+                                 style="text-decoration:none;color:#929ead" target="_blank">{{ "string.home"|trans }}</a>
+                              |
+                            <a href="http://www.sumofis.com/terms"
+                               style="text-decoration:none;color:#929ead" target="_blank">{{ "string.terms"|trans }}</a>
+                              |
+                            <a href="{{ project_privacy }}"
+                               style="text-decoration:none;color:#929ead" target="_blank">{{ "string.privacy"|trans }}</a>
+                          </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

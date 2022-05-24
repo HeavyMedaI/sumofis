@@ -1,0 +1,319 @@
+{% trans_default_domain "company" %}
+{% set body_class = '' %}
+{% extends 'MeetingBundle:base.html.twig' %}
+
+{% block stylesheets %}
+    <!---->
+{% endblock %}
+
+{% block imports_css %}
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.less') }}" />
+{% endblock %}
+
+{% block imports_js %}
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.js') }}"></script>
+{% endblock %}
+
+{% block top_scripts %}
+    <script type="text/javascript">
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+
+        $(function(){
+            window.Makrosum.window.width = windowWidth;
+            window.Makrosum.window.height = windowHeight;
+
+            Makrosum.funcs.windowLoader.show();
+
+            var makrosumMenu = {
+                element: $('.makrosum-menu'),
+                width: $('.makrosum-menu').width(),
+                height: $('.makrosum-menu').height()
+            };
+
+            window.Makrosum.Menu = makrosumMenu;
+
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="grid makrosum-container boxed">
+
+        {% embed "MeetingBundle:layouts:notifications_menu.html.twig" %}{% endembed %}
+
+        <div class="col_12">
+
+            <div class="col_3">
+                <h5><img width="50" height="50" alt="{{ company_name }}" src="{{ asset('bundles/Makrosum/Meeting/Logo/' ~ company_logo) }}"></h5>
+                <hr />
+                <ul class="icons makrosum-left-menu">
+                    <li><a href="{{ path('company_company_personnels', {subdomain: company_domain}) }}"><i class="fa fa-users"></i> {{ "string.personnels"|trans }}</a></li>
+                    <li><a href="{{ path("company_company_positions", {subdomain: company_domain}) }}"><i class="fa fa-tasks"></i> {{ "string.positions"|trans }}</a></li>
+                    <li><a href="{{ path("company_company_departments", {subdomain: company_domain}) }}"><i class="fa fa-code-fork"></i> {{ "string.departments"|trans }}</a></li>
+                </ul>
+            </div>
+
+            <div class="col_9">
+                <h5><i class="fa fa-user"></i> {{ 'string.new_personnel'|trans }}</h5>
+                <hr class="alt1" />
+                <form class="makrosum-form {{ form_type }}" action="{{ form_action }}" method="post" autocomplete="off">
+                    <input type="hidden" name="personnel" value="{{ personnel.id }}">
+                    <input type="hidden" id="user_id" name="user" value="{{ personnel.user }}">
+                    <table>
+                        <tr>
+                            <td><label for="domain">{{ 'string.user_email'|trans }}</label></td>
+                            <td><input data-available="no" class="col_5" value="{{ personnel.email }}" id="email" type="email" placeholder="{{ 'string.user_email'|trans }}" {{ personnel.disabled }} />
+                                <button class="check-button small green {{ personnel.hide_check }}" type="button">{{ 'string.find_user'|trans }}</button></td>
+                            <script type="text/javascript">
+                                $(function(){
+                                    $('.check-button').click(function(){
+                                        if($('#email').val().length<=1){
+                                            alert('{{ "string.type_user_email"|trans }}');
+                                            return;
+                                        }
+                                        $('#domain').attr('disabled', 'disabled');
+                                        Makrosum.funcs.windowLoader.show();
+                                        $.post('{{ path("company_company_personnels_check", {subdomain: company_domain}) }}', {email: $('#email').val()}, function(r){
+                                            if(r.status){
+                                                $('input#email').attr('data-available', 'yes').css('border-color', '#699652').css('box-shadow', 'inset 0 0px 2px #699652');
+                                                $('button.save').removeAttr('disabled');
+                                                $('input#user_id').val(r.message.user_id);
+                                                $('#user_fullname').find('input#name').val(r.message.user_fullname);
+                                                $('#user_fullname').removeClass('hide');
+                                                Makrosum.funcs.windowLoader.hide();
+                                            }else{
+                                                //alert(r.message);
+                                                if(confirm(r.message)){
+                                                    $.post('{{ path("company_company_personnels_invite", {subdomain: company_domain}) }}', {email: $('#email').val()}, function(r){
+                                                        alert(r.message);
+                                                        Makrosum.funcs.windowLoader.hide();
+                                                    });
+                                                }else{
+                                                    Makrosum.funcs.windowLoader.hide();
+                                                }
+                                                $('input#email').attr('data-available', 'no').css('border-color', '#EF391C').css('box-shadow', 'inset 0 0px 2px #EF391C');
+                                            }
+                                            $('#email').removeAttr('disabled');
+                                        });
+                                    });
+                                });
+                            </script>
+                        </tr>
+                        <tr id="user_fullname" class="{{ display_fullname }}">
+                            <td><label for="name">{{ 'string.personnel.fullname'|trans }}</label></td>
+                            <td><input class="col_5" id="name" value="{{ personnel.name }}" type="text" placeholder="{{ 'string.personnel.fullname'|trans }}" disabled /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="department">{{ 'string.department'|trans }}</label></td>
+                            <td>
+                                <select class="col_5" id="department" name="department" required>
+                                    <option value="*">{{ 'string.please_select'|trans }}</option>
+                                    {% for department_id, department in departments %}
+                                        {% if department.selected == false %}
+                                            <option value="{{ department.id }}">{{ department.name }}</option>
+                                        {% elseif department.selected == true %}
+                                            <option value="{{ department.id }}" selected="selected">{{ department.name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                                <script type="text/javascript">
+                                    $(function(){
+                                        $('#department').change(function(){
+                                            $('#position').attr('disabled', 'disabled');
+                                            $.post('{{ path("company_company_positions_all", {subdomain: company_domain}) }}', {departmentId: $(this).val()}, function(r){
+                                                $('#position').html(r).removeAttr('disabled');
+                                            });
+                                        });
+                                    });
+                                </script>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="position">{{ 'string.position'|trans }}</label></td>
+                            <td>
+                                <select class="col_5" id="position" name="position" required>
+                                    <option value="*">{{ 'string.please_select'|trans }}</option>
+                                    {% for position_id, position in positions %}
+                                        {% if position.selected == false %}
+                                            <option value="{{ position.id }}">{{ position.name }}</option>
+                                        {% elseif position.selected == true %}
+                                            <option value="{{ position.id }}" selected="selected">{{ position.name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="position">{{ 'string.permissions'|trans }}</label></td>
+                            <td>
+                                <fieldset class="col_5">
+                                    <legend>{{ 'string.personnel_permission'|trans }}</legend>
+                                    <input {% if GRANTED_SUPER_PERSONNEL == true %}checked{% endif %} type="checkbox" id="personnel-super" class="personnel-permission" name="permission[personnel][super]" value="1" />
+                                    <label for="personnel-super" class="inline"><strong style="color: #4984A0;">{{ "string.admin"|trans }}</strong></label>
+                                    <script type="text/javascript">
+                                        $(function(){
+                                            $('.personnel-permission#personnel-super').change(function(){
+                                                if($(this).is(':checked')){
+                                                    $('.personnel-permission:not(#personnel-super)').each(function(){
+                                                        $(this).prop('checked', true).attr('disabled', 'disabled');
+                                                    });
+                                                }else{
+                                                    $('.personnel-permission:not(#personnel-super)').each(function(){
+                                                        $(this).prop('checked', false).removeAttr('disabled');
+                                                    });
+                                                }
+                                            });
+                                            if($('.personnel-permission#personnel-super').is(':checked')){
+                                                $('.personnel-permission#personnel-super').change();
+                                            }
+                                        });
+                                    </script>
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                <fieldset class="col_5">
+                                    <legend>{{ 'string.meeting_permission'|trans }}</legend>
+                                    <input {% if GRANTED_SUPER_MEETING == true %}checked{% endif %} type="checkbox" id="meeting-super" class="meeting-permission" name="permission[meeting][super]" value="1" />
+                                    <label for="meeting-super" class="inline"><strong style="color: #4984A0;">{{ "string.admin"|trans }}</strong></label>
+                                    <br />
+                                    <input {% if GRANTED_CREATE_MEETING == true %}checked{% endif %} type="checkbox" id="create" class="meeting-permission" name="permission[meeting][create]" value="1" />
+                                    <label for="create" class="inline"><span style="color: #5793B1;">{{ "string.create"|trans }}</span></label>
+                                    <br />
+                                    <input {% if GRANTED_EDIT_MEETING == true %}checked{% endif %} type="checkbox" id="edit" class="meeting-permission" name="permission[meeting][edit]" value="1" />
+                                    <label for="edit" class="inline"><span style="color: #5793B1;">{{ "string.edit"|trans }}</span></label>
+                                    <br />
+                                    <input {% if GRANTED_STATUS_MEETING == true %}checked{% endif %} type="checkbox" id="status" class="meeting-permission" name="permission[meeting][status]" value="1" />
+                                    <label for="status" class="inline"><span style="color: #5793B1;">{{ "string.change_status"|trans }}</span></label>
+                                    <br />
+                                    <input {% if GRANTED_REQUEST_MEETING == true %}checked{% endif %} type="checkbox" id="request" class="meeting-permission" name="permission[meeting][request]" value="1" />
+                                    <label for="request" class="inline"><span style="color: #5793B1;">{{ "string.request"|trans }}</span></label>
+                                    <br />
+                                    <input {% if GRANTED_MATTER_MEETING == true %}checked{% endif %} type="checkbox" id="matter" class="meeting-permission" name="permission[meeting][matter]" value="1" />
+                                    <label for="matter" class="inline"><span style="color: #5793B1;">{{ "string.matter"|trans }}</span></label>
+                                    <script type="text/javascript">
+                                        $(function(){
+                                            $('.meeting-permission#meeting-super').change(function(){
+                                                if($(this).is(':checked')){
+                                                    $('.meeting-permission:not(#meeting-super)').each(function(i,e){
+                                                        $(e).prop('checked', true).attr('disabled', 'disabled');
+                                                    });
+                                                }else{
+                                                    $('.meeting-permission:not(#meeting-super)').each(function(i,e){
+                                                        $(e).prop('checked', false).removeAttr('disabled');
+                                                    });
+                                                }
+                                            });
+                                            if($('.meeting-permission#meeting-super').is(':checked')){
+                                                $('.meeting-permission#meeting-super').change();
+                                            }
+
+                                            $('.meeting-permission#create').change(function(){
+                                                if($(this).is(':checked')){
+                                                    $('.meeting-permission#request').prop('checked', true).attr('disabled', 'disabled');
+                                                    $('.meeting-permission#matter').prop('checked', true).attr('disabled', 'disabled');
+                                                }else{
+                                                    $('.meeting-permission#request').prop('checked', false).removeAttr('disabled');
+                                                    $('.meeting-permission#matter').prop('checked', false).removeAttr('disabled');
+                                                }
+                                            });
+                                            if($('.meeting-permission#create').is(':checked')){
+                                                $('.meeting-permission#create').change();
+                                            }
+
+                                            $('.meeting-permission#edit').change(function(){
+                                                if($(this).is(':checked')){
+                                                    $('.meeting-permission#request').prop('checked', true).attr('disabled', 'disabled');
+                                                    $('.meeting-permission#matter').prop('checked', true).attr('disabled', 'disabled');
+                                                }else{
+                                                    $('.meeting-permission#request').prop('checked', false).removeAttr('disabled');
+                                                    $('.meeting-permission#matter').prop('checked', false).removeAttr('disabled');
+                                                }
+                                            });
+                                            if($('.meeting-permission#edit').is(':checked')){
+                                                $('.meeting-permission#edit').change();
+                                            }
+
+                                            $('.meeting-permission#status').change(function(){
+                                                if($(this).is(':checked')){
+                                                    $('.meeting-permission#edit').prop('checked', true).attr('disabled', 'disabled');
+                                                    $('.meeting-permission#request').prop('checked', true).attr('disabled', 'disabled');
+                                                    $('.meeting-permission#matter').prop('checked', true).attr('disabled', 'disabled');
+                                                }else{
+                                                    $('.meeting-permission#edit').prop('checked', false).removeAttr('disabled');
+                                                    $('.meeting-permission#request').prop('checked', false).removeAttr('disabled');
+                                                    $('.meeting-permission#matter').prop('checked', false).removeAttr('disabled');
+                                                }
+                                            });
+                                            if($('.meeting-permission#status').is(':checked')){
+                                                $('.meeting-permission#status').change();
+                                            }
+
+                                            $('.meeting-permission#request').change(function(){
+                                                if($(this).is(':checked')){
+                                                    $('.meeting-permission#matter').prop('checked', true).attr('disabled', 'disabled');
+                                                }else{
+                                                    $('.meeting-permission#matter').prop('checked', false).removeAttr('disabled');
+                                                }
+                                            });
+                                            if($('.meeting-permission#request').is(':checked')){
+                                                $('.meeting-permission#request').change();
+                                            }
+                                        });
+                                    </script>
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                <div class="col_5">
+                                    <button style="cursor:pointer;" {{ disable_submit }} class="button blue float-right save" type="submit">{{ 'string.save'|trans }}</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block bottom_scripts %}
+    <script type="text/javascript">
+        $(function () {
+            $('.menu li.dropdown > a').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            /* PAGE SCRIPS HERE */
+            $('.makrosum-form').submit(function(e){
+                e.preventDefault();
+                Makrosum.funcs.windowLoader.show();
+                var elForm = $(this);
+                if($('input#email').attr('data-available')=='yes'||$(this).is('.edit')){
+                    $.post($(this).attr('action'), $(this).serialize(), function(r){
+                        Makrosum.funcs.windowLoader.hide();
+                        if(r.status){
+                            alert('{{ 'string.status_ok'|trans({}, "global", trans_l) }}');
+                            location.href = '{{ protocol }}://'+r.route;
+                        }
+                    });
+                }else{
+                    Makrosum.funcs.windowLoader.hide();
+                    alert('{{ "string.check_user_availability"|trans }}');
+                }
+            });
+
+            Makrosum.funcs.pageLoaded(function(global){
+                Makrosum.funcs.windowLoader.hide();
+            });
+
+        });
+    </script>
+{% endblock %}

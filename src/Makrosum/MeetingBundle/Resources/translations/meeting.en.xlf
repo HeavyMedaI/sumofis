@@ -1,0 +1,271 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="tr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>string.company_name</source>
+                <target>Company Name</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>string.header</source>
+                <target>Header</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>string.creator</source>
+                <target>Creator</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>string.category</source>
+                <target>Category</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>string.begin_time</source>
+                <target>Begin Time</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>string.end_time</source>
+                <target>End Time</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>string.transactions</source>
+                <target>Transcations</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>string.edit</source>
+                <target>Edit</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>string.remove</source>
+                <target>Remove</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>string.save</source>
+                <target>Save</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>string.please_select</source>
+                <target>Please Select</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>string.new_meeting</source>
+                <target>New Meeting</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>string.new_category</source>
+                <target>New Category</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>string.meetings</source>
+                <target>Meetings</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>string.categories</source>
+                <target>Categories</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>string.cancel</source>
+                <target>Cancel</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>string.meeting_name</source>
+                <target>Meeting Name</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>string.meeting_category</source>
+                <target>Meeting Category</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>string.view</source>
+                <target>View</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>string.sure_cancel_meeting</source>
+                <target>Are you sure to cancel this meeting?</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>string.sure_re_set_meeting</source>
+                <target>Are you sure to re-set this meeting?</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>string.re_set</source>
+                <target>Re-Set</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>string.approve</source>
+                <target>Accept and Create</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>string.sure_approve_meeting</source>
+                <target>Are you sure to approve this meeting request?</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>string.new_subject</source>
+                <target>New Matter Subject</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>string.drop_object</source>
+                <target>»Drop files to upload (or click)«</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>string.subject_header</source>
+                <target>Subject Header</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>string.sure_remove_subject</source>
+                <target>Are you sure to remove this subject?</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>string.add_member</source>
+                <target>Add Member</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>string.add_external_member</source>
+                <target>Add External Member</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>string.members</source>
+                <target>Members</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>string.subjects</source>
+                <target>Subjects</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>string.member_name</source>
+                <target>Member Name</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>string.member_email</source>
+                <target>Member E-Mail</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>string.member_role</source>
+                <target>Member Role</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>string.member_role_guest</source>
+                <target>Guest Member</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>string.member_role_reporter</source>
+                <target>Reporter Member</target>
+            </trans-unit>
+            <trans-unit id="38">
+                <source>string.member_role_member</source>
+                <target>Member</target>
+            </trans-unit>
+            <trans-unit id="39">
+                <source>string.meeting_not_permitted_to_view</source>
+                <target>You are not permitted to view details of this meeting</target>
+            </trans-unit>
+            <trans-unit id="40">
+                <source>string.member_already_exist</source>
+                <target>This member already exist in this meeting!</target>
+            </trans-unit>
+            <trans-unit id="41">
+                <source>string.sure_remove_member</source>
+                <target>Are you sure to remove this member?</target>
+            </trans-unit>
+            <trans-unit id="42">
+                <source>string.subject_content</source>
+                <target>Subject Content</target>
+            </trans-unit>
+            <trans-unit id="43">
+                <source>string.reports</source>
+                <target>Reports</target>
+            </trans-unit>
+            <trans-unit id="44">
+                <source>string.new_report</source>
+                <target>New Report</target>
+            </trans-unit>
+            <trans-unit id="45">
+                <source>string.report_header</source>
+                <target>Report Header</target>
+            </trans-unit>
+            <trans-unit id="46">
+                <source>string.report_content</source>
+                <target>Report Content</target>
+            </trans-unit>
+            <trans-unit id="47">
+                <source>string.sure_remove_report</source>
+                <target>Are you sure to remove this report?</target>
+            </trans-unit>
+            <trans-unit id="48">
+                <source>string.new_category</source>
+                <target>New Category</target>
+            </trans-unit>
+            <trans-unit id="49">
+                <source>string.category_could_not_created</source>
+                <target>Category could not created</target>
+            </trans-unit>
+            <trans-unit id="50">
+                <source>string.category_could_not_found</source>
+                <target>Category could not found</target>
+            </trans-unit>
+            <trans-unit id="51">
+                <source>string.meeting_could_not_found</source>
+                <target>Meeting could not found</target>
+            </trans-unit>
+            <trans-unit id="52">
+                <source>string.company</source>
+                <target>Company</target>
+            </trans-unit>
+            <trans-unit id="53">
+                <source>string.category_name</source>
+                <target>Category Name</target>
+            </trans-unit>
+            <trans-unit id="54">
+                <source>string.sure_remove_category</source>
+                <target>Are you sure to remove this category?</target>
+            </trans-unit>
+            <trans-unit id="55">
+                <source>string.request_meeting</source>
+                <target>Send Meeting Request</target>
+            </trans-unit>
+            <trans-unit id="56">
+                <source>string.details</source>
+                <target>Details</target>
+            </trans-unit>
+            <trans-unit id="57">
+                <source>string.open</source>
+                <target>Open</target>
+            </trans-unit>
+            <trans-unit id="58">
+                <source>string.matter_subjects</source>
+                <target>Matter Subjects</target>
+            </trans-unit>
+            <trans-unit id="59">
+                <source>string.additional_reports</source>
+                <target>Additional Reports</target>
+            </trans-unit>
+            <trans-unit id="60">
+                <source>string.report</source>
+                <target>Report</target>
+            </trans-unit>
+            <trans-unit id="61">
+                <source>string.download</source>
+                <target>Download</target>
+            </trans-unit>
+            <trans-unit id="62">
+                <source>string.pdf_could_not_created</source>
+                <target>PDF file couldn´t created!</target>
+            </trans-unit>
+            <trans-unit id="63">
+                <source>string.end_and_publish</source>
+                <target>Complete &amp; Publish</target>
+            </trans-unit>
+            <trans-unit id="64">
+                <source>string.sure_for_complete_meeting</source>
+                <target>Are you sure to complete this meeting?</target>
+            </trans-unit>
+            <trans-unit id="65">
+                <source>string.make_editable</source>
+                <target>Make editable</target>
+            </trans-unit>
+            <trans-unit id="66">
+                <source>string.sure_for_make_editable_meeting</source>
+                <target>Are you sure to make editable this meeting?</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

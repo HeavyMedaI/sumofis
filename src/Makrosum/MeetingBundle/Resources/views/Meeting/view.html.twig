@@ -1,0 +1,82 @@
+{% trans_default_domain "meeting" %}
+{% set body_class = '' %}
+{% extends 'MeetingBundle:base.html.twig' %}
+
+{% block stylesheets %}
+    <!---->
+{% endblock %}
+
+{% block imports_css %}
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.less') }}" />
+{% endblock %}
+
+{% block imports_js %}
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.js') }}"></script>
+{% endblock %}
+
+{% block top_scripts %}
+    <script type="text/javascript">
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+
+        $(function(){
+            window.Makrosum.window.width = windowWidth;
+            window.Makrosum.window.height = windowHeight;
+
+            //Makrosum.funcs.windowLoader.show();
+
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="grid makrosum-container boxed">
+
+        {% embed "MeetingBundle:layouts:notifications_menu.html.twig" %}{% endembed %}
+
+        <div class="col_12">
+
+            <div class="col_3">
+                <h5><img width="50" height="50" alt="{{ company_name }}" src="{{ asset('bundles/Makrosum/Meeting/Logo/' ~ company_logo) }}"></h5>
+                <hr />
+                <ul class="icons makrosum-left-menu">
+                    <li><a href="{{ path('company_company_meetings', {subdomain: company_domain}) }}"><i class="fa fa-briefcase"></i> {{ "string.meetings"|trans }}</a></li>
+                    <li><a href="{{ path("company_company_meeting_categries", {subdomain: company_domain}) }}"><i class="fa fa-star"></i> {{ "string.categories"|trans }}</a></li>
+                </ul>
+            </div>
+
+            <div class="col_8">
+                <h5 style="font-size: 1.3em;"><i class="fa fa-briefcase"></i> {{ meeting_header }}<span style="opacity: 0.45;font-size: 0.9em;margin-left: 5px;">({{ meeting_category }})</span></h5>
+                <span style="color: #075B86;" class="right-top-header">{{ meeting_time }}</span>
+                <hr class="alt1" />
+                <div class="col_12 column">
+                    <button style="float: right;background: rgba(90, 137, 160, 0.83);color: rgba(252, 252, 252, 0);border: 0px;display: none;" class="download-report">
+                        <i style="margin-right: 5px;" class="fa fa-file-pdf-o"></i> {{ "string.download"|trans }}
+                    </button>
+                </div>
+                <iframe class="col_12 column" style="height: 500px;border: 0px solid;" src="{{ path('company_meeting_pdf_meeting', {subdomain: company_domain, meetingId: meeting_id}) }}"></iframe>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block bottom_scripts %}
+    <script type="text/javascript">
+        $(function () {
+            $('.menu li.dropdown > a').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            $('.download-report').click(function(e){
+                e.preventDefault();
+                location.href = '{{ path("company_meeting_pdf_meeting", {subdomain: company_domain, meetingId: meeting_id}) }}';
+            });
+
+            Makrosum.funcs.pageLoaded(function(global){
+                Makrosum.funcs.windowLoader.hide();
+            });
+        });
+    </script>
+{% endblock %}

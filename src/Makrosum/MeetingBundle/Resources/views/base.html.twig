@@ -1,0 +1,59 @@
+{% set uriParse = app.request.uri|split(':') %}
+{#% set protocol = uriParse[0] %#}
+{% set protocol = protocol_scheme %}
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- META -->
+    <title>{{ title }}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <link rel="icon" href="{{ asset('bundles/Makrosum/Meeting/_assets/img/logo.png') }}" type="image/gif" sizes="16x16">
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/css/normalize.css') }}" media="all"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/css/kickstart.css') }}" media="all"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/custom-scrollbars/custom-scrollbars.css') }}" media="all"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/style.css') }}" media="all"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-center-loader/css/prettify.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-center-loader/css/style.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/blue-style-makrosum.css') }}" media="all"/>
+    {% block imports_css %}{% endblock %}
+
+    <!-- Javascript -->
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/js/Makrosum.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/js/lib/less.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/js/lib/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/js/kickstart.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-center-loader/js/prettify.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-center-loader/center-loader.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/js/functions.js') }}"></script>
+    {% block imports_js %}{% endblock %}
+    {% block top_scripts %}{% endblock %}
+    {% block stylesheets %}{% endblock %}
+    {% if promt_error.messageKey is defined %}
+        <script type="text/javascript">
+            alert('{{ promt_error.messageKey|trans(promt_error.messageData, 'security') }}');
+        </script>
+    {% endif %}
+</head>
+<body class="{{ body_class }}">
+{% if
+    app.request.attributes.get("_route") != "login_www"
+    and app.request.attributes.get("_route") != "register"
+    and app.request.attributes.get("_route") != "forgot_password"
+    and app.request.attributes.get("_route") != "reset_password"
+    and app.request.attributes.get("_route") != "check_your_email"
+    and app.request.attributes.get("_route") != "add_your_phone"
+    and app.request.attributes.get("_route") != "set_phone"
+    and (app.request.attributes.get("_route") != "company_homepage" or is_related == true)
+%}
+    {% embed "MeetingBundle:layouts:header.html.twig" %}{% endembed %}
+{% endif %}
+{% block body %}{% endblock %}
+{% embed "MeetingBundle:layouts:footer.html.twig" %}{% endembed %}
+</body>
+
+{% block bottom_scripts %}{% endblock %}
+</html>

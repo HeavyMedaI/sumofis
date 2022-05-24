@@ -1,0 +1,484 @@
+{% trans_default_domain "meeting" %}
+{% set body_class = '' %}
+{% extends 'MeetingBundle:base.html.twig' %}
+
+{% block stylesheets %}
+    <!---->
+{% endblock %}
+
+{% block imports_css %}
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.less') }}" />
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-lean-modal/jquery.makrosumModal.css') }}" />
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-datetimepicker/jquery.datetimepicker.css') }}" />
+{% endblock %}
+
+{% block imports_js %}
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-lean-modal/jquery.makrosumModal.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-datetimepicker/jquery.datetimepicker.full.min.js') }}"></script>
+{% endblock %}
+
+{% block top_scripts %}
+    <script type="text/javascript">
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+
+        $(function(){
+            window.Makrosum.window.width = windowWidth;
+            window.Makrosum.window.height = windowHeight;
+
+            Makrosum.funcs.windowLoader.show();
+
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="grid makrosum-container boxed">
+
+        {% embed "MeetingBundle:layouts:notifications_menu.html.twig" %}{% endembed %}
+
+        <div class="col_12">
+
+            <div class="col_3">
+                <h5><img width="50" height="50" alt="{{ company_name }}" src="{{ asset('bundles/Makrosum/Meeting/Logo/' ~ company_logo) }}"></h5>
+                <hr />
+                <ul class="icons makrosum-left-menu">
+                    <li class="current"><i class="fa fa-briefcase"></i> {{ "string.meetings"|trans }}</li>
+                    <li><a href="{{ path("company_company_meeting_categries", {subdomain: company_domain}) }}"><i class="fa fa-star"></i> {{ "string.categories"|trans }}</a></li>
+                </ul>
+            </div>
+
+            <div class="col_9">
+                <h5><i class="fa fa-briefcase"></i> {{ "string.meetings"|trans }}</h5>
+                <hr class="alt1" />
+                <table>
+                    <thead>
+                    <tr>
+                        <th colspan="2">
+                            {% if IS_GRANTED_SUPER_MEETING == true or IS_GRANTED_CREATE_MEETING == true %}<a title="{{ "string.new_meeting"|trans }}" style="text-decoration:none;" class="new-meeting float-right" href="#makrosum-modal.new"><i class="fa fa-plus"></i> {{ "string.new_meeting"|trans }}</a>{% endif %}
+                            {% if IS_GRANTED_SUPER_MEETING == true or IS_GRANTED_REQUEST_MEETING == true %}<a title="{{ "string.request_meeting"|trans }}" style="text-decoration:none;padding-right: 10px;" class="request-meeting float-right" href="#makrosum-modal.request"><i class="fa fa-plus"></i> {{ "string.request_meeting"|trans }}</a>{% endif %}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <table class="sortable striped makrosum-table" cellspacing="0" cellpadding="0">
+                                <thead>
+                                <tr>
+                                    <th>{{ "string.header"|trans }}</th>
+                                    <th>{{ "string.category"|trans }}</th>
+                                    <th>{{ "string.company_name"|trans }}</th>
+                                    <th>{{ "string.begin_time"|trans }}</th>
+                                    <th>{{ "string.end_time"|trans }}</th>
+                                    <th><span style="float: right;margin-right: 10px;">{{ "string.transactions"|trans }}</span></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for meeting in meetings %}
+                                    <tr>
+                                        <td>{{ meeting.header }}</td>
+                                        <td>{{ meeting.category_name }}</td>
+                                        <td>{{ meeting.company }}</td>
+                                        <td>{{ meeting.begin_view }}</td>
+                                        <td>{{ meeting.end_view }}</td>
+                                        <td>
+                                            {% if IS_GRANTED_SUPER_MEETING == true or IS_GRANTED_STATUS_MEETING == true %}
+                                                {% if meeting.status == 1 %}
+                                                    <a title="{{ "string.cancel"|trans }}" class="edit status-meeting"
+                                                       data-confirm-message="{{ "string.sure_cancel_meeting"|trans }}"
+                                                       data-header="{{ meeting.header }}"
+                                                       data-set="{{ path("company_meeting_cancel_meeting", {subdomain: company_domain, meetingId: meeting.id}) }}"
+                                                       href="#{{ meeting.id }}"><i class="fa fa-ban"></i></a>
+                                                {% endif %}
+                                                {% if meeting.status == 3 %}
+                                                    <a title="{{ "string.re_set"|trans }}" class="edit status-meeting"
+                                                       data-confirm-message="{{ "string.sure_re_set_meeting"|trans }}"
+                                                       data-header="{{ meeting.header }}"
+                                                       data-set="{{ path("company_meeting_set_meeting", {subdomain: company_domain, meetingId: meeting.id}) }}"
+                                                       href="#{{ meeting.id }}"><i class="fa fa-flash"></i></a>
+                                                {% endif %}
+                                            {% endif %}
+                                            {% if IS_GRANTED_SUPER_MEETING == true or IS_GRANTED_CREATE_MEETING == true %}
+                                                {% if meeting.isCreatedByMe == false %}
+                                                    {% if meeting.status == 4 %}
+                                                        <a title="{{ "string.approve"|trans }}" class="edit status-meeting"
+                                                           data-confirm-message="{{ "string.sure_approve_meeting"|trans }}"
+                                                           data-header="{{ meeting.header }}"
+                                                           data-set="{{ path("company_meeting_approve_meeting", {subdomain: company_domain, meetingId: meeting.id}) }}"
+                                                           href="#{{ meeting.id }}"><i class="fa fa-check"></i></a>
+                                                        <a title="{{ "string.cancel"|trans }}" class="edit status-meeting"
+                                                           data-confirm-message="{{ "string.sure_cancel_meeting"|trans }}"
+                                                           data-header="{{ meeting.header }}"
+                                                           data-set="{{ path("company_meeting_cancel_meeting", {subdomain: company_domain, meetingId: meeting.id}) }}"
+                                                           href="#{{ meeting.id }}"><i class="fa fa-ban"></i></a>
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endif %}
+                                            {% if IS_GRANTED_SUPER_MEETING == true or IS_GRANTED_EDIT_MEETING == true %}
+                                            <a title="{{ "string.edit"|trans }}" class="edit edit-meeting"
+                                               data-header="{{ meeting.header }}"
+                                               data-category="{{ meeting.category_id }}"
+                                               data-begin="{{ meeting.begin_time }}"
+                                               data-end="{{ meeting.end_time }}"
+                                               data-edit="{{ path("company_meeting_edit_meeting", {subdomain: company_domain, meetingId: meeting.id}) }}"
+                                               href="#makrosum-modal.edit"><i class="fa fa-pencil"></i></a>
+                                            {% endif %}
+                                            {% if meeting.status != 2 or IS_GRANTED_SUPER_MEETING == true or IS_GRANTED_CREATE_MEETING == true %}
+                                                <a title="{{ "string.open"|trans }}" class="edit open-meeting"
+                                                   href="{{ path('company_meeting_open_meeting', {subdomain: company_domain, meetingId: meeting.id}) }}"
+                                                        ><i class="fa fa-external-link"></i> {{ "string.open"|trans }}</a>
+                                            {% endif %}
+                                            {% if meeting.status == 2 %}
+                                                <a title="{{ "string.view"|trans }}" class="edit view-meeting"
+                                                   href="{{ path('company_meeting_view_meeting', {subdomain: company_domain, meetingId: meeting.id}) }}"
+                                                        ><i class="fa fa-file"></i> {{ "string.view"|trans }}</a></td>
+                                            {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="makrosum-modal" class="new">
+        <div id="signup-ct">
+            <div id="makrosum-modal-header">
+                <h5 class="header">{{ "string.new_meeting"|trans }}</h5>
+                <a class="modal_close" href="#"></a>
+            </div>
+
+            <div id="makrosum-modal-body">
+                <form id="makrosum-modal-form" action="{{ path("company_meeting_new_meeting", {subdomain: company_domain}) }}" autocomplete="off">
+                    <div class="txt-fld">
+                        <label for="meeting_header">{{ "string.header"|trans }}</label>
+                        <input data-available="yes" id="meeting_header" name="header" type="text" placeholder="{{ "string.meeting_name"|trans }}" required>
+                    </div>
+                    <div class="txt-fld">
+                        <label for="meeting_category">{{ "string.meeting_category"|trans }}</label>
+                        <select id="meeting_category" name="category" required>
+                            <option value="*">{{ 'string.please_select'|trans }}</option>
+                            {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="txt-fld">
+                        <label for="begin_time">{{ "string.begin_time"|trans }}</label>
+                        <input data-available="yes" id="begin_time" name="begin" type="text" placeholder="{{ "string.begin_time"|trans }}" required>
+                    </div>
+                    <div class="txt-fld">
+                        <label for="end_time">{{ "string.end_time"|trans }}</label>
+                        <input data-available="yes" id="end_time" name="end" type="text" placeholder="{{ "string.end_time"|trans }}" required>
+                    </div>
+                    <div class="btn-fld">
+                        <button class="button blue float-right submit" type="submit">{{ "string.save"|trans }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="makrosum-modal" class="request">
+        <div id="signup-ct">
+            <div id="makrosum-modal-header">
+                <h5 class="header">{{ "string.new_meeting"|trans }}</h5>
+                <a class="modal_close" href="#"></a>
+            </div>
+
+            <div id="makrosum-modal-body">
+                <form id="makrosum-modal-form" action="{{ path("company_meeting_new_meeting", {subdomain: company_domain}) }}" autocomplete="off">
+                    <input type="hidden" name="status" value="4">
+                    <div class="txt-fld">
+                        <label for="meeting_header">{{ "string.header"|trans }}</label>
+                        <input data-available="yes" id="meeting_header" name="header" type="text" placeholder="{{ "string.meeting_name"|trans }}" required>
+                    </div>
+                    <div class="txt-fld">
+                        <label for="meeting_category">{{ "string.meeting_category"|trans }}</label>
+                        <select id="meeting_category" name="category" required>
+                            <option value="*">{{ 'string.please_select'|trans }}</option>
+                            {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="txt-fld">
+                        <label for="begin_time">{{ "string.begin_time"|trans }}</label>
+                        <input data-available="yes" id="begin_time" name="begin" type="text" placeholder="{{ "string.begin_time"|trans }}" required>
+                    </div>
+                    <div class="txt-fld">
+                        <label for="end_time">{{ "string.end_time"|trans }}</label>
+                        <input data-available="yes" id="end_time" name="end" type="text" placeholder="{{ "string.end_time"|trans }}" required>
+                    </div>
+                    <div class="btn-fld">
+                        <button class="button blue float-right submit" type="submit">{{ "string.save"|trans }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="makrosum-modal" class="edit">
+        <div id="signup-ct">
+            <div id="makrosum-modal-header">
+                <h5 class="header">&nbsp;</h5>
+                <a class="modal_close" href="#"></a>
+            </div>
+
+            <div id="makrosum-modal-body">
+                <form id="makrosum-modal-form" action="" autocomplete="off">
+                    <div class="txt-fld">
+                        <label for="meeting_header">{{ "string.header"|trans }}</label>
+                        <input data-available="yes" id="meeting_header" name="header" type="text" placeholder="{{ "string.meeting_name"|trans }}" required>
+                    </div>
+                    <div class="txt-fld">
+                        <label for="meeting_category">{{ "string.meeting_category"|trans }}</label>
+                        <select id="meeting_category" name="category" required>
+                            <option value="*">{{ 'string.please_select'|trans }}</option>
+                            {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="txt-fld">
+                        <label for="begin_time">{{ "string.begin_time"|trans }}</label>
+                        <input data-available="yes" id="begin_time" name="begin" type="text" placeholder="{{ "string.begin_time"|trans }}" required>
+                    </div>
+                    <div class="txt-fld">
+                        <label for="end_time">{{ "string.end_time"|trans }}</label>
+                        <input data-available="yes" id="end_time" name="end" type="text" placeholder="{{ "string.end_time"|trans }}" required>
+                    </div>
+                    <div class="btn-fld">
+                        <button class="button blue float-right submit" type="submit">{{ "string.save"|trans }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block bottom_scripts %}
+    <script type="text/javascript">
+        $(function () {
+            $('.menu li.dropdown > a').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            Makrosum.funcs.MakrosumModal('a.new-meeting', {ease: 'easein', top: 145}, function(modal, trigger){
+                var form = modal.body.find('form');
+                trigger.click(function(){
+                    //modal.body.find('button.submit').attr('disabled', 'disabled');
+                });
+                form.submit(function(e){
+                    e.preventDefault();
+                    if(
+                            $(this).find('#meeting_header').val().length>=3
+                            &&$(this).find('#meeting_header').attr('data-available')=='yes'
+                            &&$(this).find('#meeting_category').val()!='*'
+                            &&$(this).find('#begin_time').val().length>=19
+                            &&$(this).find('#end_time').val().length>=19
+                    ){
+                        modal.parent.fadeOut(0);
+                        $('#lean_overlay').fadeOut(0);
+                        Makrosum.funcs.windowLoader.show();
+                        $.post($(this).attr('action'), $(this).serialize(), function(r){
+                            if(r.status){
+                                location.href = r.route;
+                            }else{
+                                alert(r.message);
+                                Makrosum.funcs.windowLoader.hide();
+                            }
+                        });
+                    }else{
+                        alert('{{ "string.check_form"|trans({}, "global", trans_l) }}');
+                        Makrosum.funcs.windowLoader.hide();
+                    }
+                });
+            },{hidden: function(e, modal, trigger){
+                e.preventDefault();
+                e.stopPropagation();
+                modal.body.find('#meeting_header').val('');
+                modal.body.find('#meeting_header').removeAttr('class');
+                modal.body.find('#meeting_header').data('available', 'no');
+                modal.body.find('button.submit').attr('disabled', 'disabled');
+            }
+            });
+
+            Makrosum.funcs.MakrosumModal('a.request-meeting', {ease: 'easein', top: 145}, function(modal, trigger){
+                var form = modal.body.find('form');
+                trigger.click(function(){
+                    //modal.body.find('button.submit').attr('disabled', 'disabled');
+                });
+                form.submit(function(e){
+                    e.preventDefault();
+                    if(
+                            $(this).find('#meeting_header').val().length>=3
+                            &&$(this).find('#meeting_header').attr('data-available')=='yes'
+                            &&$(this).find('#meeting_category').val()!='*'
+                            &&$(this).find('#begin_time').val().length>=19
+                            &&$(this).find('#end_time').val().length>=19
+                    ){
+                        modal.parent.fadeOut(0);
+                        $('#lean_overlay').fadeOut(0);
+                        Makrosum.funcs.windowLoader.show();
+                        $.post($(this).attr('action'), $(this).serialize(), function(r){
+                            if(r.status){
+                                location.href = r.route;
+                            }else{
+                                alert(r.message);
+                                Makrosum.funcs.windowLoader.hide();
+                            }
+                        });
+                    }else{
+                        alert('{{ "string.check_form"|trans({}, "global", trans_l) }}');
+                        Makrosum.funcs.windowLoader.hide();
+                    }
+                });
+            },{hidden: function(e, modal, trigger){
+                e.preventDefault();
+                e.stopPropagation();
+                modal.body.find('#meeting_header').val('');
+                modal.body.find('#meeting_header').removeAttr('class');
+                modal.body.find('#meeting_header').data('available', 'no');
+                modal.body.find('button.submit').attr('disabled', 'disabled');
+            }
+            });
+
+            Makrosum.funcs.MakrosumModal($('a.edit-meeting'), {top: 145}, function(modal, trigger){
+                var form = modal.body.find('form');
+                trigger.click(function(){
+                    modal.header.find('.header').text($(this).data('header'));
+                    form.attr('action', $(this).data('edit'));
+                    form.data('attempt', 'edit');
+                    form.find('#meeting_header').val($(this).data('header'));
+                    form.find('#begin_time').val($(this).data('begin')).change();
+                    form.find('#end_time').val($(this).data('end')).change();
+                    form.find('select#meeting_category > option[value="'+$(this).data('category')+'"]').attr('selected', true).prop('selected', true).select();
+                });
+                form.submit(function(e){
+                    e.preventDefault();
+                    if(
+                            $(this).find('#meeting_header').val().length>=3
+                            &&$(this).find('#meeting_header').attr('data-available')=='yes'
+                            &&$(this).find('#meeting_category').val()!='*'
+                            &&$(this).find('#begin_time').val().length>=19
+                            &&$(this).find('#end_time').val().length>=19
+                    ){
+                        modal.parent.fadeOut(0);
+                        $('#lean_overlay').fadeOut(0);
+                        Makrosum.funcs.windowLoader.show();
+                        $.post($(this).attr('action'), $(this).serialize(), function(r){
+                            if(r.status){
+                                location.reload(1);
+                            }else{
+                                alert(r.message);
+                                Makrosum.funcs.windowLoader.hide();
+                            }
+                        });
+                    }else{
+                        alert('{{ "string.check_form"|trans({}, "global", trans_l) }}');
+                        Makrosum.funcs.windowLoader.hide();
+                    }
+                });
+            });
+
+            $('.new #begin_time').datetimepicker({
+                dayOfWeekStart : 1,
+                lang: 'en',
+                step: 30,
+                defaultDate: new Date(),
+                format: 'Y-m-d H:i:s',
+                onGenerate:function( ct ){
+                    $(this).find('.xdsoft_date.xdsoft_day_of_week0')
+                            .addClass('xdsoft_disabled');
+                }
+            });
+
+            $('.new #end_time').datetimepicker({
+                dayOfWeekStart : 1,
+                lang: 'en',
+                step: 30,
+                defaultDate: new Date(),
+                format: 'Y-m-d H:i:s',
+                onGenerate:function( ct ){
+                    $(this).find('.xdsoft_date.xdsoft_day_of_week0')
+                            .addClass('xdsoft_disabled');
+                }
+            });
+
+            $('.request #begin_time').datetimepicker({
+                dayOfWeekStart : 1,
+                lang: 'en',
+                step: 30,
+                defaultDate: new Date(),
+                format: 'Y-m-d H:i:s',
+                onGenerate:function( ct ){
+                    $(this).find('.xdsoft_date.xdsoft_day_of_week0')
+                            .addClass('xdsoft_disabled');
+                }
+            });
+
+            $('.request #end_time').datetimepicker({
+                dayOfWeekStart : 1,
+                lang: 'en',
+                step: 30,
+                defaultDate: new Date(),
+                format: 'Y-m-d H:i:s',
+                onGenerate:function( ct ){
+                    $(this).find('.xdsoft_date.xdsoft_day_of_week0')
+                            .addClass('xdsoft_disabled');
+                }
+            });
+
+            $('.edit #begin_time').datetimepicker({
+                dayOfWeekStart : 1,
+                lang: 'en',
+                step: 30,
+                defaultDate: new Date(),
+                format: 'Y-m-d H:i:s',
+                onGenerate:function( ct ){
+                    $(this).find('.xdsoft_date.xdsoft_day_of_week0')
+                            .addClass('xdsoft_disabled');
+                }
+            });
+
+            $('.edit #end_time').datetimepicker({
+                dayOfWeekStart : 1,
+                lang: 'en',
+                step: 30,
+                defaultDate: new Date(),
+                format: 'Y-m-d H:i:s',
+                onGenerate:function( ct ){
+                    $(this).find('.xdsoft_date.xdsoft_day_of_week0')
+                            .addClass('xdsoft_disabled');
+                }
+            });
+
+
+            $('a.status-meeting').click(function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var elThis = $(this);
+                if(confirm(elThis.data('confirm-message'))){
+                    Makrosum.funcs.windowLoader.show();
+                    $.post($(this).attr('data-set'), function(r){
+                        location.reload(1);
+                    });
+                }
+            });
+
+            Makrosum.funcs.pageLoaded(function(global){
+                Makrosum.funcs.windowLoader.hide();
+            });
+
+        });
+    </script>
+{% endblock %}

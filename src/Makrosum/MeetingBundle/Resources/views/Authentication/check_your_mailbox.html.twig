@@ -1,0 +1,66 @@
+{% trans_default_domain "security" %}
+{% set body_class = '' %}
+{% extends 'MeetingBundle:base.html.twig' %}
+
+{% block stylesheets %}
+    <!---->
+{% endblock %}
+
+{% block imports_css %}
+    <!---->
+{% endblock %}
+
+{% block imports_js %}
+    <!---->
+{% endblock %}
+
+{% block top_scripts %}
+    <script type="text/javascript">
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+
+        $(function(){
+            window.Makrosum.window.width = windowWidth;
+            window.Makrosum.window.height = windowHeight;
+
+            Makrosum.funcs.windowLoader.show();
+
+            /*var makrosumMenu = {
+             element: $('.makrosum-menu'),
+             width: $('.makrosum-menu').width(),
+             height: $('.makrosum-menu').height()
+             };
+             window.Makrosum.Menu = makrosumMenu;*/
+
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="grid makrosum-container boxed">
+
+        <div class="col_12">
+            <div class="col_2"></div>
+            <div style="text-align: center" class="col_8">
+                {{ "string.check_your_email_#{reg}"|trans }} {{ email }}
+            </div>
+            <div class="col_2"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block bottom_scripts %}
+    <script type="text/javascript">
+        $(function () {
+            $('.menu li.dropdown > a').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            Makrosum.funcs.pageLoaded(function(global){
+                Makrosum.funcs.windowLoader.hide();
+            });
+
+        });
+    </script>
+{% endblock %}

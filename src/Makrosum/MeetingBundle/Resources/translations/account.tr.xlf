@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>string.profile</source>
+                <target>Profil Bilgilerim</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>string.settings.general</source>
+                <target>Genel Ayarlar</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>string.settings.notification</source>
+                <target>Bildirim Ayarları</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>string.fullname</source>
+                <target>Adı Soyadı</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>string.email</source>
+                <target>E-Posta</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>string.phone</source>
+                <target>Telefon</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>string.password</source>
+                <target>Şifre</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>string.country</source>
+                <target>Ülke</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>string.province</source>
+                <target>İl</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>string.city</source>
+                <target>İlçe</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>string.save</source>
+                <target>Kaydet</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>string.language</source>
+                <target>Dil</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>string.email_notifications</source>
+                <target>E-Posta Bildirimleri</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>string.sms_notifications</source>
+                <target>SMS Bildirimleri</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>string.active</source>
+                <target>Açık</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>string.deactive</source>
+                <target>Kapalı</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>string.please_select</source>
+                <target>Lütfen Seçiniz</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>string.register</source>
+                <target>Kayıt Ol</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

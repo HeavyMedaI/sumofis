@@ -1,0 +1,869 @@
+{% trans_default_domain "meeting" %}
+{% set body_class = '' %}
+{% extends 'MeetingBundle:base.html.twig' %}
+
+{% block stylesheets %}
+    <!---->
+{% endblock %}
+
+{% block imports_css %}
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.less') }}" />
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-lean-modal/jquery.makrosumModal.css') }}" />
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/dropzone/dropzone.css') }}" />
+{% endblock %}
+
+{% block imports_js %}
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-lean-modal/jquery.makrosumModal.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/dropzone/dropzone.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/tinymce/tinymce.min.js') }}"></script>
+{% endblock %}
+
+{% block top_scripts %}
+    <script type="text/javascript">
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+
+        $(function(){
+            window.Makrosum.window.width = windowWidth;
+            window.Makrosum.window.height = windowHeight;
+
+            tinymce.init({
+                selector: 'textarea:not(.report)',
+                theme: 'modern',
+                menubar: false
+            });
+
+            tinymce.init({
+                selector: 'textarea.report',
+                theme: 'modern',
+                menubar: false,
+                height: 400
+            });
+
+            Makrosum.funcs.windowLoader.show();
+
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="grid makrosum-container boxed">
+
+        {% embed "MeetingBundle:layouts:notifications_menu.html.twig" %}{% endembed %}
+
+        <div class="col_12">
+            {% if meeting_status == 1 %}
+                {% if IS_GRANTED_SUPER_MEETING == true or IS_GRANTED_REPORT_MEETING == true %}
+                    <div class="col_12 column">
+                        <button style="float: right;background: rgba(90, 137, 160, 0.83);color: rgba(252, 252, 252, 0);border: 0px;"
+                                class="prevent-event"
+                                data-confirm="{{ 'string.sure_for_complete_meeting'|trans({}, 'meeting', trans_l) }}"
+                                data-prevented="{}" href="{{ path("company_meeting_complete_meeting", {subdomain: company_domain, meetingId: meeting_id}) }}">
+                            <i style="margin-right: 5px;" class="fa fa-file-pdf-o"></i> {{ "string.end_and_publish"|trans }}
+                        </button>
+                    </div>
+                {% endif %}
+            {% elseif meeting_status == 2 %}
+                {% if IS_GRANTED_SUPER_MEETING == true or IS_GRANTED_CREATE_MEETING == true %}
+                    <div class="col_12 column">
+                        <button style="float: right;background: rgba(90, 137, 160, 0.83);color: rgba(252, 252, 252, 0);border: 0px;"
+                                class="prevent-event"
+                                data-confirm="{{ 'string.sure_for_make_editable_meeting'|trans({}, 'meeting', trans_l) }}"
+                                data-prevented="{}" href="{{ path("company_meeting_set_meeting", {subdomain: company_domain, meetingId: meeting_id}) }}">
+                            <i style="margin-right: 5px;" class="fa fa-edit"></i> {{ "string.make_editable"|trans }}
+                        </button>
+                    </div>
+                {% endif %}
+            {% endif %}
+            <div class="col_3">
+                <h5><img width="50" height="50" alt="{{ company_name }}" src="{{ asset('bundles/Makrosum/Meeting/Logo/' ~ company_logo) }}"></h5>
+                <hr />
+                <ul class="icons makrosum-left-menu">
+                    <li><a href="{{ path('company_company_meetings', {subdomain: company_domain}) }}"><i class="fa fa-briefcase"></i> {{ "string.meetings"|trans }}</a></li>
+                    <li><a href="{{ path("company_company_meeting_categries", {subdomain: company_domain}) }}"><i class="fa fa-star"></i> {{ "string.categories"|trans }}</a></li>
+                </ul>
+            </div>
+
+            <div class="col_9">
+                <h5 style="font-size: 1.3em;"><i class="fa fa-briefcase"></i> {{ meeting_header }}<span style="opacity: 0.45;font-size: 0.9em;margin-left: 5px;">({{ meeting_category }})</span></h5>
+                <span style="color: #075B86;" class="right-top-header">{{ meeting_time }}</span>
+                <hr class="alt1" />
+                <table>
+                    <thead>
+                    <tr>
+                        <th>{{ "string.subjects"|trans }}</th>
+                        <th>
+                            {% if IS_GRANTED_SUPER_MEETING == true or IS_GRANTED_MATTER_MEETING == true %}
+                            <a title="{{ "string.new_subject"|trans }}" style="text-decoration:none;" class="new-subject float-right" href="#makrosum-modal.new"><i class="fa fa-plus"></i> {{ "string.new_subject"|trans }}</a>
+                            {% endif %}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <table class="sortable striped makrosum-table" cellspacing="0" cellpadding="0">
+                                <thead>
+                                <tr>
+                                    <th>{{ "string.header"|trans }}</th>
+                                    <th>{{ "string.company_name"|trans }}</th>
+                                    <th>{{ "string.creator"|trans }}</th>
+                                    <th><span style="float: right;margin-right: 10px;">{{ "string.transactions"|trans }}</span></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for meeting_subject in meeting_subjects %}
+                                    <tr>
+                                        <td>{{ meeting_subject.header }}</td>
+                                        <td>{{ meeting_subject.company }}</td>
+                                        <td>{{ meeting_subject.creator }}</td>
+                                        <td>
+                                            {% if IS_GRANTED_SUPER_MEETING == true or IS_GRANTED_MATTER_MEETING == true or meeting_subject.is_mine == true %}
+                                                <a title="{{ "string.remove"|trans }}"
+                                                   class="trash-subject"
+                                                   href="{{ path('company_meeting_subject_remove', {subdomain: company_domain, matterSubjectId: meeting_subject.id}) }}">
+                                                    <i class="fa fa-minus-square"></i> {{ "string.remove"|trans }}</a>
+                                                <a title="{{ "string.edit"|trans }}"
+                                                   class="edit-subject" href="#makrosum-modal.edit"
+                                                   data-header="{{ meeting_subject.header }}"
+                                                   data-content="{{ meeting_subject.content }}"
+                                                   data-id="{{ meeting_subject.id }}"
+                                                   data-href="{{ path('company_meeting_subject_edit', {subdomain: company_domain, matterSubjectId: meeting_subject.id}) }}">
+                                                    <i class="fa fa-pencil"></i> {{ "string.edit"|trans }}</a>
+                                            {% endif %}
+                                            {% if IS_GRANTED_SUPER_MEETING == true or IS_GRANTED_REPORT_MEETING == true %}
+                                                <a title="{{ "string.report"|trans }}"
+                                                   class="subject-report" href="#makrosum-modal.subject-report"
+                                                   data-header="{{ meeting_subject.header }}"
+                                                   data-content="{{ meeting_subject.report.content }}"
+                                                   data-href="{{ path('company_meeting_report_edit', {subdomain: company_domain, meetingId: meeting_id, reportId: meeting_subject.report.id}) }}">
+                                                    <i class="fa fa-file-text"></i> {{ "string.report"|trans }}</a>
+                                            {% endif %}
+                                            <a title="{{ "string.open"|trans }}"
+                                               class="view-subject" href="#makrosum-modal.view"
+                                               data-header="{{ meeting_subject.header }}"
+                                               data-content="{{ meeting_subject.content }}"
+                                               data-id="{{ meeting_subject.id }}">
+                                                <i class="fa fa-eye"></i> {{ "string.open"|trans }}</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>{{ "string.members"|trans }}</th>
+                        <th>
+                            {% if IS_GRANTED_SUPER_MEETING == true or IS_GRANTED_CREATE_MEETING == true or IS_GRANTED_EDIT_MEETING == true %}
+                                <a title="{{ "string.add_external_member"|trans }}" style="text-decoration:none;" class="new-external-member float-right" href="#makrosum-modal.new-external-member"><i class="fa fa-plus"></i> {{ "string.add_external_member"|trans }}</a>
+                                <a title="{{ "string.add_member"|trans }}" style="text-decoration:none;padding-right: 10px;" class="new-member float-right" href="#makrosum-modal.new-member"><i class="fa fa-plus"></i> {{ "string.add_member"|trans }}</a>
+                            {% endif %}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <table class="sortable striped makrosum-table" cellspacing="0" cellpadding="0">
+                                <thead>
+                                <tr>
+                                    <th>{{ "string.member_name"|trans }}</th>
+                                    <th>{{ "string.member_email"|trans }}</th>
+                                    <th>{{ "string.member_role"|trans }}</th>
+                                    <th><span style="float: right;margin-right: 10px;">{{ "string.transactions"|trans }}</span></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for meeting_member in meeting_members %}
+                                    <tr>
+                                        <td>{{ meeting_member.name }}</td>
+                                        <td>{{ meeting_member.email }}</td>
+                                        <td>{{ meeting_member.role }}</td>
+                                        <td>
+                                            {% if IS_GRANTED_SUPER_MEETING == true or IS_GRANTED_CREATE_MEETING == true or IS_GRANTED_EDIT_MEETING == true %}
+                                                <a title="{{ "string.remove"|trans }}"
+                                                   class="trash-member"
+                                                   href="{{ path('company_meeting_member_remove', {subdomain: company_domain, memberId: meeting_member.id}) }}">
+                                                    <i class="fa fa-minus-square"></i> {{ "string.remove"|trans }}</a>
+                                                {% if meeting_member.role_id == 1 %}
+                                                    <a title="{{ "string.member_role_reporter"|trans }}"
+                                                       class="set-member"
+                                                       data-set="2"
+                                                       href="{{ path('company_meeting_member_set', {subdomain: company_domain, meetingId: meeting_id, memberId: meeting_member.id}) }}">
+                                                        <i class="fa fa-flag"></i> {{ "string.member_role_reporter"|trans }}</a>
+                                                {% elseif meeting_member.role_id == 2 %}
+                                                    <a title="{{ "string.member_role_member"|trans }}"
+                                                       class="set-member"
+                                                       data-set="1"
+                                                       href="{{ path('company_meeting_member_set', {subdomain: company_domain, meetingId: meeting_id, memberId: meeting_member.id}) }}">
+                                                        <i class="fa fa-user"></i> {{ "string.member_role_member"|trans }}</a>
+                                                {% endif %}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <style type="text/css">
+                    .dropzone{
+                        border: 2px solid rgba(121, 179, 208, 0.56) !important;
+                        background: rgba(255, 255, 255, 0.3) !important;
+                        border: 2px solid rgba(121, 179, 208, 0.56);
+                    }
+                    .dropzone .dz-preview.dz-image-preview{
+                        background: rgba(255, 255, 255, 0);
+                    }
+                    .dropzone .dz-preview.dz-image-preview img{
+                        cursor: pointer;
+                    }
+                    .dz-remove{
+                        text-decoration: none !important;
+                    }
+                    .dz-remove:hover{
+                    }
+                </style>
+                <div style="position: relative;z-index: 1;"><form class="dropzone" id="objectupload">
+                        {% if IS_GRANTED_SUPER_MEETING == true or IS_GRANTED_CREATE_MEETING == true or IS_GRANTED_EDIT_MEETING == true %}
+                            <div class="dz-message">{{ "string.drop_object"|trans }}</div>
+                        {% endif %}
+                        {% for meeting_object in meeting_objects %}
+                        <div class="dz-preview dz-processing dz-image-preview dz-success dz-complete">
+                            <div class="dz-image" data-object="{{ meeting_object.object_link }}">
+                                <img style="width: 100%;height: 100%;" data-dz-thumbnail="" alt="{{ meeting_object.object_link }}" src="{{ meeting_object.object_preview }}">
+                                <div class="dz-details">
+                                    <div class="dz-filename"><span data-dz-name="">{{ meeting_object.object_link }}</span></div>
+                                </div>
+                            </div>
+                            {% if IS_GRANTED_SUPER_MEETING == true or IS_GRANTED_CREATE_MEETING == true or IS_GRANTED_EDIT_MEETING == true %}
+                            <a class="dz-remove trash-object" data-object="{{ meeting_object.id }}" href="removeObject" data-dz-remove="">{{ "string.remove"|trans }}</a>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </form></div>
+                {% if IS_GRANTED_SUPER_MEETING == true or IS_GRANTED_CREATE_MEETING == true or IS_GRANTED_EDIT_MEETING == true %}
+                    <script type="application/javascript">
+                        $('.trash-object').click(function(e){
+                            e.preventDefault();
+                            var elThis = $(this);
+                            $.post('{{ path("company_object_remove_stream", {subdomain: company_domain, objectId: ""}) }}'+elThis.data('object'), function(){
+                                elThis.parent().remove();
+                                console.info('Object: '+elThis.data('object')+' is removed.');
+                            });
+                        });
+                        var ObjectUpload = new Dropzone("form#objectupload", {
+                            url: '{{ path("company_object_upload_stream", {subdomain: company_domain, meetingId: meeting_id}) }}',
+                            name: 'meeting_object',
+                            paramName: 'meeting_object',
+                            addRemoveLinks: true,
+                            clickable: true
+                        });
+                        ObjectUpload.on('complete', function(Object){
+                            Object._removeLink.setAttribute('href', 'removeObject');
+                            Object._removeLink.innerText = '{{ "string.remove"|trans }}';
+                            var Upload = JSON.parse(Object.xhr.responseText);
+                            $(Object.previewElement).click(function(){
+                                window.open('/bundles/Makrosum/Meeting/Objects/'+Object.name, '_blank');
+                            });
+                            $(Object._removeLink).click(function(){
+                                $.post('{{ path("company_object_remove_stream", {subdomain: company_domain, objectId: ""}) }}'+Upload.objectId, function(){
+                                    console.info('Object: '+Upload.objectId+' is removed.');
+                                });
+                            });
+                        });
+                    </script>
+                {% endif %}
+                <script type="text/javascript">
+                    $(function(){
+                        $('.dz-image').click(function(e){
+                            e.preventDefault();
+                            window.open('/bundles/Makrosum/Meeting/Objects/'+$(this).data('object'), '_blank');
+                        });
+                    });
+                </script>
+                <br />
+                <table>
+                    <thead>
+                    <tr>
+                        <th>{{ "string.reports"|trans }}</th>
+                        <th>
+                            {% if IS_GRANTED_SUPER_MEETING == true or IS_GRANTED_REPORT_MEETING == true %}
+                                <a title="{{ "string.new_report"|trans }}" style="text-decoration:none;" class="new-report float-right" href="#makrosum-modal.new-report"><i class="fa fa-plus"></i> {{ "string.new_report"|trans }}</a>
+                            {% endif %}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <table class="sortable striped makrosum-table" cellspacing="0" cellpadding="0">
+                                <thead>
+                                <tr>
+                                    <th>{{ "string.header"|trans }}</th>
+                                    <th>{{ "string.company_name"|trans }}</th>
+                                    <th>{{ "string.creator"|trans }}</th>
+                                    <th><span style="float: right;margin-right: 10px;">{{ "string.transactions"|trans }}</span></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for meeting_report in meeting_reports %}
+                                    <tr>
+                                        <td>{{ meeting_report.header }}</td>
+                                        <td>{{ meeting_report.company }}</td>
+                                        <td>{{ meeting_report.creator }}</td>
+                                        <td>
+                                            {% if IS_GRANTED_SUPER_MEETING == true or IS_GRANTED_REPORT_MEETING == true %}
+                                                <a title="{{ "string.remove"|trans }}"
+                                                   class="trash-report"
+                                                   href="{{ path('company_meeting_report_remove', {subdomain: company_domain, meetingId: meeting_id, reportId: meeting_report.id}) }}">
+                                                    <i class="fa fa-minus-square"></i> {{ "string.remove"|trans }}</a>
+                                                <a title="{{ "string.edit"|trans }}"
+                                                   class="edit-report" href="#makrosum-modal.edit-report"
+                                                   data-header="{{ meeting_report.header }}"
+                                                   data-content="{{ meeting_report.content }}"
+                                                   data-id="{{ meeting_report.id }}"
+                                                   data-href="{{ path('company_meeting_report_edit', {subdomain: company_domain, meetingId: meeting_id, reportId: meeting_report.id}) }}">
+                                                    <i class="fa fa-pencil"></i> {{ "string.edit"|trans }}</a>
+                                            {% endif %}
+                                            <!--<a title="{{ "string.open"|trans }}"
+                                               class="view-subject" href="#makrosum-modal.download-report"
+                                               data-id="{{ meeting_report.id }}">
+                                                <i class="fa fa-eye"></i> {{ "string.open"|trans }}</a>-->
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col_12">
+                <button style="float: right;background: rgb(56, 146, 82);color: rgba(252, 252, 252, 0);border: 0px;"
+                        onclick="javascript:location.href='{{ path('company_company_meetings', {subdomain: company_domain}) }}';">
+                    <i style="margin-right: 5px;" class="fa fa-save"></i> {{ "string.save"|trans }}
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="makrosum-modal" class="new">
+        <div id="signup-ct">
+            <div id="makrosum-modal-header">
+                <h5 class="header">{{ "string.new_subject"|trans }}</h5>
+                <a class="modal_close" href="#"></a>
+            </div>
+
+            <div id="makrosum-modal-body">
+                <form id="makrosum-modal-form" action="{{ path('company_meeting_subject_create', {subdomain: company_domain, meetingId: meeting_id}) }}" autocomplete="off">
+                    <div class="txt-fld">
+                        <label for="subject_header">{{ "string.header"|trans }}</label>
+                        <input data-available="yes" id="subject_header" name="name" type="text" placeholder="{{ "string.subject_header"|trans }}" required>
+                    </div>
+                    <div class="txt-fld">
+                        <textarea id="add_subject_content" name="content" placeholder="{{ "string.subject_content"|trans }}"></textarea>
+                    </div>
+                    <div class="btn-fld">
+                        <button class="button blue float-right submit" type="submit">{{ "string.save"|trans }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="makrosum-modal" class="edit">
+        <div id="signup-ct">
+            <div id="makrosum-modal-header">
+                <h5 class="header">&nbsp;</h5>
+                <a class="modal_close" href="#"></a>
+            </div>
+
+            <div id="makrosum-modal-body">
+                <form id="makrosum-modal-form" action="" autocomplete="off">
+                    <div class="txt-fld">
+                        <label for="subject_header">{{ "string.header"|trans }}</label>
+                        <input data-available="yes" id="subject_header" name="name" type="text" placeholder="{{ "string.subject_header"|trans }}" required>
+                    </div>
+                    <div class="txt-fld">
+                        <textarea id="edit_subject_content" name="content" placeholder="{{ "string.subject_content"|trans }}"></textarea>
+                    </div>
+                    <div class="btn-fld">
+                        <button class="button blue float-right submit" type="submit">{{ "string.save"|trans }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="makrosum-modal" class="view">
+        <div id="signup-ct">
+            <div id="makrosum-modal-header">
+                <h5 class="header">&nbsp;</h5>
+                <a class="modal_close" href="#"></a>
+            </div>
+
+            <div id="makrosum-modal-body">
+                <form id="makrosum-modal-form" action="" autocomplete="off">
+                    <div class="txt-fld">
+                        <div class="view-subject" style="width: 100%;text-align: left;"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="makrosum-modal" class="new-member">
+        <div id="signup-ct">
+            <div id="makrosum-modal-header">
+                <h5 class="header">{{ "string.add_member"|trans }}</h5>
+                <a class="modal_close" href="#"></a>
+            </div>
+
+            <div id="makrosum-modal-body">
+                <form id="makrosum-modal-form" action="{{ path('company_meeting_member_insert', {subdomain: company_domain, meetingId: meeting_id}) }}" autocomplete="off">
+                    <div class="txt-fld">
+                        <label for="member">{{ "string.member_name"|trans }}</label>
+                        <select id="member" name="member" required>
+                            <option value="*">{{ 'string.please_select'|trans }}</option>
+                            {% for personnel in personnels %}
+                                <option value="{{ personnel.id }}">{{ personnel.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="btn-fld">
+                        <button class="button blue float-right submit" type="submit">{{ "string.save"|trans }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="makrosum-modal" class="new-external-member">
+        <div id="signup-ct">
+            <div id="makrosum-modal-header">
+                <h5 class="header">{{ "string.add_external_member"|trans }}</h5>
+                <a class="modal_close" href="#"></a>
+            </div>
+
+            <div id="makrosum-modal-body">
+                <form id="makrosum-modal-form" action="{{ path('company_meeting_member_insert_external', {subdomain: company_domain, meetingId: meeting_id}) }}" autocomplete="off">
+                    <div class="txt-fld">
+                        <label for="member_email">{{ "string.member_email"|trans }}</label>
+                        <input data-available="yes" id="member_email" name="email" type="text" placeholder="{{ "string.member_email"|trans }}" required>
+                    </div>
+                    <div class="btn-fld">
+                        <button class="button blue float-right submit" type="submit">{{ "string.save"|trans }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="makrosum-modal" class="new-report">
+        <div id="signup-ct">
+            <div id="makrosum-modal-header">
+                <h5 class="header">{{ "string.new_report"|trans }}</h5>
+                <a class="modal_close" href="#"></a>
+            </div>
+
+            <div id="makrosum-modal-body">
+                <form id="makrosum-modal-form" action="{{ path('company_meeting_report_create', {subdomain: company_domain, meetingId: meeting_id}) }}" autocomplete="off">
+                    <div class="txt-fld">
+                        <label for="report_header">{{ "string.report_header"|trans }}</label>
+                        <input data-available="yes" id="report_header" name="name" type="text" placeholder="{{ "string.report_header"|trans }}" required>
+                    </div>
+                    <div class="txt-fld">
+                        <textarea class="report" id="add_report_content" name="content" placeholder="{{ "string.report_content"|trans }}"></textarea>
+                    </div>
+                    <div class="btn-fld">
+                        <button class="button blue float-right submit" type="submit">{{ "string.save"|trans }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="makrosum-modal" class="edit-report">
+        <div id="signup-ct">
+            <div id="makrosum-modal-header">
+                <h5 class="header"></h5>
+                <a class="modal_close" href="#"></a>
+            </div>
+
+            <div id="makrosum-modal-body">
+                <form id="makrosum-modal-form" action="" autocomplete="off">
+                    <div class="txt-fld">
+                        <label for="report_header">{{ "string.report_header"|trans }}</label>
+                        <input data-available="yes" id="report_header" name="name" type="text" placeholder="{{ "string.report_header"|trans }}" required>
+                    </div>
+                    <div class="txt-fld">
+                        <textarea class="report" id="edit_report_content" name="content" placeholder="{{ "string.report_content"|trans }}"></textarea>
+                    </div>
+                    <div class="btn-fld">
+                        <button class="button blue float-right submit" type="submit">{{ "string.save"|trans }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="makrosum-modal" class="subject-report">
+        <div id="signup-ct">
+            <div id="makrosum-modal-header">
+                <h5 class="header"></h5>
+                <a class="modal_close" href="#"></a>
+            </div>
+
+            <div style="height: 92% !important;" id="makrosum-modal-body">
+                <form id="makrosum-modal-form" action="" autocomplete="off">
+                    <div class="txt-fld">
+                        <textarea class="report" id="edit_matter_report_content" name="content" placeholder="{{ "string.report_content"|trans }}"></textarea>
+                    </div>
+                    <div class="btn-fld">
+                        <button class="button blue float-right submit" type="submit">{{ "string.save"|trans }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block bottom_scripts %}
+    <script type="text/javascript">
+        $(function () {
+            $('.menu li.dropdown > a').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            Makrosum.funcs.MakrosumModal('a.new-subject', {ease: 'easein', top: 145}, function(modal, trigger){
+                var form = modal.body.find('form');
+                trigger.click(function(){
+                    //modal.body.find('button.submit').attr('disabled', 'disabled');
+                });
+                form.submit(function(e){
+                    e.preventDefault();
+                    if(
+                            $(this).find('#subject_header').val().length>=3
+                    ){
+                        modal.parent.fadeOut(0);
+                        $('#lean_overlay').fadeOut(0);
+                        Makrosum.funcs.windowLoader.show();
+                        $.post($(this).attr('action'), {name: $(this).find('#subject_header').val(), content: tinyMCE.get('add_subject_content').getContent()}, function(r){
+                            if(r.status){
+                                location.reload(true);
+                            }else{
+                                alert(r.message);
+                                Makrosum.funcs.windowLoader.hide();
+                            }
+                        });
+                    }else{
+                        alert('{{ "string.check_form"|trans({}, "global", trans_l) }}');
+                        Makrosum.funcs.windowLoader.hide();
+                    }
+                });
+            },{hidden: function(e, modal, trigger){
+                e.preventDefault();
+                e.stopPropagation();
+                modal.body.find('#subject_header').val('');
+                modal.body.find('#subject_header').removeAttr('class');
+                modal.body.find('#subject_header').data('available', 'no');
+                //modal.body.find('button.submit').attr('disabled', 'disabled');
+            }
+            });
+
+            Makrosum.funcs.MakrosumModal($('a.edit-subject'), {top: 145}, function(modal, trigger){
+                var form = modal.body.find('form');
+                trigger.click(function(){
+                    modal.header.find('.header').text($(this).data('header'));
+                    form.attr('action', $(this).data('href'));
+                    form.data('attempt', 'edit');
+                    form.find('#subject_header').val($(this).data('header')).change();
+                    tinyMCE.get('edit_subject_content').setContent($(this).data('content'));
+                });
+                form.submit(function(e){
+                    e.preventDefault();
+                    if($(this).find('#subject_header').val().length>=3&&$(this).find('#subject_header').attr('data-available')=='yes'){
+                        modal.parent.fadeOut(0);
+                        $('#lean_overlay').fadeOut(0);
+                        Makrosum.funcs.windowLoader.show();
+                        $.post($(this).attr('action'), {name: $(this).find('#subject_header').val(), content: tinyMCE.get('edit_subject_content').getContent()}, function(r){
+                            if(r.status){
+                                location.reload(1);
+                            }else{
+                                alert(r.message);
+                                Makrosum.funcs.windowLoader.hide();
+                            }
+                        });
+                    }else{
+                        alert('{{ "string.check_form"|trans({}, "global", trans_l) }}');
+                        Makrosum.funcs.windowLoader.hide();
+                    }
+                });
+            });
+
+            Makrosum.funcs.MakrosumModal($('a.view-subject'), {top: 145}, function(modal, trigger){
+                var form = modal.body.find('form');
+                trigger.click(function(){
+                    modal.header.find('.header').text($(this).data('header'));
+                    form.attr('action', '#');
+                    form.data('attempt', 'view');
+                    form.find('.view-subject').html($(this).data('content'));
+                });
+                form.submit(function(e){
+                    e.preventDefault();
+                    return;
+                });
+            });
+
+            Makrosum.funcs.MakrosumModal('a.new-member', {ease: 'easein', top: 145}, function(modal, trigger){
+                var form = modal.body.find('form');
+                trigger.click(function(){
+                    //modal.body.find('button.submit').attr('disabled', 'disabled');
+                });
+                form.submit(function(e){
+                    e.preventDefault();
+                    if(
+                            $(this).find('#member').val()!='*'
+                    ){
+                        modal.parent.fadeOut(0);
+                        $('#lean_overlay').fadeOut(0);
+                        Makrosum.funcs.windowLoader.show();
+                        $.post($(this).attr('action'), $(this).serialize(), function(r){
+                            if(r.status){
+                                location.reload(true);
+                            }else{
+                                alert(r.message);
+                                Makrosum.funcs.windowLoader.hide();
+                            }
+                        });
+                    }else{
+                        alert('{{ "string.check_form"|trans({}, "global", trans_l) }}');
+                        Makrosum.funcs.windowLoader.hide();
+                    }
+                });
+            },{hidden: function(e, modal, trigger){
+                e.preventDefault();
+                e.stopPropagation();
+                modal.body.find('#member').val('');
+                modal.body.find('#member').removeAttr('class');
+                modal.body.find('#member').data('available', 'no');
+                //modal.body.find('button.submit').attr('disabled', 'disabled');
+            }
+            });
+
+            Makrosum.funcs.MakrosumModal('a.new-external-member', {ease: 'easein', top: 145}, function(modal, trigger){
+                var form = modal.body.find('form');
+                trigger.click(function(){
+                    //modal.body.find('button.submit').attr('disabled', 'disabled');
+                });
+                form.submit(function(e){
+                    e.preventDefault();
+                    if(
+                            $(this).find('#member_email').val()!='*'
+                    ){
+                        modal.parent.fadeOut(0);
+                        $('#lean_overlay').fadeOut(0);
+                        Makrosum.funcs.windowLoader.show();
+                        $.post($(this).attr('action'), $(this).serialize(), function(r){
+                            if(r.status){
+                                location.reload(true);
+                            }else{
+                                alert(r.message);
+                                Makrosum.funcs.windowLoader.hide();
+                            }
+                        });
+                    }else{
+                        alert('{{ "string.check_form"|trans({}, "global", trans_l) }}');
+                        Makrosum.funcs.windowLoader.hide();
+                    }
+                });
+            },{hidden: function(e, modal, trigger){
+                e.preventDefault();
+                e.stopPropagation();
+                modal.body.find('#member_email').val('');
+                modal.body.find('#member_email').removeAttr('class');
+                modal.body.find('#member_email').data('available', 'no');
+                //modal.body.find('button.submit').attr('disabled', 'disabled');
+            }
+            });
+
+            Makrosum.funcs.MakrosumModal('a.new-report', {ease: 'easein', top: 10, width: 1000, height: 620}, function(modal, trigger){
+                var form = modal.body.find('form');
+                trigger.click(function(){
+                    //modal.body.find('button.submit').attr('disabled', 'disabled');
+                });
+                form.submit(function(e){
+                    e.preventDefault();
+                    if(
+                            $(this).find('#report_header').val().length>=3
+                    ){
+                        modal.parent.fadeOut(0);
+                        $('#lean_overlay').fadeOut(0);
+                        Makrosum.funcs.windowLoader.show();
+                        $.post($(this).attr('action'), {name: $(this).find('#report_header').val(), content: tinyMCE.get('add_report_content').getContent()}, function(r){
+                            if(r.status){
+                                location.reload(true);
+                            }else{
+                                alert(r.message);
+                                Makrosum.funcs.windowLoader.hide();
+                            }
+                        });
+                    }else{
+                        alert('{{ "string.check_form"|trans({}, "global", trans_l) }}');
+                        Makrosum.funcs.windowLoader.hide();
+                    }
+                });
+            },{hidden: function(e, modal, trigger){
+                e.preventDefault();
+                e.stopPropagation();
+                modal.body.find('#report_header').val('');
+                modal.body.find('#report_header').removeAttr('class');
+                modal.body.find('#report_header').data('available', 'no');
+                //modal.body.find('button.submit').attr('disabled', 'disabled');
+            }
+            });
+
+            Makrosum.funcs.MakrosumModal($('a.edit-report'), {top: 10, width: 1000, height: 620}, function(modal, trigger){
+                var form = modal.body.find('form');
+                trigger.click(function(){
+                    modal.header.find('.header').text($(this).data('header'));
+                    form.attr('action', $(this).data('href'));
+                    form.data('attempt', 'edit');
+                    form.find('#report_header').val($(this).data('header')).change();
+                    tinyMCE.get('edit_report_content').setContent($(this).data('content'));
+                });
+                form.submit(function(e){
+                    e.preventDefault();
+                    if($(this).find('#report_header').val().length>=3&&$(this).find('#report_header').attr('data-available')=='yes'){
+                        modal.parent.fadeOut(0);
+                        $('#lean_overlay').fadeOut(0);
+                        Makrosum.funcs.windowLoader.show();
+                        $.post($(this).attr('action'), {name: $(this).find('#report_header').val(), content: tinyMCE.get('edit_report_content').getContent()}, function(r){
+                            if(r.status){
+                                location.reload(1);
+                            }else{
+                                alert(r.message);
+                                Makrosum.funcs.windowLoader.hide();
+                            }
+                        });
+                    }else{
+                        alert('{{ "string.check_form"|trans({}, "global", trans_l) }}');
+                        Makrosum.funcs.windowLoader.hide();
+                    }
+                });
+            });
+
+            Makrosum.funcs.MakrosumModal($('a.subject-report'), {top: 10, width: 1000, height: 620}, function(modal, trigger){
+                var form = modal.body.find('form');
+                trigger.click(function(){
+                    modal.header.find('.header').text($(this).data('header'));
+                    form.attr('action', $(this).data('href'));
+                    form.data('attempt', 'edit');
+                    tinyMCE.get('edit_matter_report_content').setContent($(this).data('content'));
+                });
+                form.submit(function(e){
+                    e.preventDefault();
+                    modal.parent.fadeOut(0);
+                    $('#lean_overlay').fadeOut(0);
+                    Makrosum.funcs.windowLoader.show();
+                    $.post($(this).attr('action'), {content: tinyMCE.get('edit_matter_report_content').getContent()}, function(r){
+                        if(r.status){
+                            location.reload(1);
+                        }else{
+                            alert(r.message);
+                            Makrosum.funcs.windowLoader.hide();
+                        }
+                    });
+                });
+            });
+
+            $('a.trash-subject').click(function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var elThis = $(this);
+                if(confirm('{{ "string.sure_remove_subject"|trans }}')){
+                    Makrosum.funcs.windowLoader.show();
+                    $.post($(this).attr('href'), function(r){
+                        if(r.status){
+                            elThis.parent().parent().remove();
+                            Makrosum.funcs.windowLoader.hide();
+                        }else{
+                            alert(r.message);
+                            Makrosum.funcs.windowLoader.hide();
+                        }
+                    });
+                }
+            });
+
+            $('a.set-member').click(function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var elThis = $(this);
+                Makrosum.funcs.windowLoader.show();
+                $.post($(this).attr('href'), {role: $(this).data('set')}, function(r){
+                    if(r.status){
+                        location.reload(1);
+                    }else{
+                        alert(r.message);
+                        Makrosum.funcs.windowLoader.hide();
+                    }
+                });
+            });
+
+            $('a.trash-member').click(function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var elThis = $(this);
+                if(confirm('{{ "string.sure_remove_member"|trans }}')){
+                    Makrosum.funcs.windowLoader.show();
+                    $.post($(this).attr('href'), function(r){
+                        if(r.status){
+                            elThis.parent().parent().remove();
+                            location.reload(1);
+                            //Makrosum.funcs.windowLoader.hide();
+                        }else{
+                            alert(r.message);
+                            Makrosum.funcs.windowLoader.hide();
+                        }
+                    });
+                }
+            });
+
+            $('a.trash-report').click(function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var elThis = $(this);
+                if(confirm('{{ "string.sure_remove_report"|trans }}')){
+                    Makrosum.funcs.windowLoader.show();
+                    $.post($(this).attr('href'), function(r){
+                        if(r.status){
+                            elThis.parent().parent().remove();
+                            Makrosum.funcs.windowLoader.hide();
+                        }else{
+                            alert(r.message);
+                            Makrosum.funcs.windowLoader.hide();
+                        }
+                    });
+                }
+            });
+
+            Makrosum.funcs.pageLoaded(function(global){
+                Makrosum.funcs.windowLoader.hide();
+            });
+
+        });
+    </script>
+{% endblock %}

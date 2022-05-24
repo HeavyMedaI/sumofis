@@ -1,0 +1,265 @@
+{% trans_default_domain "company" %}
+{% set body_class = '' %}
+{% extends 'MeetingBundle:base.html.twig' %}
+
+{% block stylesheets %}
+    <!---->
+{% endblock %}
+
+{% block imports_css %}
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.less') }}" />
+{% endblock %}
+
+{% block imports_js %}
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.js') }}"></script>
+{% endblock %}
+
+{% block top_scripts %}
+    <script type="text/javascript">
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+
+        $(function(){
+            window.Makrosum.window.width = windowWidth;
+            window.Makrosum.window.height = windowHeight;
+
+            Makrosum.funcs.windowLoader.show();
+
+            var makrosumMenu = {
+                element: $('.makrosum-menu'),
+                width: $('.makrosum-menu').width(),
+                height: $('.makrosum-menu').height()
+            };
+
+            window.Makrosum.Menu = makrosumMenu;
+
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="grid makrosum-container boxed">
+
+        {% embed "MeetingBundle:layouts:notifications_menu.html.twig" %}{% endembed %}
+
+        <div class="col_12">
+
+            <div class="col_3"></div>
+
+            <div class="col_9">
+                <h5 style="float: left;"><i class="fa fa-building"></i> {{ action_header }}</h5>
+                {% if act == "edit" %}
+                    <div style="float: right;">
+                        <img class="logo" width="50" height="50" src="{{ asset('bundles/Makrosum/Meeting/Logo/' ~ company_logo) }}">
+                    </div>
+                {% endif %}
+                <hr class="alt1" />
+                <form class="makrosum-form" action="{{ action }}" method="post" autocomplete="off">
+                    <table>
+                        {% if act == "edit" %}
+                            <tr>
+                                <td><label for="logochose">{{ 'string.company_logo'|trans }}<span style="opacity: 1;margin-left: 5px;">({{ 'string.company_logo_max_size'|trans }})</span></label></td>
+                                <td>
+                                    <input class="col_5" id="logochose" name="logochose" type="file" placeholder="{{ 'string.company_logo'|trans }}" />
+                                    <button class="logo-upload small green hide" type="button">{{ 'string.company_logo_upload'|trans }}</button></td>
+                                </td>
+                            </tr>
+                            <script type="application/javascript">
+                                $(function(){
+                                    var $reader = new FileReader();
+                                    $reader.addEventListener('load', function(){
+                                        $.post('{{ path("company_backservice_upload_logo", {subdomain: company_domain}) }}', {logo: $reader.result}, function(r){
+                                            if(r.status){
+                                                document.querySelector('img.logo').src = $reader.result;
+                                            }else{
+                                                alert(r.message);
+                                            }
+                                        });
+                                    });
+                                    /*$('.logo-upload').click(function(){
+                                        var filePath = document.querySelector('input#logochose[type=file]').files[0];
+                                        $reader.readAsDataURL(filePath);
+                                    });*/
+                                    $('#logochose').change(function(){
+                                        var filePath = document.querySelector('input#logochose[type=file]').files[0];
+                                        $reader.readAsDataURL(filePath);
+                                    });
+                                    return;
+                                });
+                            </script>
+                        {% endif %}
+                        <tr>
+                            <td><label for="domain">{{ 'string.company_domain'|trans }}</label></td>
+                            {% if act == 'new' %}
+                                <td><input data-available="no" class="col_2" id="domain" name="domain" type="text" placeholder="{{ 'string.company_domain'|trans }}" required />.{{ base_hostname }} &nbsp;
+                                    <button class="check-domain small green" type="button">{{ 'string.check'|trans }}</button></td>
+                                <script type="text/javascript">
+                                    $(function(){
+                                        $('.check-domain').click(function(){
+                                            if($('#domain').val().length<=1){
+                                                alert('{{ "string.type_domain"|trans }}');
+                                                return;
+                                            }
+                                            $('#domain').attr('disabled', 'disabled');
+                                            Makrosum.funcs.windowLoader.show();
+                                            $.post('{{ path("company_backservice_check_domain") }}', {domain: $('#domain').val()}, function(r){
+                                                if(r.status){
+                                                    $('input#domain').attr('data-available', 'yes').css('border-color', '#699652').css('box-shadow', 'inset 0 0px 2px #699652');
+                                                    $('button.save').removeAttr('disabled');
+                                                }else{
+                                                    $('input#domain').attr('data-available', 'no').css('border-color', '#EF391C').css('box-shadow', 'inset 0 0px 2px #EF391C');
+                                                }
+                                                $('#domain').removeAttr('disabled');
+                                                Makrosum.funcs.windowLoader.hide();
+                                            });
+                                        });
+                                    });
+                                </script>
+                            {% endif %}
+                            {% if act == 'edit' %}
+                                <td><input value="{{ form_domain }}.{{ base_hostname }}" class="col_5" id="domain" name="domain" type="text" placeholder="{{ 'string.company_domain'|trans }}" data-available="yes" disabled /></td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td><label for="name">{{ 'string.company_name'|trans }}</label></td>
+                            <td><input value="{{ form_name }}" class="col_5" id="name" name="name" type="text" placeholder="{{ 'string.company_name'|trans }}" required /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="website">{{ 'string.company_website'|trans }}</label></td>
+                            <td><input value="{{ form_website }}" class="col_5" id="website" name="website" type="website" placeholder="www." /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="email">{{ 'string.company_email'|trans }}</label></td>
+                            <td><input value="{{ form_email }}" class="col_5" id="email" name="email" type="email" placeholder="{{ 'string.company_email'|trans }}" required /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="phone">{{ 'string.company_phone'|trans }}</label></td>
+                            <td><input value="{{ form_phone }}" class="col_5" id="phone" name="phone" type="text" placeholder="2xxxxxxxxx" maxlength="13" required /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="fax">{{ 'string.company_fax'|trans }}</label></td>
+                            <td><input value="{{ form_fax }}" class="col_5" id="fax" name="fax" type="text" placeholder="2xxxxxxxxx" maxlength="13" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="country">{{ 'string.country'|trans }}</label></td>
+                            <td>
+                                <select class="col_5" id="country" name="country" required>
+                                    <option value="*">{{ 'string.please_select'|trans }}</option>
+                                    {% for locale, country in countries %}
+                                        {% if country.selected == false %}
+                                            <option value="{{ country.code }}">{{ country.name }}</option>
+                                        {% elseif country.selected == true %}
+                                            <option value="{{ country.code }}" selected="selected">{{ country.name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                                <script type="text/javascript">
+                                    $(function(){
+                                        $('#country').change(function(){
+                                            $('#province').attr('disabled', 'disabled');
+                                            $.post('{{ path("profile_load_provinces") }}', {country: $(this).val()}, function(r){
+                                                $('#province').html(r).removeAttr('disabled');
+                                            });
+                                        });
+                                    });
+                                </script>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="province">{{ 'string.province'|trans }}</label></td>
+                            <td>
+                                <select class="col_5" id="province" name="province" required>
+                                    {% for province in provinces %}
+                                        {% if province.selected == false %}
+                                            <option value="{{ province.area }}">{{ province.name }}</option>
+                                        {% elseif province.selected == true %}
+                                            <option value="{{ province.area }}" selected="selected">{{ province.name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                                <script type="text/javascript">
+                                    $(function(){
+                                        $('#province').change(function(){
+                                            $('#city').attr('disabled', 'disabled');
+                                            $.post('{{ path("profile_load_cities") }}', {country: $('#country').val(), province: $(this).val()}, function(r){
+                                                $('#city').html(r).removeAttr('disabled');
+                                            });
+                                        });
+                                    });
+                                </script>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="city">{{ 'string.city'|trans }}</label></td>
+                            <td>
+                                <select class="col_5" id="city" name="city" required>
+                                    {% for city in cities %}
+                                        {% if city.selected == false %}
+                                            <option value="{{ city.area }}">{{ city.name }}</option>
+                                        {% elseif city.selected == true %}
+                                            <option value="{{ city.area }}" selected="selected">{{ city.name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="address">{{ 'string.company_address'|trans }}</label></td>
+                            <td><textarea class="col_5" id="name" name="address" placeholder="{{ 'string.company_address'|trans }}">{{ form_address }}</textarea></td>
+                        </tr>
+                        <tr>
+                            <td><label for="map">{{ 'string.company_map'|trans }}</label></td>
+                            <td><input value="{{ form_map }}" multiple class="col_5" id="map" name="map" type="text" placeholder="Latitude, Longitude" /></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                <div class="col_5">
+                                    <button style="cursor:pointer;" {% if act == 'new' %}disabled="disabled"{% endif %} class="button blue float-right save" type="submit">{{ 'string.save'|trans }}</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block bottom_scripts %}
+    <script type="text/javascript">
+        $(function () {
+            $('.menu li.dropdown > a').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            /* PAGE SCRIPS HERE */
+            $('.makrosum-form').submit(function(e){
+                e.preventDefault();
+                Makrosum.funcs.windowLoader.show();
+                if($('input#domain').attr('data-available')=='yes'){
+                    $.post($(this).attr('action'), $(this).serialize(), function(r){
+                        Makrosum.funcs.windowLoader.hide();
+                        if(r.status){
+                            {% if act == "new" %}
+                            location.href = '{{ protocol }}://'+r.company;
+                            {% elseif act == "edit" %}
+                            //location.reload(1);
+                            {% endif %}
+                        }
+                    });
+                }else{
+                    Makrosum.funcs.windowLoader.hide();
+                    alert('{{ "string.check_domain_availability"|trans }}');
+                }
+            });
+
+            Makrosum.funcs.pageLoaded(function(global){
+                Makrosum.funcs.windowLoader.hide();
+            });
+
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,178 @@
+{% trans_default_domain "account" %}
+{% set body_class = '' %}
+{% extends 'MeetingBundle:base.html.twig' %}
+
+{% block stylesheets %}
+    <!---->
+{% endblock %}
+
+{% block imports_css %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-fullcalendar/fullcalendar.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-fullcalendar/fullcalendar.print.css') }}" media="print"/>
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.less') }}" />
+{% endblock %}
+
+{% block imports_js %}
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-fullcalendar/moment.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-fullcalendar/fullcalendar.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-fullcalendar/lang/tr.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/Makrosum/Meeting/_assets/external/jquery-pull-notification/jquery-pull-notification.js') }}"></script>
+{% endblock %}
+
+{% block top_scripts %}
+    <script type="text/javascript">
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+
+        $(function(){
+            window.Makrosum.window.width = windowWidth;
+            window.Makrosum.window.height = windowHeight;
+
+            Makrosum.funcs.windowLoader.show();
+
+            var makrosumMenu = {
+                element: $('.makrosum-menu'),
+                width: $('.makrosum-menu').width(),
+                height: $('.makrosum-menu').height()
+            };
+
+            window.Makrosum.Menu = makrosumMenu;
+
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="grid makrosum-container boxed">
+
+        {% embed "MeetingBundle:layouts:notifications_menu.html.twig" %}{% endembed %}
+
+        <div class="col_12">
+
+            <div class="col_3">
+                <h5>&nbsp;</h5>
+                <hr />
+                <ul class="icons makrosum-left-menu">
+                    <li class="current"><i class="fa fa-user"></i> {{ "string.profile"|trans }}</li>
+                    <li><a href="{{ path("account_settings_general") }}"><i class="fa fa-cog"></i> {{ "string.settings.general"|trans }}</a></li>
+                    <li><a href="{{ path("account_settings_notification") }}"><i class="fa fa-bell-o"></i> {{ "string.settings.notification"|trans }}</a></li>
+                </ul>
+            </div>
+
+            <div class="col_9">
+                <h5><i class="fa fa-user"></i> {{ 'string.profile'|trans }}</h5>
+                <hr class="alt1" />
+                <form class="makrosum-form" action="{{ path("profile_update") }}" method="post" autocomplete="off">
+                    <table>
+                        <tr>
+                            <td><label for="fullname">{{ 'string.fullname'|trans }}</label></td>
+                            <td><input class="col_5" id="fullname" name="fullname" value="{{ fullname }}" type="text" placeholder="{{ 'string.fullname'|trans }}" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="phone">{{ 'string.phone'|trans }}</label></td>
+                            <td><input class="col_5" id="phone" name="phone" value="{{ phone }}" type="text" placeholder="{{ 'string.phone'|trans }}" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="email">{{ 'string.email'|trans }}</label></td>
+                            <td><input class="col_5" id="email" name="email" value="{{ email }}" type="text" placeholder="{{ 'string.email'|trans }}" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="password">{{ 'string.password'|trans }}</label></td>
+                            <td><input class="col_5" id="password" name="password" type="password" placeholder="{{ 'string.password'|trans }}" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="country">{{ 'string.country'|trans }}</label></td>
+                            <td>
+                                <select class="col_5" id="country" name="country">
+                                    <option value="*">Seçiniz</option>
+                                    {% for locale, country in countries %}
+                                        {% if country.selected == false %}
+                                        <option value="{{ country.code }}">{{ country.name }}</option>
+                                        {% elseif country.selected == true %}
+                                            <option value="{{ country.code }}" selected="selected">{{ country.name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                                <script type="text/javascript">
+                                    $(function(){
+                                        $('#country').change(function(){
+                                            $('#province').attr('disabled', 'disabled');
+                                            $.post('{{ path("profile_load_provinces") }}', {country: $(this).val()}, function(r){
+                                                $('#province').html(r).removeAttr('disabled');
+                                            });
+                                        });
+                                    });
+                                </script>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="province">{{ 'string.province'|trans }}</label></td>
+                            <td>
+                                <select class="col_5" id="province" name="province">
+                                    {% for province in provinces %}
+                                        {% if province.selected == false %}
+                                            <option value="{{ province.area }}">{{ province.name }}</option>
+                                        {% elseif province.selected == true %}
+                                            <option value="{{ province.area }}" selected="selected">{{ province.name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                                <script type="text/javascript">
+                                    $(function(){
+                                        $('#province').change(function(){
+                                            $('#city').attr('disabled', 'disabled');
+                                            $.post('{{ path("profile_load_cities") }}', {country: $('#country').val(), province: $(this).val()}, function(r){
+                                                $('#city').html(r).removeAttr('disabled');
+                                            });
+                                        });
+                                    });
+                                </script>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="city">{{ 'string.city'|trans }}</label></td>
+                            <td>
+                                <select class="col_5" id="city" name="city">
+                                    {% for city in cities %}
+                                        {% if city.selected == false %}
+                                            <option value="{{ city.area }}">{{ city.name }}</option>
+                                        {% elseif city.selected == true %}
+                                            <option value="{{ city.area }}" selected="selected">{{ city.name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                <div class="col_5">
+                                    <button class="button blue float-right" type="submit">{{ 'string.save'|trans }}</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block bottom_scripts %}
+    <script type="text/javascript">
+        $(function () {
+            $('.menu li.dropdown > a').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            /* PAGE SCRIPS HERE */
+
+            Makrosum.funcs.pageLoaded(function(global){
+                Makrosum.funcs.windowLoader.hide();
+            });
+
+        });
+    </script>
+{% endblock %}

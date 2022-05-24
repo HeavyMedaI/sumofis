@@ -1,0 +1,283 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="tr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>string.new_company</source>
+                <target>New Company</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>string.company_name</source>
+                <target>Company Name</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>string.company_domain</source>
+                <target>Company Domain</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>string.company_website</source>
+                <target>Web Site</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>string.company_email</source>
+                <target>E-Mail</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>string.company_phone</source>
+                <target>Company Phone</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>string.company_fax</source>
+                <target>Company Fax</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>string.country</source>
+                <target>Country</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>string.province</source>
+                <target>Province</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>string.city</source>
+                <target>City</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>string.company_address</source>
+                <target>Address</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>string.company_map</source>
+                <target>Map</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>string.save</source>
+                <target>Save</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>string.please_select</source>
+                <target>Please Select</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>string.check</source>
+                <target>Check</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>string.check_domain_availability</source>
+                <target>Please check your domain availability</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>string.type_domain</source>
+                <target>Please tyep a domain</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>string.meeting_management</source>
+                <target>Meetign Management</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>string.personnel_management</source>
+                <target>Personnel Management</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>string.personnels</source>
+                <target>Personnels</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>string.positions</source>
+                <target>Positions</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>string.departments</source>
+                <target>Departments</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>string.permissions</source>
+                <target>Permissions</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>string.company</source>
+                <target>Company</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>string.personnel.fullname</source>
+                <target>Fullname</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>string.department</source>
+                <target>Department</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>string.position</source>
+                <target>Position</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>string.transactions</source>
+                <target>Transcations</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>string.edit</source>
+                <target>Edit</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>string.remove</source>
+                <target>Remove</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>string.new_personnel</source>
+                <target>New Personnel</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>string.new_department</source>
+                <target>New Department</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>string.new_position</source>
+                <target>New Position</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>string.department_name</source>
+                <target>Department Name</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>string.sure_remove_department</source>
+                <target>Are you sure to delete this department?</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>string.position_name</source>
+                <target>Position Name</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>string.sure_remove_position</source>
+                <target>Are you sure to delete this position?</target>
+            </trans-unit>
+            <trans-unit id="38">
+                <source>string.department_could_not_found</source>
+                <target>Department could not found!</target>
+            </trans-unit>
+            <trans-unit id="39">
+                <source>string.department_could_not_created</source>
+                <target>Department could not created!</target>
+            </trans-unit>
+            <trans-unit id="40">
+                <source>string.position_could_not_found</source>
+                <target>Position could not found!</target>
+            </trans-unit>
+            <trans-unit id="41">
+                <source>string.position_could_not_created</source>
+                <target>Position could not created!</target>
+            </trans-unit>
+            <trans-unit id="42">
+                <source>string.personnel_could_not_found</source>
+                <target>Personnel could not found!</target>
+            </trans-unit>
+            <trans-unit id="43">
+                <source>string.personnel_could_not_created</source>
+                <target>Personnel could not created!</target>
+            </trans-unit>
+            <trans-unit id="44">
+                <source>string.user_email</source>
+                <target>E-Mail</target>
+            </trans-unit>
+            <trans-unit id="45">
+                <source>string.find_user</source>
+                <target>Find user</target>
+            </trans-unit>
+            <trans-unit id="46">
+                <source>string.type_user_email</source>
+                <target>Please type user´s email address first!</target>
+            </trans-unit>
+            <trans-unit id="47">
+                <source>string.user_could_not_found_with_email</source>
+                <target>User could not founded with given email, do you want to send an invitation? </target>
+            </trans-unit>
+            <trans-unit id="48">
+                <source>string.user_already_in_your_company</source>
+                <target>This user already registered in this company!</target>
+            </trans-unit>
+            <trans-unit id="49">
+                <source>string.check_user_availability</source>
+                <target>Please check user availability</target>
+            </trans-unit>
+            <trans-unit id="50">
+                <source>string.personnel_permission</source>
+                <target>Personnel Permissions</target>
+            </trans-unit>
+            <trans-unit id="51">
+                <source>string.meeting_permission</source>
+                <target>Meeting Permissions</target>
+            </trans-unit>
+            <trans-unit id="52">
+                <source>string.admin</source>
+                <target>Administrator</target>
+            </trans-unit>
+            <trans-unit id="53">
+                <source>string.create</source>
+                <target>Create / Approve</target>
+            </trans-unit>
+            <trans-unit id="54">
+                <source>string.edit</source>
+                <target>Edit</target>
+            </trans-unit>
+            <trans-unit id="55">
+                <source>string.delete</source>
+                <target>Delete</target>
+            </trans-unit>
+            <trans-unit id="56">
+                <source>string.request</source>
+                <target>Request</target>
+            </trans-unit>
+            <trans-unit id="57">
+                <source>string.matter</source>
+                <target>Matter Subject</target>
+            </trans-unit>
+            <trans-unit id="58">
+                <source>string.change_status</source>
+                <target>Cancel / Re-Set</target>
+            </trans-unit>
+            <trans-unit id="59">
+                <source>string.edit_company</source>
+                <target>Edit Company</target>
+            </trans-unit>
+            <trans-unit id="60">
+                <source>string.company_logo</source>
+                <target>Company Logo</target>
+            </trans-unit>
+            <trans-unit id="61">
+                <source>string.company_logo_max_size</source>
+                <target>Max. 100x100</target>
+            </trans-unit>
+            <trans-unit id="62">
+                <source>string.company_logo_upload</source>
+                <target>Upload</target>
+            </trans-unit>
+            <trans-unit id="63">
+                <source>string.remove_company</source>
+                <target>Delete Company</target>
+            </trans-unit>
+            <trans-unit id="64">
+                <source>string.company_could_not_found</source>
+                <target>Company could not founded!</target>
+            </trans-unit>
+            <trans-unit id="65">
+                <source>string.leave_company</source>
+                <target>Leave Company</target>
+            </trans-unit>
+            <trans-unit id="66">
+                <source>string.sure_for_remove_company</source>
+                <target>Are you sure to delete this company?</target>
+            </trans-unit>
+            <trans-unit id="67">
+                <source>string.sure_for_leave_company</source>
+                <target>Are you sure to leave this position?</target>
+            </trans-unit>
+            <trans-unit id="68">
+                <source>string.user_could_not_invited</source>
+                <target>User could not invited!</target>
+            </trans-unit>
+            <trans-unit id="69">
+                <source>string.user_invited_successfully</source>
+                <target>User invited successfully</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
